@@ -29,6 +29,11 @@ flutter:
   assets:
     - assets/images/
 
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true

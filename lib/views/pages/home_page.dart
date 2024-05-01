@@ -1,71 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:imperio/views/widgets/gradient_background.dart';
+import 'package:imperio/views/widgets/upper_tab_bar.dart';
+import 'package:imperio/views/widgets/upper_tab_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50.0),
-          child: AppBar(
-            centerTitle: true,
-            title: SvgPicture.asset(
-              'assets/images/logo.svg',
-              height: 25,
-            ),
-            backgroundColor: const Color(0xFFFBF5CA),
-            elevation: 0,
-          ),
-        ),
-        body: Stack(
-          children: [
-            const GradientBackground(),
-            SizedBox(
-              height: 166,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Container(
-                    width: 270,
-                    color: Colors.red,
-                    child: Center(child: Text("Container 1")),
-                  ),
-                  Container(
-                    width: 270,
-                    color: Colors.blue,
-                    child: Center(child: Text("Container 2")),
-                  ),
-                  Container(
-                    width: 270,
-                    color: Colors.green,
-                    child: Center(child: Text("Container 3")),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ));
+        appBar: buildAppBar(context),
+        body: buildBody(),
+      ),
+    );
   }
-}
 
-class GradientBackground extends StatelessWidget {
-  const GradientBackground({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 500,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color(0xFFFBF5CA), Colors.white],
+  PreferredSizeWidget buildAppBar(BuildContext context) {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(100.0),
+      child: AppBar(
+        centerTitle: true,
+        title: SvgPicture.asset(
+          'assets/images/logo.svg',
+          height: 25,
         ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        elevation: 0,
+        bottom: const UpperTabBar(
+          tabs: [
+            UpperTabButton(icon: Icons.home, text: 'Todos'),
+            UpperTabButton(icon: Icons.home, text: 'Todos'),
+            UpperTabButton(icon: Icons.star, text: 'Favorites'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildBody() {
+    return Stack(
+      children: [
+        const GradientBackground(),
+        TabBarView(
+          children: [
+            buildPageContent("Home Page Content"),
+            buildPageContent("Favorites Page Content"),
+            buildPageContent("Settings Page Content"),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget buildPageContent(String text) {
+    return Center(
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 24),
       ),
     );
   }
