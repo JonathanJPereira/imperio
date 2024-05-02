@@ -69,17 +69,15 @@ class _HomePageState extends State<HomePage> {
           const GradientBackground(),
           TabBarView(
             children: [
-              buildPageContent(store.sports.length.toString()),
+              Center(
+                child: Text(
+                  store.sports.length.toString(),
+                ),
+              ),
             ],
           ),
         ],
       ),
-    );
-  }
-
-  Widget buildPageContent(String text) {
-    return Center(
-      child: Text(text),
     );
   }
 }
