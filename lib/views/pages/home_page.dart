@@ -7,15 +7,24 @@ import 'package:imperio/views/widgets/gradient_background.dart';
 import 'package:imperio/views/widgets/upper_tab_bar.dart';
 import 'package:imperio/views/widgets/upper_tab_button.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final SportsStore store = getIt<SportsStore>();
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     store.fetchSports();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -38,14 +47,19 @@ class HomePage extends StatelessWidget {
           ),
           backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
-          bottom: UpperTabBar(tabs: [
-            const UpperTabButton(icon: Icons.home, text: 'Todos'),
-            ...store.sports.map(
-                (sport) => UpperTabButton(icon: Icons.home, text: sport.name))
-          ]),
+          bottom: UpperTabBar(tabs: buildTabs()),
         ),
       ),
     );
+  }
+
+  List<Widget> buildTabs() {
+    return [
+      const UpperTabButton(
+          icon: IconData(0xe800, fontFamily: 'sport'), text: 'Todos'),
+      ...store.sports.map((sport) =>
+          UpperTabButton(icon: Icons.sports_soccer, text: sport.name))
+    ];
   }
 
   Widget buildBody() {

@@ -38,6 +38,10 @@ flutter:
       fonts:
         - asset: assets/fonts/Montserrat-Regular.ttf
 
+    - family: sport
+      fonts:
+        - asset: assets/fonts/sport.ttf
+
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
