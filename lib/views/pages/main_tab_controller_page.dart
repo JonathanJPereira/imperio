@@ -7,32 +7,20 @@ import 'package:imperio/views/widgets/gradient_background.dart';
 import 'package:imperio/views/widgets/upper_tab_bar.dart';
 import 'package:imperio/views/widgets/upper_tab_button.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class MainTabController extends StatefulWidget {
+  const MainTabController({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<MainTabController> createState() => _MainTabControllerState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainTabControllerState extends State<MainTabController> {
   final SportsStore store = getIt<SportsStore>();
 
   @override
   void initState() {
     super.initState();
     store.fetchSports();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: buildAppBar(context),
-        body: buildBody(),
-      ),
-    );
   }
 
   PreferredSizeWidget buildAppBar(BuildContext context) {
@@ -63,20 +51,30 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildBody() {
-    return Observer(
-      builder: (_) => Stack(
-        children: [
-          const GradientBackground(),
-          TabBarView(
-            children: [
-              Center(
-                child: Text(
-                  store.sports.length.toString(),
-                ),
+    return Stack(
+      children: [
+        const GradientBackground(),
+        Observer(
+          builder: (_) => TabBarView(children: [
+            Center(
+              child: Text(
+                store.sports.length.toString(),
               ),
-            ],
-          ),
-        ],
+            ),
+          ]),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: buildAppBar(context),
+        body: buildBody(),
       ),
     );
   }
