@@ -18,19 +18,24 @@ class UpperTabBar extends StatelessWidget implements PreferredSizeWidget {
         labelColor: Theme.of(context).colorScheme.secondary,
         unselectedLabelColor:
             Theme.of(context).colorScheme.secondary.withOpacity(0.5),
-        indicator: UnderlineTabIndicator(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.secondary,
-            width: 4,
-          ),
-          insets: const EdgeInsets.symmetric(horizontal: 15),
-        ),
+        indicator: _buildIndicator(context),
+        dividerColor: const Color(0xFFEFEFEF),
         tabs: tabs,
       ),
     );
   }
 
+  Decoration _buildIndicator(BuildContext context) {
+    return UnderlineTabIndicator(
+      borderSide: BorderSide(
+        color: Theme.of(context).colorScheme.secondary,
+        width: 4.0,
+      ),
+      insets: const EdgeInsets.symmetric(horizontal: 15),
+      borderRadius: BorderRadius.circular(30),
+    );
+  }
+
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 48);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

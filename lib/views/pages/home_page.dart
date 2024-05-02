@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:imperio/stores/sports_store.dart';
+import 'package:imperio/utils/service_locator.dart';
 import 'package:imperio/views/widgets/gradient_background.dart';
 import 'package:imperio/views/widgets/upper_tab_bar.dart';
 import 'package:imperio/views/widgets/upper_tab_button.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  final SportsStore store = getIt<SportsStore>();
 
   @override
   Widget build(BuildContext context) {
+    store.fetchSports();
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -22,46 +29,43 @@ class HomePage extends StatelessWidget {
   PreferredSizeWidget buildAppBar(BuildContext context) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(100.0),
-      child: AppBar(
-        centerTitle: true,
-        title: SvgPicture.asset(
-          'assets/images/logo.svg',
-          height: 25,
-        ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        elevation: 0,
-        bottom: const UpperTabBar(
-          tabs: [
-            UpperTabButton(icon: Icons.home, text: 'Todos'),
-            UpperTabButton(icon: Icons.home, text: 'Todos'),
-            UpperTabButton(icon: Icons.star, text: 'Favorites'),
-          ],
+      child: Observer(
+        builder: (_) => AppBar(
+          centerTitle: true,
+          title: SvgPicture.asset(
+            'assets/images/logo.svg',
+            height: 25,
+          ),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          elevation: 0,
+          bottom: UpperTabBar(tabs: [
+            const UpperTabButton(icon: Icons.home, text: 'Todos'),
+            ...store.sports.map(
+                (sport) => UpperTabButton(icon: Icons.home, text: sport.name))
+          ]),
         ),
       ),
     );
   }
 
   Widget buildBody() {
-    return Stack(
-      children: [
-        const GradientBackground(),
-        TabBarView(
-          children: [
-            buildPageContent("Home Page Content"),
-            buildPageContent("Favorites Page Content"),
-            buildPageContent("Settings Page Content"),
-          ],
-        ),
-      ],
+    return Observer(
+      builder: (_) => Stack(
+        children: [
+          const GradientBackground(),
+          TabBarView(
+            children: [
+              buildPageContent(store.sports.length.toString()),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
   Widget buildPageContent(String text) {
     return Center(
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 24),
-      ),
+      child: Text(text),
     );
   }
 }

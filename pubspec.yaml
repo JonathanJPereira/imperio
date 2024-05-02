@@ -15,6 +15,9 @@ dependencies:
   flutter_mobx: ^2.2.1
   provider: ^6.1.2
   flutter_svg: ^2.0.10
+  json_annotation: ^4.9.0
+  dio: ^5.4.3
+  get_it: ^7.7.0
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +26,7 @@ dev_dependencies:
   flutter_launcher_icons: "^0.13.1"
   mobx_codegen: ^2.6.1
   build_runner: ^2.4.9
+  json_serializable: ^6.8.0
 
 flutter:
   uses-material-design: true

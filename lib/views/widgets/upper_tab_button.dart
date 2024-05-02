@@ -10,6 +10,11 @@ class UpperTabButton extends StatelessWidget {
     super.key,
   });
 
+  String capitalizeFirstOfEach(String text) {
+    if (text.isEmpty) return text;
+    return text[0].toUpperCase() + text.substring(1).toLowerCase();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Tab(
@@ -18,7 +23,7 @@ class UpperTabButton extends StatelessWidget {
         children: <Widget>[
           Icon(icon),
           const SizedBox(width: 8),
-          Text(text),
+          Text(capitalizeFirstOfEach(text)),
         ],
       ),
     );
