@@ -20,23 +20,25 @@ class _MainTabControllerState extends State<MainTabController> {
   @override
   void initState() {
     super.initState();
-    store.fetchSports();
+    store.fetchSports().then((_) {
+      if (mounted) {
+        setState(() {});
+      }
+    });
   }
 
   PreferredSizeWidget buildAppBar(BuildContext context) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(100.0),
-      child: Observer(
-        builder: (_) => AppBar(
-          centerTitle: true,
-          title: SvgPicture.asset(
-            'assets/images/logo.svg',
-            height: 25,
-          ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          elevation: 0,
-          bottom: UpperTabBar(tabs: buildTabs()),
+      child: AppBar(
+        centerTitle: true,
+        title: SvgPicture.asset(
+          'assets/images/logo.svg',
+          height: 25,
         ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        elevation: 0,
+        bottom: UpperTabBar(tabs: buildTabs()),
       ),
     );
   }
@@ -45,8 +47,10 @@ class _MainTabControllerState extends State<MainTabController> {
     return [
       const UpperTabButton(
           icon: IconData(0xe800, fontFamily: 'sport'), text: 'Todos'),
-      ...store.sports.map((sport) =>
-          UpperTabButton(icon: Icons.sports_soccer, text: sport.name))
+      ...store.sports
+          .map((sport) =>
+              UpperTabButton(icon: Icons.sports_soccer, text: sport.name))
+          .toList()
     ];
   }
 
@@ -54,14 +58,15 @@ class _MainTabControllerState extends State<MainTabController> {
     return Stack(
       children: [
         const GradientBackground(),
-        Observer(
-          builder: (_) => TabBarView(children: [
+        TabBarView(
+          children: [
             Center(
-              child: Text(
-                store.sports.length.toString(),
-              ),
-            ),
-          ]),
+                child: Text(
+                    'Todos os Esportes')), // Esta é a página para a aba "Todos"
+            ...store.sports
+                .map((sport) => Center(child: Text(sport.name)))
+                .toList() // Uma página para cada esporte
+          ],
         ),
       ],
     );
@@ -69,13 +74,32 @@ class _MainTabControllerState extends State<MainTabController> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: buildAppBar(context),
-        body: buildBody(),
-      ),
+    return Observer(
+      builder: (_) {
+        // Verifica se a lista de esportes está vazia
+        if (store.sports.isEmpty) {
+          // Retorna um widget de carregamento ou uma mensagem
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("Carregando esportes..."),
+              backgroundColor: Theme.of(context).colorScheme.primary,
+            ),
+            body: Center(
+              child: CircularProgressIndicator(), // Widget de carregamento
+            ),
+          );
+        }
+
+        // Se a lista não estiver vazia, monta a tela normalmente
+        return DefaultTabController(
+          length: store.sports.length + 1, // Mais um para a aba "Todos"
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: buildAppBar(context),
+            body: buildBody(),
+          ),
+        );
+      },
     );
   }
 }

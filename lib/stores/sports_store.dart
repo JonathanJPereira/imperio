@@ -9,9 +9,7 @@ class SportsStore = _SportsStore with _$SportsStore;
 abstract class _SportsStore with Store {
   final SportsService _sportsService;
 
-  _SportsStore(this._sportsService) {
-    sports.add(Sport(id: '0', name: 'Todos', image: ''));
-  }
+  _SportsStore(this._sportsService) {}
 
   @observable
   ObservableList<Sport> sports = ObservableList<Sport>();
