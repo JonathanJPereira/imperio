@@ -15,9 +15,9 @@ class UpperTabBar extends StatelessWidget implements PreferredSizeWidget {
       child: TabBar(
         tabAlignment: TabAlignment.start,
         isScrollable: true,
-        labelColor: Theme.of(context).colorScheme.secondary,
+        labelColor: Theme.of(context).colorScheme.tertiary,
         unselectedLabelColor:
-            Theme.of(context).colorScheme.secondary.withOpacity(0.5),
+            Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
         indicator: _buildIndicator(context),
         dividerColor: const Color(0xFFEFEFEF),
         tabs: tabs,
@@ -28,7 +28,7 @@ class UpperTabBar extends StatelessWidget implements PreferredSizeWidget {
   Decoration _buildIndicator(BuildContext context) {
     return UnderlineTabIndicator(
       borderSide: BorderSide(
-        color: Theme.of(context).colorScheme.secondary,
+        color: Theme.of(context).colorScheme.tertiary,
         width: 4.0,
       ),
       insets: const EdgeInsets.symmetric(horizontal: 15),

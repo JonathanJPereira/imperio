@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
       initialRoute: '/',
+      debugShowCheckedModeBanner: false,
       routes: {
         AppRoutes.HOME: (context) => const MainTabController(),
       },

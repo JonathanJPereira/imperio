@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:imperio/stores/sports_store.dart';
 import 'package:imperio/utils/service_locator.dart';
+import 'package:imperio/views/pages/all_sports_page.dart';
 import 'package:imperio/views/widgets/gradient_background.dart';
 import 'package:imperio/views/widgets/upper_tab_bar.dart';
 import 'package:imperio/views/widgets/upper_tab_button.dart';
@@ -47,10 +48,8 @@ class _MainTabControllerState extends State<MainTabController> {
     return [
       const UpperTabButton(
           icon: IconData(0xe800, fontFamily: 'sport'), text: 'Todos'),
-      ...store.sports
-          .map((sport) =>
-              UpperTabButton(icon: Icons.sports_soccer, text: sport.name))
-          .toList()
+      ...store.sports.map((sport) =>
+          UpperTabButton(icon: Icons.sports_soccer, text: sport.name))
     ];
   }
 
@@ -60,12 +59,8 @@ class _MainTabControllerState extends State<MainTabController> {
         const GradientBackground(),
         TabBarView(
           children: [
-            Center(
-                child: Text(
-                    'Todos os Esportes')), // Esta é a página para a aba "Todos"
-            ...store.sports
-                .map((sport) => Center(child: Text(sport.name)))
-                .toList() // Uma página para cada esporte
+            const AllSports(),
+            ...store.sports.map((sport) => Center(child: Text(sport.name)))
           ],
         ),
       ],
@@ -76,23 +71,20 @@ class _MainTabControllerState extends State<MainTabController> {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
-        // Verifica se a lista de esportes está vazia
         if (store.sports.isEmpty) {
-          // Retorna um widget de carregamento ou uma mensagem
           return Scaffold(
             appBar: AppBar(
-              title: Text("Carregando esportes..."),
+              title: const Text("Carregando esportes..."),
               backgroundColor: Theme.of(context).colorScheme.primary,
             ),
-            body: Center(
-              child: CircularProgressIndicator(), // Widget de carregamento
+            body: const Center(
+              child: CircularProgressIndicator(),
             ),
           );
         }
 
-        // Se a lista não estiver vazia, monta a tela normalmente
         return DefaultTabController(
-          length: store.sports.length + 1, // Mais um para a aba "Todos"
+          length: store.sports.length + 1,
           child: Scaffold(
             backgroundColor: Colors.white,
             appBar: buildAppBar(context),
