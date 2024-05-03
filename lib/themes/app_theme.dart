@@ -5,9 +5,9 @@ class AppTheme {
     return ThemeData(
       fontFamily: 'Montserrat',
       colorScheme: ColorScheme.fromSwatch().copyWith(
-        primary: const Color(0xFFFBF5CA),
-        secondary: Colors.black,
-      ),
+          primary: const Color(0xFFFBF5CA),
+          secondary: const Color(0xFFF5D70A),
+          tertiary: Colors.black),
       scaffoldBackgroundColor: Colors.white,
     );
   }
