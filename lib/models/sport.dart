@@ -4,11 +4,15 @@ part 'sport.g.dart';
 
 @JsonSerializable()
 class Sport {
-  String id;
-  String name;
-  String image;
+  final String id;
+  final String name;
+  final String image;
 
-  Sport({required this.id, required this.name, required this.image});
+  Sport({
+    required this.id,
+    required this.name,
+    required this.image,
+  });
 
   factory Sport.fromJson(Map<String, dynamic> json) => _$SportFromJson(json);
 

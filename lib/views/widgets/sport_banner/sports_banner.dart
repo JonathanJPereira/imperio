@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imperio/models/featured_banner.dart';
+import 'package:imperio/views/widgets/shared/horizontal_list.dart';
 import 'package:imperio/views/widgets/sport_banner/sport_banner_card.dart';
 
 class SportsBanner extends StatelessWidget {
@@ -23,22 +24,25 @@ class SportsBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
-      height: 166,
-      child: ListView(
-        clipBehavior: Clip.none,
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          ...banners.map(
-            (banner) => SportBannerCard(
-              title: banner.title,
-              subtitle: banner.subtitle,
-              color: banner.color,
-              imagePath: banner.imagePath,
-            ),
-          )
-        ],
+    final sportBanners = [
+      ...banners.map(
+        (banner) => SportBannerCard(
+          title: banner.title,
+          subtitle: banner.subtitle,
+          color: banner.color,
+          imagePath: banner.imagePath,
+        ),
+      )
+    ];
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 30),
+      child: HorizontalList(
+        heigth: 160,
+        itemCount: sportBanners.length,
+        itemBuilder: (context, index) {
+          return sportBanners[index];
+        },
       ),
     );
   }

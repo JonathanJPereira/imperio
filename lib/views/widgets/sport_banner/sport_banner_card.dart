@@ -17,7 +17,6 @@ class SportBannerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 25),
       width: 270,
       decoration: BoxDecoration(
         color: color,
@@ -45,9 +44,7 @@ class SportBannerCard extends StatelessWidget {
           ),
           if (subtitle != null)
             Padding(
-              padding: const EdgeInsets.only(
-                  top:
-                      10), // Adiciona um pequeno espaçamento se o subtítulo estiver presente
+              padding: const EdgeInsets.only(top: 10),
               child: Text(
                 subtitle!,
                 style: _subtitleStyle(context),
