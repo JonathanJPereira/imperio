@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperio/views/widgets/popular_championships/popular_championships.dart';
 import 'package:imperio/views/widgets/sport_banner/sports_banner.dart';
 
 class AllSports extends StatelessWidget {
@@ -6,12 +7,14 @@ class AllSports extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          SportsBanner(),
-          Text('Teste'),
-        ],
+    return SingleChildScrollView(
+      child: Container(
+        child: Column(
+          children: [
+            SportsBanner(),
+            PopularChampionships(),
+          ],
+        ),
       ),
     );
   }
