@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imperio/views/widgets/sports_banner.dart';
+import 'package:imperio/views/widgets/sport_banner/sports_banner.dart';
 
 class AllSports extends StatelessWidget {
   const AllSports({super.key});
