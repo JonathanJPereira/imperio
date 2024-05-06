@@ -26,26 +26,29 @@ class _TipsListState extends State<TipsList> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SectionHeader(title: 'Dicas'),
-        Observer(
-          builder: (_) {
-            if (tipsStore.tips.isEmpty) {
-              return CircularProgressIndicator();
-            }
-            return HorizontalList(
-              heigth: 300,
-              itemDistance: 8,
-              itemCount: tipsStore.tips.length,
-              itemBuilder: (context, index) {
-                final tip = tipsStore.tips[index];
-                return TipCard(tip: tip);
-              },
-            );
-          },
-        ),
-      ],
+    return Container(
+      margin: const EdgeInsets.only(bottom: 50),
+      child: Column(
+        children: [
+          const SectionHeader(title: 'Dicas'),
+          Observer(
+            builder: (_) {
+              if (tipsStore.tips.isEmpty) {
+                return CircularProgressIndicator();
+              }
+              return HorizontalList(
+                heigth: 300,
+                itemDistance: 8,
+                itemCount: tipsStore.tips.length,
+                itemBuilder: (context, index) {
+                  final tip = tipsStore.tips[index];
+                  return TipCard(tip: tip);
+                },
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
