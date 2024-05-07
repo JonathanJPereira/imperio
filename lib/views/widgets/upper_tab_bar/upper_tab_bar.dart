@@ -19,7 +19,7 @@ class UpperTabBar extends StatelessWidget implements PreferredSizeWidget {
         unselectedLabelColor:
             Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
         indicator: _buildIndicator(context),
-        dividerColor: const Color(0xFFEFEFEF),
+        dividerColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.09),
         tabs: tabs,
       ),
     );
