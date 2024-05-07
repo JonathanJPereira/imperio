@@ -37,7 +37,7 @@ class _TipsListState extends State<TipsList> {
                 return CircularProgressIndicator();
               }
               return HorizontalList(
-                heigth: 300,
+                height: 300,
                 itemDistance: 8,
                 itemCount: tipsStore.tips.length,
                 itemBuilder: (context, index) {

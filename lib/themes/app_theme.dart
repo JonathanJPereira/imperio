@@ -33,6 +33,14 @@ class AppTheme {
           )),
         ),
       ),
+      cardTheme: const CardTheme(
+        color: Colors.white,
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(24)),
+        ),
+        shadowColor: Colors.black26,
+      ),
     );
   }
 }

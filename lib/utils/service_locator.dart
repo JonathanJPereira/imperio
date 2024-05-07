@@ -4,10 +4,12 @@ import 'package:imperio/services/sports_service.dart';
 import 'package:imperio/services/championships_service.dart';
 import 'package:imperio/services/tips_service.dart';
 import 'package:imperio/services/bonus_service.dart';
+import 'package:imperio/services/won_bets_service.dart';
 import 'package:imperio/stores/sports_store.dart';
 import 'package:imperio/stores/championships_store.dart';
 import 'package:imperio/stores/tips_store.dart';
 import 'package:imperio/stores/bonus_store.dart';
+import 'package:imperio/stores/won_bets_store.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -28,6 +30,10 @@ void setupLocator() {
   getIt.registerFactory<TipsStore>(() => TipsStore(getIt()));
 
   // Serviços e stores para bônus
-  getIt.registerLazySingleton<BonusService>(() => BonusService(getIt())); // Registre o BonusService
-  getIt.registerFactory<BonusStore>(() => BonusStore(getIt())); // Registre o BonusStore
+  getIt.registerLazySingleton<BonusService>(() => BonusService(getIt()));
+  getIt.registerFactory<BonusStore>(() => BonusStore(getIt()));
+
+  // Serviços e stores para apostas ganhas
+  getIt.registerLazySingleton<WonBetsService>(() => WonBetsService(getIt()));
+  getIt.registerFactory<WonBetsStore>(() => WonBetsStore(getIt()));
 }

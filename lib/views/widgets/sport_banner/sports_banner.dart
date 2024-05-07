@@ -38,7 +38,7 @@ class SportsBanner extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30),
       child: HorizontalList(
-        heigth: 160,
+        height: 160,
         itemCount: sportBanners.length,
         itemBuilder: (context, index) {
           return sportBanners[index];

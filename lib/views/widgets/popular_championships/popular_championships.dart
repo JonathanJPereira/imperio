@@ -27,7 +27,7 @@ class _PopularChampionshipsState extends State<PopularChampionships> {
       children: [
         const SectionHeader(title: 'Campeonatos populares'),
         HorizontalList(
-          heigth: 80,
+          height: 80,
           itemDistance: 8,
           itemCount: 69,
           itemBuilder: (context, item) {

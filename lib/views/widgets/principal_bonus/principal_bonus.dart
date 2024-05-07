@@ -73,6 +73,9 @@ class _PrincipalBonusState extends State<PrincipalBonus> {
         ),
         const ActionPromptRow(
           title: 'Veja mais bônus disponíveis',
+        ),
+        SizedBox(
+          height: 50,
         )
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperio/views/widgets/last_bets_won/last_bets_won.dart';
 import 'package:imperio/views/widgets/match_list/match_list.dart';
 import 'package:imperio/views/widgets/popular_championships/popular_championships.dart';
 import 'package:imperio/views/widgets/principal_bonus/principal_bonus.dart';
@@ -16,8 +17,9 @@ class AllSports extends StatelessWidget {
           // SportsBanner(),
           // const PopularChampionships(),
           // MatchList(),
-          TipsList(),
-          PrincipalBonus()
+          // TipsList(),
+          PrincipalBonus(),
+          LastBetsWon()
         ],
       ),
     );
