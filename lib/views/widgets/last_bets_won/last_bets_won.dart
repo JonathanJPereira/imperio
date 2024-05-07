@@ -41,6 +41,9 @@ class LastBetsWon extends StatelessWidget {
             },
           );
         }),
+        SizedBox(
+          height: 25,
+        )
       ],
     );
   }
