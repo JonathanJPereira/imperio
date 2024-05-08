@@ -9,7 +9,9 @@ class SportsStore = _SportsStore with _$SportsStore;
 abstract class _SportsStore with Store {
   final SportsService _sportsService;
 
-  _SportsStore(this._sportsService) {}
+  _SportsStore(this._sportsService) {
+    fetchSports();
+  }
 
   @observable
   ObservableList<Sport> sports = ObservableList<Sport>();

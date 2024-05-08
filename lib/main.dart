@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
       routes: {
-        AppRoutes.HOME: (context) => const MainTabController(),
+        AppRoutes.HOME: (context) => MainTabController(),
       },
     );
   }

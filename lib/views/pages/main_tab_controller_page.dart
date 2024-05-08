@@ -8,21 +8,10 @@ import 'package:imperio/views/widgets/shared/gradient_background.dart';
 import 'package:imperio/views/widgets/upper_tab_bar/upper_tab_bar.dart';
 import 'package:imperio/views/widgets/upper_tab_bar/upper_tab_button.dart';
 
-class MainTabController extends StatefulWidget {
-  const MainTabController({super.key});
+class MainTabController extends StatelessWidget {
+  MainTabController({super.key});
 
-  @override
-  State<MainTabController> createState() => _MainTabControllerState();
-}
-
-class _MainTabControllerState extends State<MainTabController> {
   final SportsStore store = getIt<SportsStore>();
-
-  @override
-  void initState() {
-    super.initState();
-    store.fetchSports();
-  }
 
   PreferredSizeWidget buildAppBar(BuildContext context) {
     return PreferredSize(
