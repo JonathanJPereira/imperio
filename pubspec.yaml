@@ -45,9 +45,9 @@ flutter:
         - asset: assets/fonts/Montserrat-Bold.ttf
           weight: 700
 
-    - family: sport
+    - family: imperioIcons
       fonts:
-        - asset: assets/fonts/sport.ttf
+        - asset: assets/fonts/imperio_icons.ttf
 
 flutter_launcher_icons:
   android: "launcher_icon"
