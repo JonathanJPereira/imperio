@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
+  static const primaryColor = Color(0xFFFBF5CA);
+  static const secondaryColor = Color(0xFFF5D70A);
+  static const tertiaryColor = Colors.black;
+  static const secondaryContainerColor = Color(0xFFF2ECCB);
+
   static ThemeData get lightTheme {
     return ThemeData(
+      appBarTheme: const AppBarTheme(color: primaryColor),
       fontFamily: 'Montserrat',
       colorScheme: ColorScheme.fromSwatch().copyWith(
         surfaceTint: Colors.white,
-        primary: const Color(0xFFFBF5CA),
-        secondary: const Color(0xFFF5D70A),
-        tertiary: Colors.black,
-        secondaryContainer: const Color(0xFFF2ECCB),
+        primary: primaryColor,
+        secondary: secondaryColor,
+        tertiary: tertiaryColor,
+        secondaryContainer: secondaryContainerColor,
       ),
       scaffoldBackgroundColor: Colors.white,
       textTheme: const TextTheme(
@@ -21,16 +27,13 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(
-            Color(0xFFF5D70A),
-          ),
-          foregroundColor: MaterialStateProperty.all<Color>(
-            Colors.black,
-          ),
+          backgroundColor: MaterialStateProperty.all<Color>(secondaryColor),
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(80),
-          )),
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(80),
+            ),
+          ),
         ),
       ),
       cardTheme: const CardTheme(
