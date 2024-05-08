@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:imperio/stores/bonus_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:imperio/views/widgets/shared/horizontal_list.dart';
 import 'package:imperio/views/widgets/shared/action_prompt_row.dart';
 import 'package:imperio/views/widgets/shared/section_header.dart';
 
@@ -74,9 +73,6 @@ class _PrincipalBonusState extends State<PrincipalBonus> {
         const ActionPromptRow(
           title: 'Veja mais bônus disponíveis',
         ),
-        SizedBox(
-          height: 50,
-        )
       ],
     );
   }

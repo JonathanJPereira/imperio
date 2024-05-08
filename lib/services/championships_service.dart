@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:imperio/models/championship.dart';
 

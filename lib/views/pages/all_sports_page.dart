@@ -12,16 +12,22 @@ class AllSports extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const itemDistance = 30.0;
+
     return SingleChildScrollView(
       child: Column(
         children: [
           SportsBanner(),
           const PopularChampionships(),
-          MatchList(),
-          TipsList(),
-          PrincipalBonus(),
+          const MatchList(),
+          const SizedBox(height: itemDistance),
+          const TipsList(),
+          const SizedBox(height: itemDistance),
+          const PrincipalBonus(),
+          const SizedBox(height: itemDistance),
           LastBetsWon(),
-          Footer(),
+          const SizedBox(height: itemDistance),
+          const Footer(),
         ],
       ),
     );

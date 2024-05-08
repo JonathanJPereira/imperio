@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class MatchCard extends StatelessWidget {
   const MatchCard({super.key});
