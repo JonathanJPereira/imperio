@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:imperio/utils/imperio_icons.dart';
 import 'package:imperio/views/widgets/nav_bar/nav_item.dart';
 
 class NavBar extends StatelessWidget {
