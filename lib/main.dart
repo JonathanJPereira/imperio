@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imperio/utils/app_routes.dart';
 import 'package:imperio/utils/service_locator.dart';
+import 'package:imperio/views/pages/main_tab_page.dart';
 import 'package:imperio/views/pages/main_upper_tab_page.dart';
 import 'themes/app_theme.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
       routes: {
-        AppRoutes.HOME: (context) => MainTabController(),
+        AppRoutes.HOME: (context) => MainTabPage(),
       },
     );
   }

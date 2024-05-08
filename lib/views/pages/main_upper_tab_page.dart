@@ -7,10 +7,10 @@ import 'package:imperio/views/pages/all_sports_page.dart';
 import 'package:imperio/views/widgets/upper_tab_bar/upper_tab_bar.dart';
 import 'package:imperio/views/widgets/upper_tab_bar/upper_tab_button.dart';
 
-class MainTabController extends StatelessWidget {
+class MainUpperTabPage extends StatelessWidget {
   final SportsStore store = getIt<SportsStore>();
 
-  MainTabController({super.key});
+  MainUpperTabPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class MainTabController extends StatelessWidget {
       title: SvgPicture.asset('assets/images/logo.svg', height: 25),
       centerTitle: true,
       floating: true,
-      snap: true,
+      snap: false,
       bottom: UpperTabBar(tabs: _buildTabs()),
     );
   }
