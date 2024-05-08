@@ -11,6 +11,7 @@ class UpperTabBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return TabBar(
+      tabAlignment: TabAlignment.start,
       isScrollable: true,
       labelColor: Theme.of(context).colorScheme.tertiary,
       unselectedLabelColor:

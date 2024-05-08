@@ -54,7 +54,7 @@ class MainTabController extends StatelessWidget {
   Widget _buildTabBarView() {
     return TabBarView(
       children: [
-        const AllSports(),
+        const AllSportsPage(),
         ...store.sports.map((sport) => Center(child: Text(sport.name)))
       ],
     );

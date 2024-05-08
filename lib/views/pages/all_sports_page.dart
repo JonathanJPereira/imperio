@@ -7,8 +7,8 @@ import 'package:imperio/views/widgets/principal_bonus/principal_bonus.dart';
 import 'package:imperio/views/widgets/sport_banner/sports_banner.dart';
 import 'package:imperio/views/widgets/tips_list/tips_list.dart';
 
-class AllSports extends StatelessWidget {
-  const AllSports({super.key});
+class AllSportsPage extends StatelessWidget {
+  const AllSportsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
