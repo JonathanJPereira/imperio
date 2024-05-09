@@ -9,6 +9,30 @@ part of 'navigation_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$NavigationStore on _NavigationStore, Store {
+  Computed<Widget>? _$currentPageComputed;
+
+  @override
+  Widget get currentPage =>
+      (_$currentPageComputed ??= Computed<Widget>(() => super.currentPage,
+              name: '_NavigationStore.currentPage'))
+          .value;
+
+  late final _$navItemsAtom =
+      Atom(name: '_NavigationStore.navItems', context: context);
+
+  @override
+  ObservableList<NavItem> get navItems {
+    _$navItemsAtom.reportRead();
+    return super.navItems;
+  }
+
+  @override
+  set navItems(ObservableList<NavItem> value) {
+    _$navItemsAtom.reportWrite(value, super.navItems, () {
+      super.navItems = value;
+    });
+  }
+
   late final _$selectedIndexAtom =
       Atom(name: '_NavigationStore.selectedIndex', context: context);
 
@@ -42,7 +66,9 @@ mixin _$NavigationStore on _NavigationStore, Store {
   @override
   String toString() {
     return '''
-selectedIndex: ${selectedIndex}
+navItems: ${navItems},
+selectedIndex: ${selectedIndex},
+currentPage: ${currentPage}
     ''';
   }
 }
