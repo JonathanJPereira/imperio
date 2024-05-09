@@ -49,6 +49,22 @@ mixin _$NavigationStore on _NavigationStore, Store {
     });
   }
 
+  late final _$menuIsOpenAtom =
+      Atom(name: '_NavigationStore.menuIsOpen', context: context);
+
+  @override
+  bool get menuIsOpen {
+    _$menuIsOpenAtom.reportRead();
+    return super.menuIsOpen;
+  }
+
+  @override
+  set menuIsOpen(bool value) {
+    _$menuIsOpenAtom.reportWrite(value, super.menuIsOpen, () {
+      super.menuIsOpen = value;
+    });
+  }
+
   late final _$_NavigationStoreActionController =
       ActionController(name: '_NavigationStore', context: context);
 
@@ -64,10 +80,22 @@ mixin _$NavigationStore on _NavigationStore, Store {
   }
 
   @override
+  void toggleMenu() {
+    final _$actionInfo = _$_NavigationStoreActionController.startAction(
+        name: '_NavigationStore.toggleMenu');
+    try {
+      return super.toggleMenu();
+    } finally {
+      _$_NavigationStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 navItems: ${navItems},
 selectedIndex: ${selectedIndex},
+menuIsOpen: ${menuIsOpen},
 currentPage: ${currentPage}
     ''';
   }
