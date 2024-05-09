@@ -14,6 +14,12 @@ dependencies:
   mobx: ^2.3.3
   flutter_mobx: ^2.2.1
   provider: ^6.1.2
+  flutter_svg: ^2.0.10
+  json_annotation: ^4.9.0
+  dio: ^5.4.3
+  get_it: ^7.7.0
+  intl: ^0.19.0
+  flutter_hooks: ^0.20.5
 
 dev_dependencies:
   flutter_test:
@@ -22,9 +28,27 @@ dev_dependencies:
   flutter_launcher_icons: "^0.13.1"
   mobx_codegen: ^2.6.1
   build_runner: ^2.4.9
+  json_serializable: ^6.8.0
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/images/betting_houses/
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        # weight: 500
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 600
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700
+
+    - family: imperioIcons
+      fonts:
+        - asset: assets/fonts/imperio_icons.ttf
 
 flutter_launcher_icons:
   android: "launcher_icon"
