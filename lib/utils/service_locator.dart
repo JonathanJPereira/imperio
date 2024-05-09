@@ -28,10 +28,10 @@ void setupLocator() {
 
   // Stores
   // Registra como Singleton se você deseja manter o estado em toda a aplicação
-  getIt.registerSingleton<NavigationStore>(NavigationStore());
   getIt.registerSingleton<SportsStore>(SportsStore(getIt()));
   getIt.registerSingleton<ChampionshipsStore>(ChampionshipsStore(getIt()));
   getIt.registerSingleton<TipsStore>(TipsStore(getIt()));
   getIt.registerSingleton<BonusStore>(BonusStore(getIt()));
   getIt.registerSingleton<WonBetsStore>(WonBetsStore(getIt()));
+  getIt.registerSingleton<NavigationStore>(NavigationStore());
 }
