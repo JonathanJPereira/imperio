@@ -70,7 +70,7 @@ class MainTabPage extends StatelessWidget {
 
   Widget buildNavBar() {
     return RoundedNavBar(
-      destinations: List.generate(store.navItems.length, (index) {
+      destinations: List.generate(store.navItems.take(3).length, (index) {
         final item = store.navItems[index];
         return RoundedDestination(
             icon: item.icon,

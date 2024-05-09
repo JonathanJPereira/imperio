@@ -14,22 +14,52 @@ abstract class _NavigationStore with Store {
   @observable
   ObservableList<NavItem> navItems = ObservableList.of([
     NavItem(
-      label: "Home",
+      label: "Início",
       icon: ImperioIcons.iconHomeOutline,
       selectedIcon: ImperioIcons.iconHome,
       page: MainUpperTabPage(),
     ),
     NavItem(
-      label: "Sports",
+      label: "Esportes",
       icon: ImperioIcons.iconWhistleOutline,
       selectedIcon: ImperioIcons.iconWhistle,
       page: SportsPage(),
     ),
     NavItem(
-      label: "Bookmark",
+      label: "Notícias e Dicas",
       icon: ImperioIcons.iconBookmarkOutline,
       selectedIcon: ImperioIcons.iconBookmark,
-      page: Text('Profile Page'),
+      page: const Text('Notícias e Dicas'),
+    ),
+    NavItem(
+      label: "Favoritos",
+      icon: ImperioIcons.iconBookmarkOutline,
+      selectedIcon: ImperioIcons.iconBookmark,
+      page: const Text('Favoritos'),
+    ),
+    NavItem(
+      label: "Influenciadores",
+      icon: ImperioIcons.iconBookmarkOutline,
+      selectedIcon: ImperioIcons.iconBookmark,
+      page: const Text('Influenciadores'),
+    ),
+    NavItem(
+      label: "Comparador de odds",
+      icon: ImperioIcons.iconBookmarkOutline,
+      selectedIcon: ImperioIcons.iconBookmark,
+      page: const Text('Comparador de odds'),
+    ),
+    NavItem(
+      label: "Jogo consciente ",
+      icon: ImperioIcons.iconBookmarkOutline,
+      selectedIcon: ImperioIcons.iconBookmark,
+      page: const Text('Jogo consciente'),
+    ),
+    NavItem(
+      label: "Privacidade e segurança ",
+      icon: ImperioIcons.iconBookmarkOutline,
+      selectedIcon: ImperioIcons.iconBookmark,
+      page: const Text('Privacidade e segurança'),
     ),
   ]);
 
