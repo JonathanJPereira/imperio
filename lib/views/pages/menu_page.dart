@@ -7,7 +7,7 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Text('Várias glock de pente alongado'),
+      body: Text('Teste'),
     );
   }
 }
