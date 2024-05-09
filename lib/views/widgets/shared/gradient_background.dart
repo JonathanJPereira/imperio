@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class GradientBackground extends StatelessWidget {
+  final double height;
+
   const GradientBackground({
+    this.height = 500,
     super.key,
   });
 
@@ -11,7 +14,7 @@ class GradientBackground extends StatelessWidget {
     final Color backgroundColor = Theme.of(context).scaffoldBackgroundColor;
 
     return Container(
-      height: 500,
+      height: height,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,

@@ -4,6 +4,7 @@ import 'package:imperio/stores/navigation_store.dart';
 import 'package:imperio/utils/imperio_icons.dart';
 import 'package:imperio/utils/service_locator.dart';
 import 'package:imperio/views/pages/main_upper_tab_page.dart';
+import 'package:imperio/views/pages/sports_page.dart';
 import 'package:imperio/views/widgets/nav_bar/nav_bar.dart';
 import 'package:imperio/views/widgets/nav_bar/nav_item.dart';
 
@@ -14,7 +15,7 @@ class MainTabPage extends StatelessWidget {
 
   static final List<Widget> _widgetOptions = <Widget>[
     MainUpperTabPage(),
-    Text('Página 2'),
+    SportsPage(),
     Text('Página 3'),
   ];
 

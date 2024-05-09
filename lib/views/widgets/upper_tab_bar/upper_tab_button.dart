@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperio/utils/capitalize_first_of_each.dart';
 
 class UpperTabButton extends StatelessWidget {
   final IconData icon;
@@ -9,11 +10,6 @@ class UpperTabButton extends StatelessWidget {
     required this.text,
     super.key,
   });
-
-  String capitalizeFirstOfEach(String text) {
-    if (text.isEmpty) return text;
-    return text[0].toUpperCase() + text.substring(1).toLowerCase();
-  }
 
   @override
   Widget build(BuildContext context) {

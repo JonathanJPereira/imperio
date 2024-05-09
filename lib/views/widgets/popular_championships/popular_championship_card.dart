@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperio/views/widgets/shared/rounded_image.dart';
 
 class PopularChampionshipCard extends StatelessWidget {
   const PopularChampionshipCard({super.key});
@@ -12,18 +13,8 @@ class PopularChampionshipCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         color: Theme.of(context).colorScheme.secondaryContainer,
       ),
-      child: Center(
-        child: SizedBox(
-          width: 45,
-          height: 44,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Image.network(
-              'https://loremflickr.com/640/480/sports',
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
+      child: const Center(
+        child: RoundedImage(imgUrl: 'https://loremflickr.com/640/480/sports'),
       ),
     );
   }
