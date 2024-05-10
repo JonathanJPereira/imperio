@@ -115,10 +115,14 @@ class MenuPage extends StatelessWidget {
   }
 
   Widget _conditionalDivider(int index, int count) {
-    if (index == count - 3 || index == count - 1) {
-      return const Divider(color: Color(0xFFEFEFEF));
-    } else {
-      return const SizedBox.shrink();
-    }
+    return Observer(
+      builder: (_) {
+        if ((index == count - 3 || index == count - 1) && !store.isSearchOpen) {
+          return const Divider(color: Color(0xFFEFEFEF));
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
+    );
   }
 }

@@ -8,7 +8,9 @@ class AppTheme {
 
   static ThemeData get lightTheme {
     return ThemeData(
-      appBarTheme: const AppBarTheme(color: primaryColor),
+      appBarTheme: const AppBarTheme(
+        color: primaryColor,
+      ),
       fontFamily: 'Montserrat',
       colorScheme: ColorScheme.fromSwatch().copyWith(
         surfaceTint: Colors.white,
