@@ -6,11 +6,13 @@ class NavItem {
   final IconData icon;
   final IconData selectedIcon;
   final Widget page;
+  final bool tabBarItem;
 
   NavItem(
       {required this.id,
       required this.label,
       required this.icon,
       required this.selectedIcon,
-      required this.page});
+      required this.page,
+      this.tabBarItem = false});
 }

@@ -89,7 +89,7 @@ class MenuPage extends StatelessWidget {
         itemBuilder: (context, index) {
           return Column(
             children: [
-              _buildMenuItem(items[index], color, index),
+              _buildMenuItem(items[index], color, index, context),
               _conditionalDivider(index, itemCount),
             ],
           );
@@ -98,11 +98,17 @@ class MenuPage extends StatelessWidget {
     });
   }
 
-  Widget _buildMenuItem(NavItem item, Color color, int index) {
+  Widget _buildMenuItem(
+      NavItem item, Color color, int index, BuildContext context) {
     return ListTile(
       leading: Icon(item.icon, size: 19, color: color),
       title: Text(item.label, style: TextStyle(color: color)),
       onTap: () {
+        if (!item.tabBarItem) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => item.page));
+          return;
+        }
         store.setSelectedItem(item.id);
       },
     );
