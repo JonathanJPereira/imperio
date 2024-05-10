@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperio/views/widgets/shared/rounded_image.dart';
 import 'package:intl/intl.dart';
 
 class BetCard extends StatelessWidget {
@@ -23,14 +24,12 @@ class BetCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            ClipRRect(
+            CustomNetworkImage(
+              imgUrl: userAvatar,
+              width: 40,
+              height: 40,
+              boxFit: BoxFit.cover,
               borderRadius: BorderRadius.circular(100),
-              child: Image.network(
-                userAvatar,
-                width: 40,
-                height: 40,
-                fit: BoxFit.cover,
-              ),
             ),
             const SizedBox(width: 10),
             Column(

@@ -14,7 +14,7 @@ class PopularChampionshipCard extends StatelessWidget {
         color: Theme.of(context).colorScheme.secondaryContainer,
       ),
       child: const Center(
-        child: RoundedImage(imgUrl: 'https://loremflickr.com/640/480/sports'),
+        child: CustomNetworkImage(imgUrl: 'https://loremflickr.com/640/480/sports'),
       ),
     );
   }
