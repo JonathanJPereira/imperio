@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RoundedDestination extends StatelessWidget {
+  final String id;
   final IconData icon;
   final IconData selectedIcon;
   final bool selected;
@@ -9,7 +10,7 @@ class RoundedDestination extends StatelessWidget {
     super.key,
     required this.icon,
     required this.selectedIcon,
-    required this.selected,
+    required this.selected, required this.id,
   });
 
   @override

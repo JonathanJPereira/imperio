@@ -49,7 +49,7 @@ class MainTabPage extends StatelessWidget {
         foregroundColor: Colors.white.withOpacity(0.9),
       ),
       child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300), // Duração da transição
+        duration: const Duration(milliseconds: 300),
         transitionBuilder: (Widget child, Animation<double> animation) {
           return FadeTransition(
             opacity: animation,
@@ -73,11 +73,12 @@ class MainTabPage extends StatelessWidget {
       destinations: List.generate(store.navItems.take(3).length, (index) {
         final item = store.navItems[index];
         return RoundedDestination(
+            id: item.id,
             icon: item.icon,
             selectedIcon: item.selectedIcon,
-            selected: store.selectedIndex == index);
+            selected: store.selectedItemId == item.id);
       }),
-      onItemSelected: store.setIndex,
+      onItemSelected: store.setSelectedItem,
     );
   }
 
