@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imperio/models/tip.dart';
+import 'package:imperio/views/widgets/shared/rounded_image.dart';
 
 class TipCard extends StatelessWidget {
   final Tip tip;
@@ -28,15 +29,13 @@ class TipCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
+          CustomNetworkImage(
+            imgUrl: tip.image,
+            width: double.infinity,
+            height: 141.5,
+            boxFit: BoxFit.cover,
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(24), topRight: Radius.circular(24)),
-            child: Image.network(
-              tip.image,
-              width: double.infinity,
-              height: 141.5,
-              fit: BoxFit.cover,
-            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),

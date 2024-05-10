@@ -128,7 +128,7 @@ class SportCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            RoundedImage(imgUrl: sport.image),
+            CustomNetworkImage(imgUrl: sport.image),
             Flexible(
               child: FittedBox(
                 fit: BoxFit.scaleDown,
