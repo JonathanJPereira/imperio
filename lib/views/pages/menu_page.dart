@@ -81,7 +81,7 @@ class MenuPage extends StatelessWidget {
   Widget _buildMenuList(BuildContext context) {
     final color = Theme.of(context).colorScheme.tertiary.withOpacity(0.7);
 
-    return Builder(builder: (context) {
+    return Observer(builder: (context) {
       final items = store.filteredItems;
       final itemCount = items.length;
       return ListView.builder(

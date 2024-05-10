@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imperio/models/nav_item.dart';
 import 'package:imperio/utils/imperio_icons.dart';
+import 'package:imperio/utils/remove_diacritics.dart';
 import 'package:imperio/views/pages/main_upper_tab_page.dart';
 import 'package:imperio/views/pages/menu_page.dart';
 import 'package:imperio/views/pages/sports_page.dart';
@@ -72,17 +73,19 @@ abstract class _NavigationStore with Store {
   ]);
 
   @observable
-  String searchText = '';
+  String _searchText = '';
 
   @computed
   List<NavItem> get filteredItems {
-    if (searchText.isEmpty) {
+    if (_searchText.isEmpty) {
       return navItems.toList();
     } else {
-      return navItems
-          .where((item) =>
-              item.label.toLowerCase().contains(searchText.toLowerCase()))
-          .toList();
+      return navItems.where((item) {
+        final normalizedItemLabel = removeDiacritics(item.label.toLowerCase());
+        final normalizedSearchText =
+            removeDiacritics(_searchText.toLowerCase());
+        return normalizedItemLabel.contains(normalizedSearchText);
+      }).toList();
     }
   }
 
@@ -102,13 +105,14 @@ abstract class _NavigationStore with Store {
 
   @action
   void setSelectedItem(String id) {
-    if(navItems.any((item) => item.id == id)) {
+    if (navItems.any((item) => item.id == id)) {
       menuIsOpen = false;
       isSearchOpen = false;
+      clearSearch();
       selectedItemId = id;
     }
   }
- 
+
   @action
   void toggleMenu() {
     menuIsOpen = !menuIsOpen;
@@ -116,17 +120,18 @@ abstract class _NavigationStore with Store {
 
   @action
   void toggleSearch() {
+    _searchText = '';
     isSearchOpen = !isSearchOpen;
   }
 
   @action
   void setSearchText(String text) {
-    searchText = text;
+    _searchText = text;
   }
 
   @action
   void clearSearch() {
-    searchText = '';
+    _searchText = '';
     isSearchOpen = false;
   }
 }

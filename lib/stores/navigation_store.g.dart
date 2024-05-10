@@ -40,19 +40,19 @@ mixin _$NavigationStore on _NavigationStore, Store {
     });
   }
 
-  late final _$searchTextAtom =
-      Atom(name: '_NavigationStore.searchText', context: context);
+  late final _$_searchTextAtom =
+      Atom(name: '_NavigationStore._searchText', context: context);
 
   @override
-  String get searchText {
-    _$searchTextAtom.reportRead();
-    return super.searchText;
+  String get _searchText {
+    _$_searchTextAtom.reportRead();
+    return super._searchText;
   }
 
   @override
-  set searchText(String value) {
-    _$searchTextAtom.reportWrite(value, super.searchText, () {
-      super.searchText = value;
+  set _searchText(String value) {
+    _$_searchTextAtom.reportWrite(value, super._searchText, () {
+      super._searchText = value;
     });
   }
 
@@ -166,7 +166,6 @@ mixin _$NavigationStore on _NavigationStore, Store {
   String toString() {
     return '''
 navItems: ${navItems},
-searchText: ${searchText},
 selectedItemId: ${selectedItemId},
 menuIsOpen: ${menuIsOpen},
 isSearchOpen: ${isSearchOpen},
