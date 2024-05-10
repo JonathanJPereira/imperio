@@ -61,7 +61,7 @@ class MenuPage extends StatelessWidget {
       itemBuilder: (context, index) {
         return Column(
           children: [
-            _buildMenuItem(items[index], color),
+            _buildMenuItem(items[index], color, index),
             _conditionalDivider(index, itemCount),
           ],
         );
@@ -69,11 +69,13 @@ class MenuPage extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuItem(NavItem item, Color color) {
+  Widget _buildMenuItem(NavItem item, Color color, int index) {
     return ListTile(
       leading: Icon(item.icon, size: 19, color: color),
       title: Text(item.label, style: TextStyle(color: color)),
-      onTap: () {},
+      onTap: () {
+        store.setIndex(index);
+      },
     );
   }
 

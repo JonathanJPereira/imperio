@@ -58,7 +58,7 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: TextField(
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.search, color: Color(0xFF484848)),
@@ -93,18 +93,21 @@ class SportsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
-      return GridView(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 157,
-          childAspectRatio: 4 / 4.5,
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 5,
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        child: GridView(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 157,
+            childAspectRatio: 4 / 4.5,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+          ),
+          children: [
+            ...store.filteredSports.map(
+              (sport) => SportCard(sport: sport),
+            )
+          ],
         ),
-        children: [
-          ...store.filteredSports.map(
-            (sport) => SportCard(sport: sport),
-          )
-        ],
       );
     });
   }
