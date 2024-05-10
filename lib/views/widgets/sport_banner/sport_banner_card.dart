@@ -35,22 +35,22 @@ class SportBannerCard extends StatelessWidget {
   Widget _buildTextContent(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 35),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: _titleStyle(),
-          ),
-          if (subtitle != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Text(
+      child: SizedBox(
+        width: 160,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: _titleStyle(),
+            ),
+            if (subtitle != null)
+              Text(
                 subtitle!,
                 style: _subtitleStyle(context),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -75,8 +75,12 @@ class SportBannerCard extends StatelessWidget {
     return Positioned(
       right: 0,
       bottom: 0,
-      child: Image.asset(
-        imagePath,
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(bottomRight: Radius.circular(36)),
+        child: Image.asset(
+          imagePath,
+          width: 191,
+        ),
       ),
     );
   }
