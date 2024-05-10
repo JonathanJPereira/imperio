@@ -8,7 +8,9 @@ class AppTheme {
 
   static ThemeData get lightTheme {
     return ThemeData(
-      appBarTheme: const AppBarTheme(color: primaryColor),
+      appBarTheme: const AppBarTheme(
+        color: primaryColor,
+      ),
       fontFamily: 'Montserrat',
       colorScheme: ColorScheme.fromSwatch().copyWith(
         surfaceTint: Colors.white,
@@ -43,6 +45,33 @@ class AppTheme {
           borderRadius: BorderRadius.all(Radius.circular(24)),
         ),
         shadowColor: Colors.black26,
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          shadowColor: MaterialStateProperty.all(Colors.black),
+          elevation: MaterialStateProperty.all(1.0),
+          overlayColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.pressed)) return primaryColor;
+              return null;
+            },
+          ),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          overlayColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.pressed)) return primaryColor;
+              return null;
+            },
+          ),
+          foregroundColor: MaterialStateProperty.all(Colors.black),
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          shadowColor: MaterialStateProperty.all(Colors.black),
+          elevation: MaterialStateProperty.all(1.0),
+        ),
       ),
     );
   }

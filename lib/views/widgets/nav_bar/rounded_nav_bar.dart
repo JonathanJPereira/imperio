@@ -3,7 +3,7 @@ import 'package:imperio/views/widgets/nav_bar/rounded_destination.dart';
 
 class RoundedNavBar extends StatelessWidget {
   final List<RoundedDestination> destinations;
-  final Function(int) onItemSelected;
+  final Function(String) onItemSelected;
 
   const RoundedNavBar(
       {super.key, required this.destinations, required this.onItemSelected});
@@ -21,11 +21,9 @@ class RoundedNavBar extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: destinations.asMap().entries.map((entry) {
-              int index = entry.key;
-              RoundedDestination destination = entry.value;
+            children: destinations.map((destination) {
               return GestureDetector(
-                onTap: () => onItemSelected(index),
+                onTap: () => onItemSelected(destination.id),
                 child: destination,
               );
             }).toList(),

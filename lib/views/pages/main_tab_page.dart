@@ -14,63 +14,77 @@ class MainTabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: Stack(
-        children: [
-          Observer(
-            builder: (_) => Center(
-              child: store.currentPage,
-            ),
-          ),
-        ],
+      body: Observer(
+        builder: (_) => Center(child: store.currentPage),
       ),
-      bottomNavigationBar: Observer(builder: (context) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildMenuButton(context),
-                _buildNavBar(),
-                _buildProfilePicture()
-              ],
-            ),
-          ),
-        );
-      }),
+      bottomNavigationBar: Observer(
+        builder: (_) => buildBottomNavigationBar(context),
+      ),
     );
   }
 
-  Widget _buildMenuButton(BuildContext context) {
+  Widget buildBottomNavigationBar(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            buildMenuButton(context),
+            buildNavBar(),
+            buildProfilePicture()
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildMenuButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: store.toggleMenu,
       style: ElevatedButton.styleFrom(
-          shape: const CircleBorder(),
-          padding: const EdgeInsets.all(14),
-          backgroundColor: Theme.of(context).colorScheme.tertiary,
-          foregroundColor: Colors.white.withOpacity(0.9)),
-      child: const Icon(Icons.menu),
-    );
-  }
-
-  Widget _buildNavBar() {
-    return RoundedNavBar(
-      destinations: [
-        ...List.generate(store.navItems.length, (index) {
-          return RoundedDestination(
-            icon: store.navItems[index].icon,
-            selectedIcon: store.navItems[index].selectedIcon,
-            selected: store.selectedIndex == index,
+        shape: const CircleBorder(),
+        padding: const EdgeInsets.all(14),
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
+        foregroundColor: Colors.white.withOpacity(0.9),
+      ),
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 300),
+        transitionBuilder: (Widget child, Animation<double> animation) {
+          return FadeTransition(
+            opacity: animation,
+            child: ScaleTransition(
+              scale: animation,
+              child: child,
+            ),
           );
-        })
-      ],
-      onItemSelected: (index) {
-        store.setIndex(index);
-      },
+        },
+        child: Icon(
+          store.menuIsOpen ? Icons.close : Icons.menu,
+          key: ValueKey<bool>(store.menuIsOpen),
+          size: 25,
+        ),
+      ),
     );
   }
 
-  Widget _buildProfilePicture() {
+  Widget buildNavBar() {
+    return RoundedNavBar(
+      destinations: List.generate(
+          store.navItems.where((item) => item.tabBarItem).length,
+          (index) {
+        final item = store.navItems[index];
+        return RoundedDestination(
+            id: item.id,
+            icon: item.icon,
+            selectedIcon: item.selectedIcon,
+            selected: store.selectedItemId == item.id);
+      }),
+      onItemSelected: store.setSelectedItem,
+    );
+  }
+
+  Widget buildProfilePicture() {
     return Container(
       padding: const EdgeInsets.all(2),
       decoration: BoxDecoration(
