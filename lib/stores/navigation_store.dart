@@ -81,12 +81,13 @@ abstract class _NavigationStore with Store {
       return navItems.toList();
     } else {
       return navItems.where((item) {
-        final normalizedItemLabel = removeDiacritics(item.label.toLowerCase());
-        final normalizedSearchText =
-            removeDiacritics(_searchText.toLowerCase());
-        return normalizedItemLabel.contains(normalizedSearchText);
+        return normalizeText(item.label).contains(normalizeText(_searchText));
       }).toList();
     }
+  }
+
+  String normalizeText(String text) {
+    return removeDiacritics(text.toLowerCase());
   }
 
   @observable
@@ -105,12 +106,10 @@ abstract class _NavigationStore with Store {
 
   @action
   void setSelectedItem(String id) {
-    if (navItems.any((item) => item.id == id)) {
-      menuIsOpen = false;
-      isSearchOpen = false;
-      clearSearch();
-      selectedItemId = id;
-    }
+    selectedItemId = id;
+    menuIsOpen = false;
+    isSearchOpen = false;
+    clearSearch();
   }
 
   @action
@@ -120,8 +119,10 @@ abstract class _NavigationStore with Store {
 
   @action
   void toggleSearch() {
-    _searchText = '';
     isSearchOpen = !isSearchOpen;
+    if (!isSearchOpen) {
+      clearSearch();
+    }
   }
 
   @action
