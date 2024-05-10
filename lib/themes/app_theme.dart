@@ -44,6 +44,33 @@ class AppTheme {
         ),
         shadowColor: Colors.black26,
       ),
+      iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          shadowColor: MaterialStateProperty.all(Colors.black),
+          elevation: MaterialStateProperty.all(1.0),
+          overlayColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.pressed)) return primaryColor;
+              return null;
+            },
+          ),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          overlayColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.pressed)) return primaryColor;
+              return null;
+            },
+          ),
+          foregroundColor: MaterialStateProperty.all(Colors.black),
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          shadowColor: MaterialStateProperty.all(Colors.black),
+          elevation: MaterialStateProperty.all(1.0),
+        ),
+      ),
     );
   }
 }

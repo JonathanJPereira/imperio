@@ -33,32 +33,32 @@ abstract class _NavigationStore with Store {
     ),
     NavItem(
       label: "Favoritos",
-      icon: ImperioIcons.iconBookmarkOutline,
-      selectedIcon: ImperioIcons.iconBookmark,
+      icon: ImperioIcons.iconStarOutline,
+      selectedIcon: ImperioIcons.iconStarOutline,
       page: const Text('Favoritos'),
     ),
     NavItem(
       label: "Influenciadores",
-      icon: ImperioIcons.iconBookmarkOutline,
-      selectedIcon: ImperioIcons.iconBookmark,
+      icon: ImperioIcons.iconPeoplesOutline,
+      selectedIcon: ImperioIcons.iconPeoplesOutline,
       page: const Text('Influenciadores'),
     ),
     NavItem(
       label: "Comparador de odds",
-      icon: ImperioIcons.iconBookmarkOutline,
-      selectedIcon: ImperioIcons.iconBookmark,
+      icon: ImperioIcons.iconPieOutline,
+      selectedIcon: ImperioIcons.iconPieOutline,
       page: const Text('Comparador de odds'),
     ),
     NavItem(
       label: "Jogo consciente ",
-      icon: ImperioIcons.iconBookmarkOutline,
-      selectedIcon: ImperioIcons.iconBookmark,
+      icon: ImperioIcons.iconTicketOutline,
+      selectedIcon: ImperioIcons.iconTicketOutline,
       page: const Text('Jogo consciente'),
     ),
     NavItem(
       label: "Privacidade e segurança ",
-      icon: ImperioIcons.iconBookmarkOutline,
-      selectedIcon: ImperioIcons.iconBookmark,
+      icon: ImperioIcons.iconShieldOutline,
+      selectedIcon: ImperioIcons.iconShieldOutline,
       page: const Text('Privacidade e segurança'),
     ),
   ]);
@@ -71,7 +71,7 @@ abstract class _NavigationStore with Store {
 
   @computed
   Widget get currentPage =>
-      menuIsOpen ? const MenuPage() : navItems[selectedIndex].page;
+      menuIsOpen ? MenuPage() : navItems[selectedIndex].page;
 
   @action
   void setIndex(int index) {
