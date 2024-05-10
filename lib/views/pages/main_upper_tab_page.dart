@@ -54,6 +54,7 @@ class MainUpperTabPage extends StatelessWidget {
 
   Widget _buildTabBarView() {
     return TabBarView(
+      physics: const NeverScrollableScrollPhysics(),
       children: [
         const AllSportsPage(),
         ...store.sports.map((sport) => Center(child: Text(sport.name)))
