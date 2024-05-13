@@ -1,31 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class BettingHousesDisplay extends StatelessWidget {
-  const BettingHousesDisplay({super.key});
+  final double onexbetOdd;
+  final double betsafeOdd;
+  final double betssonOdd;
+
+  const BettingHousesDisplay(
+      {super.key,
+      required this.onexbetOdd,
+      required this.betsafeOdd,
+      required this.betssonOdd});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             BettingHouseInfo(
               title: 'Casa',
               imgAsset: 'assets/images/betting_houses/1xbet.png',
-              odd: '3.2',
+              odd: NumberFormat.compact().format(onexbetOdd),
             ),
-            VerticalDivisor(),
+            const VerticalDivisor(),
             BettingHouseInfo(
               title: 'X',
               imgAsset: 'assets/images/betting_houses/betsafe.png',
-              odd: '3.2',
+              odd: NumberFormat.compact().format(betsafeOdd),
             ),
-            VerticalDivisor(),
+            const VerticalDivisor(),
             BettingHouseInfo(
               title: 'Fora',
               imgAsset: 'assets/images/betting_houses/betsson.png',
-              odd: '3.2',
+              odd: NumberFormat.compact().format(betssonOdd),
             ),
           ],
         ),

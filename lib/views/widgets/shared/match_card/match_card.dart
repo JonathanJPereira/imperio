@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperio/models/match.dart';
 import 'package:imperio/views/widgets/shared/match_card/betting_houses_display.dart';
 import 'package:imperio/views/widgets/shared/match_card/live_indicator.dart';
 import 'package:imperio/views/widgets/shared/match_card/match_score_display.dart';
@@ -7,7 +8,9 @@ import 'package:imperio/views/widgets/shared/match_card/time_line.dart';
 import 'package:imperio/views/widgets/shared/match_card/view_more.dart';
 
 class MatchCard extends StatelessWidget {
-  const MatchCard({super.key});
+  final Match match;
+
+  const MatchCard({super.key, required this.match});
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +28,25 @@ class MatchCard extends StatelessWidget {
           ),
         ],
       ),
-      child: const Column(
+      child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              TeamLogo(name: 'São Paulo'),
-              LiveIndicator(),
-              TeamLogo(name: 'Palmeiras'),
+              TeamLogo(name: match.teamB),
+              const LiveIndicator(),
+              TeamLogo(name: match.teamB),
             ],
           ),
-          MatchScoreDisplay(scoreTeamOne: 2, scoreTeamTwo: 2),
-          TimeLine(),
-          BettingHousesDisplay(),
-          ViewMore()
+          MatchScoreDisplay(
+              scoreTeamOne: match.teamAScore, scoreTeamTwo: match.teamBScore),
+          const TimeLine(),
+          BettingHousesDisplay(
+            onexbetOdd: match.onexbetOddsAvg,
+            betsafeOdd: match.betsafeOddsAvg,
+            betssonOdd: match.betssonOddsAvg,
+          ),
+          const ViewMore()
         ],
       ),
     );

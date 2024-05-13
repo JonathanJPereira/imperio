@@ -10,7 +10,6 @@ abstract class _WonBetsStore with Store {
   final WonBetsService _wonBetsService;
 
   _WonBetsStore(this._wonBetsService) {
-    print('Passando aqui');
     fetchWonBets().then((value) => print(wonBets));
   }
 

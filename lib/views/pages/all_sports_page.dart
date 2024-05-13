@@ -27,7 +27,7 @@ class AllSportsPage extends StatelessWidget {
                 children: [
                   SportsBanner(),
                   const PopularChampionships(),
-                  const MatchList(),
+                  MatchList(),
                   const SizedBox(height: itemDistance),
                   const TipsList(),
                   const SizedBox(height: itemDistance),

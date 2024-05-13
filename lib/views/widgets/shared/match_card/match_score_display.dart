@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class MatchScoreDisplay extends StatelessWidget {
   final int scoreTeamOne;
@@ -13,20 +14,28 @@ class MatchScoreDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.baseline,
-        textBaseline: TextBaseline.alphabetic,
-        children: [
-          Text('$scoreTeamOne', style: const TextStyle(fontSize: 50)),
-          Text(':',
-              style: TextStyle(
-                  fontSize: 40,
-                  color: theme.colorScheme.tertiary.withOpacity(0.6))),
-          Text('$scoreTeamTwo', style: const TextStyle(fontSize: 50)),
-        ],
+    return FittedBox(
+      fit: BoxFit.contain,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
+          children: [
+            Text(NumberFormat.compact().format(scoreTeamOne),
+                style: const TextStyle(fontSize: 50)),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(':',
+                  style: TextStyle(
+                      fontSize: 40,
+                      color: theme.colorScheme.tertiary.withOpacity(0.6))),
+            ),
+            Text(NumberFormat.compact().format(scoreTeamTwo),
+                style: const TextStyle(fontSize: 50)),
+          ],
+        ),
       ),
     );
   }
