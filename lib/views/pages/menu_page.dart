@@ -15,7 +15,7 @@ class MenuPage extends StatelessWidget {
       appBar: _buildAppBar(context),
       body: Column(
         children: [
-          const Divider(color: Color(0xFFEFEFEF)),
+          const Divider(),
           Expanded(child: _buildMenuList(context)),
         ],
       ),
@@ -118,7 +118,7 @@ class MenuPage extends StatelessWidget {
     return Observer(
       builder: (_) {
         if ((index == count - 3 || index == count - 1) && !store.isSearchOpen) {
-          return const Divider(color: Color(0xFFEFEFEF));
+          return const Divider();
         } else {
           return const SizedBox.shrink();
         }

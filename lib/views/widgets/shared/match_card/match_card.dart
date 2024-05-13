@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imperio/models/match.dart';
+
 import 'package:imperio/views/widgets/shared/match_card/betting_houses_display.dart';
 import 'package:imperio/views/widgets/shared/match_card/live_indicator.dart';
 import 'package:imperio/views/widgets/shared/match_card/match_score_display.dart';
@@ -11,6 +12,14 @@ class MatchCard extends StatelessWidget {
   final Match match;
 
   const MatchCard({super.key, required this.match});
+
+  void _navigateToMatchDetails(BuildContext context) {
+    Navigator.pushNamed(
+      context,
+      '/match_details',
+      arguments: match,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,7 @@ class MatchCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              TeamLogo(name: match.teamB),
+              TeamLogo(name: match.teamA),
               const LiveIndicator(),
               TeamLogo(name: match.teamB),
             ],
@@ -46,7 +55,9 @@ class MatchCard extends StatelessWidget {
             betsafeOdd: match.betsafeOddsAvg,
             betssonOdd: match.betssonOddsAvg,
           ),
-          const ViewMore()
+          ViewMore(
+            onPress: () => _navigateToMatchDetails(context),
+          )
         ],
       ),
     );

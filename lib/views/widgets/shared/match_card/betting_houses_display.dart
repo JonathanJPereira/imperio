@@ -42,7 +42,6 @@ class BettingHousesDisplay extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 15),
           child: const Divider(
             height: 1,
-            color: Color(0xFFDEE0DF),
           ),
         ),
       ],

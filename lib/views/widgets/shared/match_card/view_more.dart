@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 
 class ViewMore extends StatelessWidget {
-  const ViewMore({super.key});
+  final VoidCallback onPress;
+
+  const ViewMore({
+    super.key,
+    required this.onPress,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(bottom: 10),
-      child: Text(
-        'Ver mais',
-        style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.tertiary.withOpacity(0.8)),
+    return TextButton(
+      onPressed: onPress,
+      style: TextButton.styleFrom(
+        shadowColor: Colors.transparent,
+        textStyle: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+        ),
       ),
+      child: const Text('Ver mais'),
     );
   }
 }
