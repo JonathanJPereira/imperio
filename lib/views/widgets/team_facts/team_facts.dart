@@ -10,21 +10,14 @@ class TeamFacts extends StatelessWidget {
   final String teamAName;
   final String teamBImg;
   final String teamBName;
-  final List<String> teamFacts = [
-    'Perdeu 6 jogos seguidos',
-    'Sequência de derrotas de 4 jogos em casa',
-    'Marcou apenas 1 gol nos últimos 4 jogos',
-    'Quando perdem por 1-0 fora, eles vencem 40% dos seus jogos',
-    'Vencem o primeiro tempo em 16% de suas partidas',
-    'Marcam 75% dos seus gols no segundo tempo',
-  ];
+  final List<String> teamFacts;
 
   TeamFacts({
     super.key,
     required this.teamAImg,
     required this.teamAName,
     required this.teamBImg,
-    required this.teamBName,
+    required this.teamBName, required this.teamFacts,
   });
 
   @override

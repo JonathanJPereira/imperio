@@ -23,12 +23,13 @@ class MatchDetails extends StatelessWidget {
             // MatchCard(match: match),
             // FootballPitch(match: match),
             // const SizedBox(height: 20),
-            GameInfo(match: match),
+            // GameInfo(match: match),
             TeamFacts(
               teamAImg: match.teamAImage,
               teamBImg: match.teamBImage,
               teamAName: match.teamA,
               teamBName: match.teamB,
+              teamFacts: match.teamBStats.split('. '),
             )
           ],
         ),
