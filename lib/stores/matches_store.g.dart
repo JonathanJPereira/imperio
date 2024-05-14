@@ -54,19 +54,35 @@ mixin _$MatchesStore on _MatchesStore, Store {
     });
   }
 
-  late final _$currentMatchIdAtom =
-      Atom(name: '_MatchesStore.currentMatchId', context: context);
+  late final _$_currentMatchIdAtom =
+      Atom(name: '_MatchesStore._currentMatchId', context: context);
 
   @override
-  String get currentMatchId {
-    _$currentMatchIdAtom.reportRead();
-    return super.currentMatchId;
+  String get _currentMatchId {
+    _$_currentMatchIdAtom.reportRead();
+    return super._currentMatchId;
   }
 
   @override
-  set currentMatchId(String value) {
-    _$currentMatchIdAtom.reportWrite(value, super.currentMatchId, () {
-      super.currentMatchId = value;
+  set _currentMatchId(String value) {
+    _$_currentMatchIdAtom.reportWrite(value, super._currentMatchId, () {
+      super._currentMatchId = value;
+    });
+  }
+
+  late final _$matchBetsAtom =
+      Atom(name: '_MatchesStore.matchBets', context: context);
+
+  @override
+  ObservableMap<String, List<Bet>> get matchBets {
+    _$matchBetsAtom.reportRead();
+    return super.matchBets;
+  }
+
+  @override
+  set matchBets(ObservableMap<String, List<Bet>> value) {
+    _$matchBetsAtom.reportWrite(value, super.matchBets, () {
+      super.matchBets = value;
     });
   }
 
@@ -110,6 +126,14 @@ mixin _$MatchesStore on _MatchesStore, Store {
     return _$fetchMatchesAsyncAction.run(() => super.fetchMatches());
   }
 
+  late final _$enrichMatchAsyncAction =
+      AsyncAction('_MatchesStore.enrichMatch', context: context);
+
+  @override
+  Future<void> enrichMatch(String matchId) {
+    return _$enrichMatchAsyncAction.run(() => super.enrichMatch(matchId));
+  }
+
   late final _$_MatchesStoreActionController =
       ActionController(name: '_MatchesStore', context: context);
 
@@ -128,7 +152,7 @@ mixin _$MatchesStore on _MatchesStore, Store {
   String toString() {
     return '''
 matches: ${matches},
-currentMatchId: ${currentMatchId},
+matchBets: ${matchBets},
 isLoading: ${isLoading},
 errorMessage: ${errorMessage},
 teamAFacts: ${teamAFacts},

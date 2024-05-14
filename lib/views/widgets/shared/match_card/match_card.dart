@@ -17,7 +17,7 @@ class MatchCard extends StatelessWidget {
 
   void _navigateToMatchDetails(BuildContext context) {
     final MatchesStore matchesStore = GetIt.I<MatchesStore>();
-    matchesStore.currentMatchId = match.id;
+    matchesStore.setCurrentMatchId(match.id);
 
     Navigator.pushNamed(
       context,

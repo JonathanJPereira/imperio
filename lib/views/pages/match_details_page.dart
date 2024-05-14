@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:imperio/stores/matches_store.dart';
 import 'package:imperio/views/widgets/football_pitch/football_pitch.dart';
+import 'package:imperio/views/widgets/last_bets/last_bets.dart';
 import 'package:imperio/views/widgets/referee_facts/referee_facts.dart';
 import 'package:imperio/views/widgets/shared/custom_app_bar.dart';
 import 'package:imperio/models/match.dart';
@@ -55,26 +56,32 @@ class MatchDetails extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Divider(),
-            MatchCard(match: match),
-            FootballPitch(
-              teamAImg: match.teamAImage,
-              teamBImg: match.teamBImage,
-            ),
-            const SizedBox(height: 20),
-            TeamFacts(
-              teamAImg: match.teamAImage,
-              teamBImg: match.teamBImage,
-              teamAName: match.teamA,
-              teamBName: match.teamB,
-              teamAFacts: matchesStore.teamAFacts,
-              teamBFacts: matchesStore.teamBFacts,
-            ),
-            const SizedBox(height: 20),
+            // const Divider(),
+            // MatchCard(match: match),
+            // FootballPitch(
+            //   teamAImg: match.teamAImage,
+            //   teamBImg: match.teamBImage,
+            // ),
+            // const SizedBox(height: 20),
+            // TeamFacts(
+            //   teamAImg: match.teamAImage,
+            //   teamBImg: match.teamBImage,
+            //   teamAName: match.teamA,
+            //   teamBName: match.teamB,
+            //   teamAFacts: matchesStore.teamAFacts,
+            //   teamBFacts: matchesStore.teamBFacts,
+            // ),
+            // const SizedBox(height: 20),
             RefereeFacts(
               refereeName: match.referee,
               refereeImg: match.refereeAvatar,
               refereeFacts: matchesStore.refereeFacts,
+            ),
+            const SizedBox(height: 20),
+            LastBets(
+              betlist: matchesStore.matchBets.values
+                  .expand((betList) => betList)
+                  .toList(),
             ),
           ],
         ),

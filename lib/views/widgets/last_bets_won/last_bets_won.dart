@@ -37,6 +37,7 @@ class LastBetsWon extends StatelessWidget {
                 user: wonBet.user,
                 platform: wonBet.platform,
                 score: wonBet.score,
+                date: DateTime.now(),
               );
             },
           );
