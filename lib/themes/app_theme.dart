@@ -73,7 +73,7 @@ class AppTheme {
           elevation: MaterialStateProperty.all(1.0),
         ),
       ),
-      dividerTheme: const DividerThemeData(color: Color(0xFFEFEFEF)),
+      dividerColor: Color(0xFFEFEFEF),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imperio/views/widgets/game_info/game_info.dart';
+import 'package:imperio/views/widgets/referee_facts/referee_facts.dart';
 import 'package:imperio/views/widgets/shared/custom_app_bar.dart';
 import 'package:imperio/models/match.dart';
 import 'package:imperio/views/widgets/team_facts/team_facts.dart';
@@ -30,7 +31,13 @@ class MatchDetails extends StatelessWidget {
               teamAName: match.teamA,
               teamBName: match.teamB,
               teamFacts: match.teamBStats.split('. '),
-            )
+            ),
+            const SizedBox(height: 20),
+            RefereeFacts(
+              refereeName: match.referee,
+              refereeImg: match.refereeAvatar,
+              refereeFacts: match.refereeStats.split('. '),
+            ),
           ],
         ),
       ),
