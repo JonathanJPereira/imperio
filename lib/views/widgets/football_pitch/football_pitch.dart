@@ -3,11 +3,13 @@ import 'package:imperio/views/widgets/shared/rounded_image.dart';
 import 'package:imperio/models/match.dart';
 
 class FootballPitch extends StatelessWidget {
-  final Match match;
+  final String teamAImg;
+  final String teamBImg;
 
   const FootballPitch({
     super.key,
-    required this.match,
+    required this.teamAImg,
+    required this.teamBImg,
   });
 
   @override
@@ -34,8 +36,8 @@ class FootballPitch extends StatelessWidget {
           width: double.infinity,
           fit: BoxFit.cover,
         ),
-        positionTeamImage(match.teamAImage, const Alignment(-0.78, -0.5)),
-        positionTeamImage(match.teamBImage, const Alignment(0.78, -0.5)),
+        positionTeamImage(teamAImg, const Alignment(-0.78, -0.5)),
+        positionTeamImage(teamBImg, const Alignment(0.78, -0.5)),
       ],
     );
   }

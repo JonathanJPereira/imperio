@@ -11,7 +11,8 @@ class TeamFacts extends StatelessWidget {
   final String teamAName;
   final String teamBImg;
   final String teamBName;
-  final List<String> teamFacts;
+  final List<String> teamAFacts;
+  final List<String> teamBFacts;
 
   const TeamFacts({
     super.key,
@@ -19,7 +20,8 @@ class TeamFacts extends StatelessWidget {
     required this.teamAName,
     required this.teamBImg,
     required this.teamBName,
-    required this.teamFacts,
+    required this.teamAFacts,
+    required this.teamBFacts,
   });
 
   @override
@@ -32,47 +34,56 @@ class TeamFacts extends StatelessWidget {
           itemCount: 2,
           height: 426,
           itemBuilder: (context, index) {
-            String imgUrl = index == 0 ? teamAImg : teamBImg;
-            String teamName = index == 0 ? teamAName : teamBName;
-
-            return SizedBox(
-              width: 278,
-              child: CustomContainer(
-                margin: EdgeInsets.zero,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        CustomNetworkImage(
-                          imgUrl: imgUrl,
-                          width: 28,
-                          height: 28,
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          teamName,
-                          style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      height: 288,
-                      child: OrderedList(items: teamFacts),
-                    ),
-                    const ActionPromptRow(
-                      title: 'Ver mais',
-                      mainAxisAlignment: MainAxisAlignment.end,
-                    ),
-                  ],
-                ),
-              ),
+            return _buildTeamCard(
+              context,
+              teamFacts: index == 0 ? teamAFacts : teamBFacts,
+              imgUrl: index == 0 ? teamAImg : teamBImg,
+              teamName: index == 0 ? teamAName : teamBName,
             );
           },
         ),
       ],
+    );
+  }
+
+  Widget _buildTeamCard(BuildContext context,
+      {required List<String> teamFacts,
+      required String imgUrl,
+      required String teamName}) {
+    return SizedBox(
+      width: 278,
+      child: CustomContainer(
+        margin: EdgeInsets.zero,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CustomNetworkImage(
+                  imgUrl: imgUrl,
+                  width: 28,
+                  height: 28,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  teamName,
+                  style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              height: 288,
+              child: OrderedList(items: teamFacts),
+            ),
+            const ActionPromptRow(
+              title: 'Ver mais',
+              mainAxisAlignment: MainAxisAlignment.end,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
