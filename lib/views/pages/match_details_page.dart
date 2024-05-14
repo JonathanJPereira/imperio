@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:imperio/utils/imperio_icons.dart';
+import 'package:imperio/views/widgets/game_info/game_info.dart';
 import 'package:imperio/views/widgets/shared/custom_app_bar.dart';
 import 'package:imperio/views/widgets/shared/match_card/match_card.dart';
 import 'package:imperio/models/match.dart';
 import 'package:imperio/views/widgets/shared/rounded_image.dart';
+import 'package:imperio/views/widgets/shared/section_header.dart';
+import 'package:imperio/views/widgets/shared/share_button.dart';
 
 class MatchDetails extends StatelessWidget {
   const MatchDetails({super.key});
@@ -22,6 +26,10 @@ class MatchDetails extends StatelessWidget {
             const Divider(),
             MatchCard(match: match),
             buildMatchImageStack(match, context),
+            const SizedBox(height: 20),
+            GameInfo(
+              match: match,
+            ),
           ],
         ),
       ),

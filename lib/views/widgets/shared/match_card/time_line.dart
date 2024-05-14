@@ -106,9 +106,9 @@ class Ball extends StatelessWidget {
   final String ballPath;
 
   const Ball({
-    Key? key,
+    super.key,
     required this.ballPath,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
