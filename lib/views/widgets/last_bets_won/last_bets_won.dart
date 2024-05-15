@@ -29,7 +29,7 @@ class LastBetsWon extends StatelessWidget {
 
           return HorizontalList(
             itemCount: wonBetsStore.wonBets.length,
-            height: 88,
+            height: 91,
             itemBuilder: (context, index) {
               final wonBet = wonBetsStore.wonBets[index];
               return BetCard(
@@ -37,6 +37,7 @@ class LastBetsWon extends StatelessWidget {
                 user: wonBet.user,
                 platform: wonBet.platform,
                 score: wonBet.score,
+                date: DateTime.now(),
               );
             },
           );

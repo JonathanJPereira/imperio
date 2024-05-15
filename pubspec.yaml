@@ -20,6 +20,7 @@ dependencies:
   get_it: ^7.7.0
   intl: ^0.19.0
   flutter_hooks: ^0.20.5
+  timeago: ^3.6.1
 
 dev_dependencies:
   flutter_test:
@@ -40,8 +41,10 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat-Regular.ttf
-        # weight: 500
+          weight: 400
         - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
           weight: 600
         - asset: assets/fonts/Montserrat-Bold.ttf
           weight: 700

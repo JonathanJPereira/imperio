@@ -25,4 +25,6 @@ class ImperioIcons {
       IconData(0x0807, fontFamily: 'ImperioIcons');
   static const IconData iconShieldOutline =
       IconData(0x0808, fontFamily: 'ImperioIcons');
+  static const IconData iconShareOutline =
+      IconData(0x0809, fontFamily: 'ImperioIcons');
 }
