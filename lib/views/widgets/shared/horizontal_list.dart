@@ -5,6 +5,7 @@ class HorizontalList extends StatelessWidget {
   final Widget? Function(BuildContext, int) itemBuilder;
   final double height;
   final double itemDistance;
+  final double horizontalPadding;
 
   const HorizontalList({
     required this.itemBuilder,
@@ -12,12 +13,13 @@ class HorizontalList extends StatelessWidget {
     required this.height,
     this.itemDistance = 11,
     super.key,
+    this.horizontalPadding = 25,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 25),
+      margin: EdgeInsets.symmetric(horizontal: horizontalPadding),
       height: height,
       child: ListView.separated(
         separatorBuilder: (context, index) => SizedBox(width: itemDistance),

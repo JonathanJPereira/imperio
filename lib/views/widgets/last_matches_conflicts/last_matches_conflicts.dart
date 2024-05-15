@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imperio/models/match_conflict.dart';
+import 'package:imperio/views/widgets/last_matches_conflicts/match_conflict_card.dart';
+import 'package:imperio/views/widgets/shared/horizontal_list.dart';
 import 'package:imperio/views/widgets/shared/rounded_image.dart';
 import 'package:imperio/views/widgets/shared/section_header.dart';
 import 'package:imperio/views/widgets/shared/vertical_divisor.dart';
@@ -47,6 +49,25 @@ class LastMatchesConflicts extends StatelessWidget {
             teamBImg: teamBImg,
             principalConflict: principalConflict,
           ),
+          const SizedBox(
+            height: 10,
+          ),
+          HorizontalList(
+            horizontalPadding: 8,
+            itemCount: matchConflicts.length,
+            height: 120,
+            itemBuilder: (context, index) {
+              final conflict = matchConflicts[index];
+              return MatchConflictCard(
+                conflict: conflict,
+                teamAImg: teamAImg,
+                teamBImg: teamBImg,
+              );
+            },
+          ),
+          const SizedBox(
+            height: 150,
+          )
         ],
       ),
     );
@@ -76,7 +97,7 @@ class MatchSummaryCard extends StatelessWidget {
       child: Card(
         color: const Color(0xFF747D78),
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(30.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,

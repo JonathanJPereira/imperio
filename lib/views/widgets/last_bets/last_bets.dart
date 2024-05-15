@@ -18,7 +18,7 @@ class LastBets extends StatelessWidget {
         ),
         HorizontalList(
           itemCount: betlist.length,
-          height: 88,
+          height: 91,
           itemBuilder: (context, index) {
             final bet = betlist[index];
             return BetCard(

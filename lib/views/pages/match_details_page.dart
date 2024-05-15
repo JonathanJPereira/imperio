@@ -57,29 +57,30 @@ class MatchDetails extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // const Divider(),
-            // MatchCard(match: match),
-            // FootballPitch(
-            //   teamAImg: match.teamAImage,
-            //   teamBImg: match.teamBImage,
-            // ),
-            // const SizedBox(height: 20),
-            // TeamFacts(
-            //   teamAImg: match.teamAImage,
-            //   teamBImg: match.teamBImage,
-            //   teamAName: match.teamA,
-            //   teamBName: match.teamB,
-            //   teamAFacts: matchesStore.teamAFacts,
-            //   teamBFacts: matchesStore.teamBFacts,
-            // ),
-            // const SizedBox(height: 20),
-            // RefereeFacts(
-            //   refereeName: match.referee,
-            //   refereeImg: match.refereeAvatar,
-            //   refereeFacts: matchesStore.refereeFacts,
-            // ),
+            const Divider(),
+            MatchCard(match: match),
+            FootballPitch(
+              teamAImg: match.teamAImage,
+              teamBImg: match.teamBImage,
+            ),
+            const SizedBox(height: 20),
+            TeamFacts(
+              teamAImg: match.teamAImage,
+              teamBImg: match.teamBImage,
+              teamAName: match.teamA,
+              teamBName: match.teamB,
+              teamAFacts: matchesStore.teamAFacts,
+              teamBFacts: matchesStore.teamBFacts,
+            ),
+            const SizedBox(height: 20),
+            RefereeFacts(
+              refereeName: match.referee,
+              refereeImg: match.refereeAvatar,
+              refereeFacts: matchesStore.refereeFacts,
+            ),
             const SizedBox(height: 20),
             LastBets(betlist: matchesStore.matchBets[match.id]!),
+            const SizedBox(height: 20),
             LastMatchesConflicts(
               teamAName: match.teamA,
               teamBName: match.teamB,
