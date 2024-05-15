@@ -9,6 +9,7 @@ import 'package:imperio/services/won_bets_service.dart';
 import 'package:imperio/stores/matches_store.dart';
 import 'package:imperio/stores/sports_store.dart';
 import 'package:imperio/stores/championships_store.dart';
+import 'package:imperio/stores/tab_selector_store.dart';
 import 'package:imperio/stores/tips_store.dart';
 import 'package:imperio/stores/bonus_store.dart';
 import 'package:imperio/stores/won_bets_store.dart';
@@ -17,10 +18,12 @@ import 'package:imperio/stores/navigation_store.dart';
 GetIt getIt = GetIt.instance;
 
 void setupLocator() {
-  // Configurações gerais
+  // Dio é configurado como LazySingleton para garantir que apenas uma instância seja criada quando necessário.
+  // Isso é útil para compartilhar uma única instância de configuração HTTP por todo o app.
   getIt.registerLazySingleton<Dio>(() => Dio());
 
-  // Serviços
+  // Serviços são registrados como LazySingletons para garantir que sejam criados apenas quando acessados pela primeira vez,
+  // melhorando a eficiência da inicialização e reduzindo o consumo de recursos no startup.
   getIt.registerLazySingleton<SportsService>(() => SportsService(getIt()));
   getIt.registerLazySingleton<ChampionshipsService>(
       () => ChampionshipsService(getIt()));
@@ -29,8 +32,8 @@ void setupLocator() {
   getIt.registerLazySingleton<WonBetsService>(() => WonBetsService(getIt()));
   getIt.registerLazySingleton<MatchesService>(() => MatchesService(getIt()));
 
-  // Stores
-  // Registrado como Singleton para manter o estado em toda a aplicação
+  // Stores são registradas como Singletons para manter o estado compartilhado globalmente por toda a aplicação.
+  // Isso permite que o estado seja acessado de forma consistente em diferentes partes do app.
   getIt.registerSingleton<SportsStore>(SportsStore(getIt()));
   getIt.registerSingleton<ChampionshipsStore>(ChampionshipsStore(getIt()));
   getIt.registerSingleton<TipsStore>(TipsStore(getIt()));
@@ -38,4 +41,8 @@ void setupLocator() {
   getIt.registerSingleton<WonBetsStore>(WonBetsStore(getIt()));
   getIt.registerSingleton<MatchesStore>(MatchesStore(getIt()));
   getIt.registerSingleton<NavigationStore>(NavigationStore());
+
+  // TabSelectorStore é registrado como Factory para fornecer uma nova instância cada vez que for solicitado.
+  // Isso é ideal para componentes que necessitam de um estado independente, evitando interferências entre diferentes usos.
+  getIt.registerFactory<TabSelectorStore>(() => TabSelectorStore());
 }

@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         AppRoutes.HOME: (context) => MainTabPage(),
         AppRoutes.SPORTS: (context) => SportsPage(),
-        AppRoutes.MATCH_DETAILS: (context) => const MatchDetails()
+        AppRoutes.MATCH_DETAILS: (context) => MatchDetails()
       },
     );
   }

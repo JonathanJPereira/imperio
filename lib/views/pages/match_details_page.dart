@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:imperio/stores/matches_store.dart';
+import 'package:imperio/stores/tab_selector_store.dart';
 import 'package:imperio/views/widgets/football_pitch/football_pitch.dart';
+import 'package:imperio/views/widgets/game_info/game_info.dart';
 import 'package:imperio/views/widgets/last_bets/last_bets.dart';
 import 'package:imperio/views/widgets/last_matches_conflicts/last_matches_conflicts.dart';
 import 'package:imperio/views/widgets/referee_facts/referee_facts.dart';
 import 'package:imperio/views/widgets/shared/custom_app_bar.dart';
 import 'package:imperio/models/match.dart';
 import 'package:imperio/views/widgets/shared/match_card/match_card.dart';
+import 'package:imperio/views/widgets/tab_selector/tab_selector.dart';
 import 'package:imperio/views/widgets/team_facts/team_facts.dart';
 
 class MatchDetails extends StatelessWidget {
-  const MatchDetails({super.key});
+  final TabSelectorStore tabSelectorStore = GetIt.I<TabSelectorStore>();
+
+  MatchDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,47 +54,93 @@ class MatchDetails extends StatelessWidget {
 
   Widget _buildMatchDetails(
       Match match, BuildContext context, MatchesStore matchesStore) {
+    List<Widget> tabViews = [Text('Hoje'), Text('Amanhã')];
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Partida',
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Divider(),
-            MatchCard(match: match),
-            FootballPitch(
-              teamAImg: match.teamAImage,
-              teamBImg: match.teamBImage,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                const Divider(),
+                MatchCard(match: match),
+                FootballPitch(
+                  teamAImg: match.teamAImage,
+                  teamBImg: match.teamBImage,
+                ),
+                GameInfo(match: match),
+                TeamFacts(
+                  teamAImg: match.teamAImage,
+                  teamBImg: match.teamBImage,
+                  teamAName: match.teamA,
+                  teamBName: match.teamB,
+                  teamAFacts: matchesStore.teamAFacts,
+                  teamBFacts: matchesStore.teamBFacts,
+                ),
+                RefereeFacts(
+                  refereeName: match.referee,
+                  refereeImg: match.refereeAvatar,
+                  refereeFacts: matchesStore.refereeFacts,
+                ),
+                LastBets(betlist: matchesStore.matchBets[match.id]!),
+                LastMatchesConflicts(
+                  teamAName: match.teamA,
+                  teamBName: match.teamB,
+                  matchConflicts: matchesStore.matchConflicts[match.id]!,
+                  teamAImg: match.teamAImage,
+                  teamBImg: match.teamBImage,
+                ),
+              ],
             ),
-            const SizedBox(height: 20),
-            TeamFacts(
-              teamAImg: match.teamAImage,
-              teamBImg: match.teamBImage,
-              teamAName: match.teamA,
-              teamBName: match.teamB,
-              teamAFacts: matchesStore.teamAFacts,
-              teamBFacts: matchesStore.teamBFacts,
-            ),
-            const SizedBox(height: 20),
-            RefereeFacts(
-              refereeName: match.referee,
-              refereeImg: match.refereeAvatar,
-              refereeFacts: matchesStore.refereeFacts,
-            ),
-            const SizedBox(height: 20),
-            LastBets(betlist: matchesStore.matchBets[match.id]!),
-            const SizedBox(height: 20),
-            LastMatchesConflicts(
-              teamAName: match.teamA,
-              teamBName: match.teamB,
-              matchConflicts: matchesStore.matchConflicts[match.id]!,
-              teamAImg: match.teamAImage,
-              teamBImg: match.teamBImage,
-            ),
-          ],
-        ),
+          ),
+          DraggableScrollableSheet(
+            initialChildSize: 0.2,
+            minChildSize: 0.1,
+            maxChildSize: 0.8,
+            builder: (context, scrollController) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.secondary,
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(40)),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 8.0),
+                      height: 6.0,
+                      width: 53.0,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(3.0),
+                      ),
+                    ),
+                    Expanded(
+                      child: Observer(builder: (context) {
+                        return TabSelector(
+                          store: tabSelectorStore,
+                          tabs: const ['Odds mais altas', 'Outras odds'],
+                          borderColor: const Color(0xFF646E69),
+                        );
+                      }),
+                    ),
+                    Expanded(
+                      child: Observer(
+                        builder: (_) => IndexedStack(
+                          index: tabSelectorStore.selectedIndex,
+                          children: tabViews,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
