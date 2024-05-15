@@ -1,5 +1,6 @@
 import 'package:imperio/models/bet.dart';
 import 'package:imperio/models/match.dart';
+import 'package:imperio/models/match_conflict.dart';
 import 'package:imperio/services/matches_service.dart';
 import 'package:mobx/mobx.dart';
 
@@ -23,6 +24,10 @@ abstract class _MatchesStore with Store {
   @observable
   ObservableMap<String, List<Bet>> matchBets =
       ObservableMap<String, List<Bet>>();
+
+  @observable
+  ObservableMap<String, List<MatchConflict>> matchConflicts =
+      ObservableMap<String, List<MatchConflict>>();
 
   @computed
   List<String> get teamAFacts {
@@ -74,9 +79,16 @@ abstract class _MatchesStore with Store {
     isLoading = true;
     errorMessage = null;
     try {
-      List<Bet> bets = await _matchesService.fetchBets(matchId);
+      List<dynamic> results = await Future.wait([
+        _matchesService.fetchBets(matchId),
+        _matchesService.fetchMatchConflicts(matchId)
+      ]);
+
+      List<Bet> bets = results[0];
+      List<MatchConflict> conflicts = results[1];
+
       matchBets[matchId] = bets;
-      print(matchId);
+      matchConflicts[matchId] = conflicts;
     } catch (e) {
       errorMessage = "Failed to enrich match: ${e.toString()}";
     } finally {

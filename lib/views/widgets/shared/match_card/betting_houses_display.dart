@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperio/views/widgets/shared/vertical_divisor.dart';
 import 'package:intl/intl.dart';
 
 class BettingHousesDisplay extends StatelessWidget {
@@ -45,19 +46,6 @@ class BettingHousesDisplay extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class VerticalDivisor extends StatelessWidget {
-  const VerticalDivisor({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 26,
-      width: 1.0,
-      color: const Color(0xFFDEE0DF),
     );
   }
 }

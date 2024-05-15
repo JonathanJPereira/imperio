@@ -86,6 +86,22 @@ mixin _$MatchesStore on _MatchesStore, Store {
     });
   }
 
+  late final _$matchConflictsAtom =
+      Atom(name: '_MatchesStore.matchConflicts', context: context);
+
+  @override
+  ObservableMap<String, List<MatchConflict>> get matchConflicts {
+    _$matchConflictsAtom.reportRead();
+    return super.matchConflicts;
+  }
+
+  @override
+  set matchConflicts(ObservableMap<String, List<MatchConflict>> value) {
+    _$matchConflictsAtom.reportWrite(value, super.matchConflicts, () {
+      super.matchConflicts = value;
+    });
+  }
+
   late final _$isLoadingAtom =
       Atom(name: '_MatchesStore.isLoading', context: context);
 
@@ -153,6 +169,7 @@ mixin _$MatchesStore on _MatchesStore, Store {
     return '''
 matches: ${matches},
 matchBets: ${matchBets},
+matchConflicts: ${matchConflicts},
 isLoading: ${isLoading},
 errorMessage: ${errorMessage},
 teamAFacts: ${teamAFacts},

@@ -10,12 +10,14 @@ class SectionHeader extends StatelessWidget {
   final String title;
   final String? svg;
   final TextPosition textPosition;
+  final Color? color;
 
   const SectionHeader({
     required this.title,
     this.svg,
     this.textPosition = TextPosition.start,
     super.key,
+    this.color,
   });
 
   @override
@@ -37,7 +39,9 @@ class SectionHeader extends StatelessWidget {
             ),
           Text(
             title,
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: color ?? Theme.of(context).textTheme.titleLarge?.color,
+                ),
           ),
         ],
       ),
