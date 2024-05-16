@@ -29,10 +29,8 @@ class LoginService {
         throw Exception('Invalid response data');
       }
     } on DioException catch (e) {
-      print(e.message);
       throw Exception('Failed to login');
     } catch (e) {
-      print(e.toString());
       throw Exception('Failed to load data');
     }
   }
