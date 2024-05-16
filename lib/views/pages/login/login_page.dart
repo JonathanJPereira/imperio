@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:imperio/utils/app_routes.dart';
 import 'package:imperio/views/widgets/custom_large_button/custom_large_button.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends HookWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
+
     return const Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(8),
         child: Column(
           children: [
             LoginHeader(),
@@ -52,7 +58,7 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class LoginHeader extends StatelessWidget {
+class LoginHeader extends HookWidget {
   const LoginHeader({super.key});
 
   Future<void> _precacheImage(BuildContext context) async {
@@ -62,6 +68,15 @@ class LoginHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Use useEffect para configurar a barra de status quando o widget é montado
+    useEffect(() {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ));
+      return null;
+    }, []);
+
     return FutureBuilder(
       future: _precacheImage(context),
       builder: (context, snapshot) {
