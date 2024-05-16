@@ -44,7 +44,6 @@ void setupLocator() {
   getIt.registerLazySingleton<BonusStore>(() => BonusStore(getIt()));
   getIt.registerLazySingleton<WonBetsStore>(() => WonBetsStore(getIt()));
   getIt.registerLazySingleton<MatchesStore>(() => MatchesStore(getIt()));
-  getIt.registerLazySingleton<LoginStore>(() => LoginStore(getIt()));
 
   // NavigationStore é registrado como Singleton para manter o estado de navegação compartilhado globalmente por toda a aplicação.
   // Isso permite que o estado de navegação seja acessado de forma consistente em diferentes partes do app.
@@ -53,4 +52,5 @@ void setupLocator() {
   // TabSelectorStore é registrado como Factory para fornecer uma nova instância cada vez que for solicitado.
   // Isso é ideal para componentes que necessitam de um estado independente, evitando interferências entre diferentes usos.
   getIt.registerFactory<TabSelectorStore>(() => TabSelectorStore());
+  getIt.registerFactory<LoginStore>(() => LoginStore(getIt()));
 }

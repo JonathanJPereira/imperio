@@ -6,14 +6,19 @@ class LoginService {
 
   LoginService(this._dio);
 
-  Future<AuthToken> login(String email, String password) async {
+  Future<AuthToken> loginWithEmail(String email, String password) async {
+    return _login({'email': email, 'password': password});
+  }
+
+  Future<AuthToken> loginWithPhone(String phone, String password) async {
+    return _login({'phone': phone, 'password': password});
+  }
+
+  Future<AuthToken> _login(Map<String, dynamic> data) async {
     try {
       final response = await _dio.post(
-        'https://6569cc7dde53105b0dd7af5c.mockapi.io/loginn',
-        data: {
-          'email': email,
-          'password': password,
-        },
+        'https://6569cc7dde53105b0dd7af5c.mockapi.io/login',
+        data: data,
       );
 
       if (response.data != null &&

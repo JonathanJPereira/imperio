@@ -7,4 +7,5 @@ class AppRoutes {
   static const LOGIN = '/login';
   static const EMAIL = '/email';
   static const PASSWORD = '/password';
+  static const TELL = '/tell';
 }

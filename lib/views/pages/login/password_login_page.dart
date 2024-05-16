@@ -2,29 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:imperio/stores/login_store.dart';
 import 'package:imperio/utils/app_routes.dart';
-import 'package:imperio/utils/service_locator.dart';
 import 'package:imperio/utils/toast_notifier.dart';
 import 'package:imperio/views/widgets/shared/loading_overlay.dart';
 import 'auth_page.dart';
 
-class PasswordLoginPage extends StatefulWidget {
-  const PasswordLoginPage({super.key});
+class PasswordLoginPage extends StatelessWidget {
+  final LoginStore loginStore;
 
-  @override
-  State<PasswordLoginPage> createState() => _PasswordLoginPageState();
-}
+  const PasswordLoginPage({super.key, required this.loginStore});
 
-class _PasswordLoginPageState extends State<PasswordLoginPage> {
-  final LoginStore loginStore = getIt<LoginStore>();
-
-  Future<void> _handleLogin() async {
+  Future<void> _handleLogin(Function onSuccess) async {
     if (loginStore.isPasswordValid) {
       try {
         await loginStore.login();
-        if (mounted) {
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              AppRoutes.HOME, (Route<dynamic> route) => false);
-        }
+        onSuccess();
       } catch (e) {
         ToastNotifier.error(e.toString());
       }
@@ -35,6 +26,11 @@ class _PasswordLoginPageState extends State<PasswordLoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    void navigateToHome() {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          AppRoutes.HOME, (Route<dynamic> route) => false);
+    }
+
     return Observer(
       builder: (_) {
         return Stack(
@@ -44,7 +40,7 @@ class _PasswordLoginPageState extends State<PasswordLoginPage> {
               hintText: 'Senha',
               isPassword: true,
               onChanged: (value) => loginStore.setPassword(value),
-              onContinue: _handleLogin,
+              onContinue: () => _handleLogin(navigateToHome),
             ),
             LoadingOverlay(isLoading: loginStore.isLoading),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imperio/views/widgets/custom_large_button/custom_large_button.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 class AuthPage extends StatelessWidget {
   final String title;
@@ -7,6 +8,7 @@ class AuthPage extends StatelessWidget {
   final bool isPassword;
   final void Function(String value)? onChanged;
   final void Function()? onContinue;
+  final String? mask;
 
   const AuthPage({
     super.key,
@@ -15,11 +17,14 @@ class AuthPage extends StatelessWidget {
     this.isPassword = false,
     this.onChanged,
     this.onContinue,
+    this.mask,
   });
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController();
+    final controller = mask != null
+        ? MaskedTextController(mask: mask)
+        : TextEditingController();
     final FocusNode focusNode = FocusNode();
 
     return Scaffold(
@@ -109,9 +114,8 @@ class AuthInputField extends StatelessWidget {
     return TextField(
       controller: controller,
       focusNode: focusNode,
-      keyboardType: isPassword
-          ? TextInputType.visiblePassword
-          : TextInputType.emailAddress,
+      keyboardType:
+          isPassword ? TextInputType.visiblePassword : TextInputType.phone,
       obscureText: isPassword,
       decoration: InputDecoration(
         hintText: hintText,

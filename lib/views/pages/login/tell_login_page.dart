@@ -5,28 +5,29 @@ import 'package:imperio/stores/login_store.dart';
 import 'package:imperio/utils/toast_notifier.dart';
 import 'auth_page.dart';
 
-class EmailLoginPage extends StatelessWidget {
+class TellLoginPage extends StatelessWidget {
   final LoginStore loginStore = getIt<LoginStore>();
 
-  EmailLoginPage({super.key});
+  TellLoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AuthPage(
-      title: 'Qual o seu e-mail?',
-      hintText: 'seuemail@exemplo.com',
+      title: 'Qual o seu telefone?',
+      hintText: '(00) 00000-0000',
       isPassword: false,
       onChanged: (value) {
-        loginStore.setEmail(value);
+        loginStore.setTell(value);
       },
       onContinue: () {
-        if (loginStore.isEmailValid) {
+        if (loginStore.isTellValid) {
           Navigator.of(context)
               .pushNamed(AppRoutes.PASSWORD, arguments: loginStore);
         } else {
-          ToastNotifier.error('Por favor, insira um e-mail válido.');
+          ToastNotifier.error('Por favor, insira um telefone válido.');
         }
       },
+      mask: '(00) 00000-0000',
     );
   }
 }

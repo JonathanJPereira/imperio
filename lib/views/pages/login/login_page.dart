@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:imperio/utils/app_routes.dart';
-import 'package:imperio/views/pages/login/email_login_page.dart';
 import 'package:imperio/views/widgets/custom_large_button/custom_large_button.dart';
 
 class LoginPage extends StatelessWidget {
@@ -146,9 +145,12 @@ class LoginOptions extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 16),
-        const Expanded(
+        Expanded(
           child: CustomLargeButton(
             text: 'Telefone',
+            onTap: () {
+              Navigator.of(context).pushNamed(AppRoutes.TELL);
+            },
           ),
         ),
       ],

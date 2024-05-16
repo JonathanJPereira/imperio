@@ -17,6 +17,9 @@ abstract class _LoginStore with Store {
   String _email = '';
 
   @observable
+  String _tell = '';
+
+  @observable
   String _password = '';
 
   @observable
@@ -31,12 +34,20 @@ abstract class _LoginStore with Store {
   }
 
   @action
+  void setTell(String value) {
+    _tell = value;
+  }
+
+  @action
   void setPassword(String value) {
     _password = value;
   }
 
   @computed
   bool get isEmailValid => _isValidEmail(_email);
+
+  @computed
+  bool get isTellValid => _isValidTell(_tell);
 
   @computed
   bool get isPasswordValid => _isValidPassword(_password);
@@ -49,22 +60,40 @@ abstract class _LoginStore with Store {
     return emailRegex.hasMatch(email);
   }
 
+  bool _isValidTell(String phoneNumber) {
+    final phoneRegex = RegExp(r'^\(\d{2}\) \d{4,5}-\d{4}$');
+    return phoneRegex.hasMatch(phoneNumber);
+  }
+
   bool _isValidPassword(String password) {
     return password.isNotEmpty;
   }
 
   @action
   Future<void> login() async {
-    if (!isEmailValid || !isPasswordValid) {
-      throw Exception('Email ou senha inválidos.');
+    if (!isPasswordValid) {
+      throw Exception('Senha inválida.');
+    }
+
+    if (!isEmailValid && !isTellValid) {
+      throw Exception('Email ou telefone inválidos.');
     }
 
     _isLoading = true;
 
     final loginStartTime = DateTime.now();
     try {
-      _authToken = await _loginService.login(_email, _password);
-      await _storeToken(_authToken!);
+      if (isEmailValid) {
+        _authToken = await _loginService.loginWithEmail(_email, _password);
+      } else if (isTellValid) {
+        _authToken = await _loginService.loginWithPhone(_tell, _password);
+      }
+
+      if (_authToken != null) {
+        await _storeToken(_authToken!);
+      } else {
+        throw Exception('Falha no login: token nulo');
+      }
     } catch (e) {
       throw Exception('Falha no login: ${e.toString()}');
     } finally {
@@ -93,5 +122,11 @@ abstract class _LoginStore with Store {
   Future<void> _deleteToken() async {
     await _secureStorage.delete(key: 'authToken');
     await _secureStorage.delete(key: 'refreshToken');
+  }
+
+  @action
+  Future<bool> checkToken() async {
+    _authToken = await _retrieveToken();
+    return _authToken != null;
   }
 }
