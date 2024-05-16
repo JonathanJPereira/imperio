@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:imperio/utils/app_routes.dart';
+import 'package:imperio/views/pages/login/email_login_page.dart';
+import 'package:imperio/views/widgets/custom_large_button/custom_large_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -22,13 +25,13 @@ class LoginPage extends StatelessWidget {
                       width: 298,
                       child: Column(
                         children: [
-                          LoginButton(
+                          CustomLargeButton(
                             imagePath: 'assets/images/google.png',
                             text: 'Entrar com Google',
                             color: Color(0xFFE6E6E6),
                           ),
                           SizedBox(height: 16),
-                          LoginButton(
+                          CustomLargeButton(
                             imagePath: 'assets/images/apple.png',
                             text: 'Entrar com Apple',
                             color: Colors.black,
@@ -98,79 +101,6 @@ class LoginHeader extends StatelessWidget {
   }
 }
 
-class LoginButton extends StatelessWidget {
-  final String? imagePath;
-  final String text;
-  final Color color;
-  final Color? borderColor;
-
-  const LoginButton({
-    super.key,
-    this.imagePath,
-    required this.text,
-    required this.color,
-    this.borderColor,
-  });
-
-  bool _isDarkColor(Color color) {
-    return color.computeLuminance() < 0.5;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        style: ButtonStyle(
-          elevation: MaterialStateProperty.all(0),
-          backgroundColor: MaterialStateProperty.all(color),
-          side: MaterialStateProperty.all(
-              BorderSide(color: borderColor ?? Colors.transparent)),
-          padding: MaterialStateProperty.all(
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          ),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25.0),
-            ),
-          ),
-        ),
-        onPressed: () {
-          // Implementar a lógica de login
-        },
-        child: SizedBox(
-          height: 56,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              if (imagePath != null)
-                Positioned(
-                  left: 15,
-                  child: Image.asset(
-                    imagePath!,
-                    width: 24,
-                    height: 24,
-                  ),
-                ),
-              Center(
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: _isDarkColor(color) ? Colors.white : Colors.black,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class DividerText extends StatelessWidget {
   final String text;
 
@@ -202,21 +132,23 @@ class LoginOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
-          child: LoginButton(
+          child: CustomLargeButton(
             text: 'Email',
             color: Colors.white,
             borderColor: Colors.black54,
+            onTap: () {
+              Navigator.of(context).pushNamed(AppRoutes.EMAIL);
+            },
           ),
         ),
-        SizedBox(width: 16),
-        Expanded(
-          child: LoginButton(
+        const SizedBox(width: 16),
+        const Expanded(
+          child: CustomLargeButton(
             text: 'Telefone',
-            color: Colors.yellow,
           ),
         ),
       ],

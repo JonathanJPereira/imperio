@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:imperio/utils/app_routes.dart';
 import 'package:imperio/utils/service_locator.dart';
-import 'package:imperio/views/pages/login_page.dart';
+import 'package:imperio/views/pages/login/email_login_page.dart';
+import 'package:imperio/views/pages/login/login_page.dart';
+import 'package:imperio/views/pages/login/password_login_page.dart';
 import 'package:imperio/views/pages/main_tab_page.dart';
 import 'package:imperio/views/pages/match_details_page.dart';
 import 'package:imperio/views/pages/sports_page.dart';
@@ -27,7 +29,9 @@ class MyApp extends StatelessWidget {
         AppRoutes.HOME: (context) => MainTabPage(),
         AppRoutes.SPORTS: (context) => SportsPage(),
         AppRoutes.MATCH_DETAILS: (context) => MatchDetailsPage(),
-        AppRoutes.LOGIN: (context) => const LoginPage()
+        AppRoutes.LOGIN: (context) => const LoginPage(),
+        AppRoutes.EMAIL: (context) => EmailLoginPage(),
+        AppRoutes.PASSWORD: (context) => PasswordLoginPage(),
       },
     );
   }

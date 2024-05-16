@@ -5,4 +5,6 @@ class AppRoutes {
   static const SPORTS = '/sports';
   static const MATCH_DETAILS = '/match_details';
   static const LOGIN = '/login';
+  static const EMAIL = '/email';
+  static const PASSWORD = '/password';
 }
