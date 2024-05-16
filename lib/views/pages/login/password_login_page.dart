@@ -38,7 +38,7 @@ class PasswordLoginPage extends StatelessWidget {
             AuthPage(
               title: 'Qual sua senha?',
               hintText: 'Senha',
-              isPassword: true,
+              inputType: InputType.password,
               onChanged: (value) => loginStore.setPassword(value),
               onContinue: () => _handleLogin(navigateToHome),
             ),

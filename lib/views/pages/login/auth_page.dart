@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:imperio/views/widgets/custom_large_button/custom_large_button.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
+enum InputType { text, email, phone, password }
+
 class AuthPage extends StatelessWidget {
   final String title;
   final String hintText;
-  final bool isPassword;
+  final InputType inputType;
   final void Function(String value)? onChanged;
   final void Function()? onContinue;
   final String? mask;
@@ -14,7 +16,7 @@ class AuthPage extends StatelessWidget {
     super.key,
     required this.title,
     required this.hintText,
-    this.isPassword = false,
+    this.inputType = InputType.text,
     this.onChanged,
     this.onContinue,
     this.mask,
@@ -46,7 +48,7 @@ class AuthPage extends StatelessWidget {
             const SizedBox(height: 16),
             AuthInputField(
               hintText: hintText,
-              isPassword: isPassword,
+              inputType: inputType,
               onChanged: onChanged,
               controller: controller,
               focusNode: focusNode,
@@ -86,7 +88,7 @@ class AuthTitle extends StatelessWidget {
 
 class AuthInputField extends StatelessWidget {
   final String hintText;
-  final bool isPassword;
+  final InputType inputType;
   final Function(String)? onChanged;
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -95,7 +97,7 @@ class AuthInputField extends StatelessWidget {
   const AuthInputField({
     super.key,
     required this.hintText,
-    this.isPassword = false,
+    this.inputType = InputType.text,
     this.onChanged,
     required this.controller,
     required this.focusNode,
@@ -111,17 +113,30 @@ class AuthInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextInputType getKeyboardType() {
+      switch (inputType) {
+        case InputType.email:
+          return TextInputType.emailAddress;
+        case InputType.phone:
+          return TextInputType.phone;
+        case InputType.password:
+          return TextInputType.visiblePassword;
+        case InputType.text:
+        default:
+          return TextInputType.text;
+      }
+    }
+
     return TextField(
       controller: controller,
       focusNode: focusNode,
-      keyboardType:
-          isPassword ? TextInputType.visiblePassword : TextInputType.phone,
-      obscureText: isPassword,
+      keyboardType: getKeyboardType(),
+      obscureText: inputType == InputType.password,
       decoration: InputDecoration(
         hintText: hintText,
         enabledBorder: _buildBorder(Colors.grey),
         focusedBorder: _buildBorder(Theme.of(context).colorScheme.secondary),
-        suffixIcon: isPassword ? const Icon(Icons.visibility) : null,
+        suffixIcon: inputType == InputType.password ? const Icon(Icons.visibility) : null,
       ),
       onChanged: onChanged,
       onSubmitted: (value) {

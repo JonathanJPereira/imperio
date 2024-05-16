@@ -15,7 +15,7 @@ class EmailLoginPage extends StatelessWidget {
     return AuthPage(
       title: 'Qual o seu e-mail?',
       hintText: 'seuemail@exemplo.com',
-      isPassword: false,
+      inputType: InputType.email,
       onChanged: (value) {
         loginStore.setEmail(value);
       },

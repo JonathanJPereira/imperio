@@ -15,7 +15,7 @@ class TellLoginPage extends StatelessWidget {
     return AuthPage(
       title: 'Qual o seu telefone?',
       hintText: '(00) 00000-0000',
-      isPassword: false,
+      inputType: InputType.phone,
       onChanged: (value) {
         loginStore.setTell(value);
       },
