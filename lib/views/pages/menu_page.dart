@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:imperio/models/nav_item.dart';
+import 'package:imperio/stores/login_store.dart';
 import 'package:imperio/stores/navigation_store.dart';
+import 'package:imperio/utils/app_routes.dart';
 import 'package:imperio/utils/service_locator.dart';
+import 'package:imperio/views/pages/login/login_page.dart';
 
 class MenuPage extends StatelessWidget {
-  final NavigationStore store = getIt<NavigationStore>();
+  final NavigationStore navigationStore = getIt<NavigationStore>();
+  final LoginStore loginStore = getIt<LoginStore>();
 
   MenuPage({super.key});
 
@@ -29,14 +33,15 @@ class MenuPage extends StatelessWidget {
         builder: (_) => Row(
           children: [
             Expanded(
-              child: store.isSearchOpen
+              child: navigationStore.isSearchOpen
                   ? _buildSearchField(context)
                   : const Text(''),
             ),
-            if (!store.isSearchOpen) ...[
+            if (!navigationStore.isSearchOpen) ...[
               _searchButton(context),
               const SizedBox(width: 10),
               _helpSupportButton(context),
+              _logoutButton(context),
             ],
           ],
         ),
@@ -51,11 +56,11 @@ class MenuPage extends StatelessWidget {
         hintText: "Pesquisar...",
         suffixIcon: IconButton(
           icon: const Icon(Icons.close),
-          onPressed: store.toggleSearch,
+          onPressed: navigationStore.toggleSearch,
         ),
       ),
       onChanged: (value) {
-        store.setSearchText(value);
+        navigationStore.setSearchText(value);
       },
     );
   }
@@ -64,7 +69,21 @@ class MenuPage extends StatelessWidget {
     return IconButton(
       icon: Icon(Icons.search,
           color: Theme.of(context).colorScheme.tertiary.withOpacity(0.7)),
-      onPressed: store.toggleSearch,
+      onPressed: navigationStore.toggleSearch,
+    );
+  }
+
+  Widget _logoutButton(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.logout,
+          color: Theme.of(context).colorScheme.tertiary.withOpacity(0.7)),
+      onPressed: () {
+        loginStore.logout();
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          AppRoutes.LOGIN,
+          (Route<dynamic> route) => false,
+        );
+      },
     );
   }
 
@@ -82,7 +101,7 @@ class MenuPage extends StatelessWidget {
     final color = Theme.of(context).colorScheme.tertiary.withOpacity(0.7);
 
     return Observer(builder: (context) {
-      final items = store.filteredItems;
+      final items = navigationStore.filteredItems;
       final itemCount = items.length;
       return ListView.builder(
         itemCount: itemCount,
@@ -109,7 +128,7 @@ class MenuPage extends StatelessWidget {
               context, MaterialPageRoute(builder: (context) => item.page));
           return;
         }
-        store.setSelectedItem(item.id);
+        navigationStore.setSelectedItem(item.id);
       },
     );
   }
@@ -117,7 +136,8 @@ class MenuPage extends StatelessWidget {
   Widget _conditionalDivider(int index, int count) {
     return Observer(
       builder: (_) {
-        if ((index == count - 3 || index == count - 1) && !store.isSearchOpen) {
+        if ((index == count - 3 || index == count - 1) &&
+            !navigationStore.isSearchOpen) {
           return const Divider();
         } else {
           return const SizedBox.shrink();

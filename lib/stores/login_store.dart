@@ -119,7 +119,7 @@ abstract class _LoginStore with Store {
     return null;
   }
 
-  Future<void> _deleteToken() async {
+  Future<void> logout() async {
     await _secureStorage.delete(key: 'authToken');
     await _secureStorage.delete(key: 'refreshToken');
   }
