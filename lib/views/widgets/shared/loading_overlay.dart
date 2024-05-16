@@ -7,15 +7,17 @@ class LoadingOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!isLoading) {
-      return const SizedBox.shrink();
+    if (isLoading) {
+      FocusScope.of(context).unfocus();
     }
 
-    return Container(
-      color: Colors.black54,
-      child: const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
+    return isLoading
+        ? Container(
+            color: Colors.black.withOpacity(0.5),
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
+        : const SizedBox.shrink();
   }
 }

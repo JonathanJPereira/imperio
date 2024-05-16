@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:imperio/views/widgets/custom_large_button/custom_large_button.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 enum InputType { text, email, phone, password }
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends HookWidget {
   final String title;
   final String hintText;
   final InputType inputType;
@@ -24,10 +25,25 @@ class AuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = mask != null
-        ? MaskedTextController(mask: mask)
-        : TextEditingController();
-    final FocusNode focusNode = FocusNode();
+    final controller = useMemoized(
+        () => mask != null
+            ? MaskedTextController(mask: mask)
+            : TextEditingController(),
+        [mask]);
+    final focusNode = useFocusNode();
+
+    useEffect(() {
+      // Solicita foco quando o widget é montado
+      focusNode.requestFocus();
+      return;
+    }, [focusNode]);
+
+    void handleContinue() {
+      focusNode.unfocus();
+      if (onContinue != null) {
+        onContinue!();
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +75,7 @@ class AuthPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: CustomLargeButton(
                 text: 'Continuar',
-                onTap: onContinue,
+                onTap: handleContinue,
               ),
             ),
           ],
@@ -136,7 +152,9 @@ class AuthInputField extends StatelessWidget {
         hintText: hintText,
         enabledBorder: _buildBorder(Colors.grey),
         focusedBorder: _buildBorder(Theme.of(context).colorScheme.secondary),
-        suffixIcon: inputType == InputType.password ? const Icon(Icons.visibility) : null,
+        suffixIcon: inputType == InputType.password
+            ? const Icon(Icons.visibility)
+            : null,
       ),
       onChanged: onChanged,
       onSubmitted: (value) {
