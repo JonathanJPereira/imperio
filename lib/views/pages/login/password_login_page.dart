@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:imperio/config/app_navigation.dart';
 import 'package:imperio/stores/login_store.dart';
-import 'package:imperio/utils/app_routes.dart';
 import 'package:imperio/utils/toast_notifier.dart';
 import 'package:imperio/views/widgets/shared/loading_overlay.dart';
 import 'auth_page.dart';
@@ -28,12 +28,13 @@ class PasswordLoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     void navigateToHome() {
       Navigator.of(context).pushNamedAndRemoveUntil(
-          AppRoutes.HOME, (Route<dynamic> route) => false);
+          AppNavigation.HOME, (Route<dynamic> route) => false);
     }
 
     return Observer(
       builder: (_) {
         return Stack(
+
           children: [
             AuthPage(
               title: 'Qual sua senha?',

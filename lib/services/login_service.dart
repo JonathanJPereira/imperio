@@ -14,6 +14,10 @@ class LoginService {
     return _login({'phone': phone, 'password': password});
   }
 
+  Future<AuthToken?> refreshToken(String refreshToken) async {
+    return _login({'refreshToken': refreshToken});
+  }
+
   Future<AuthToken> _login(Map<String, dynamic> data) async {
     try {
       final response = await _dio.post(

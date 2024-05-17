@@ -4,7 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:imperio/models/sport.dart';
 import 'package:imperio/stores/sports_store.dart';
 import 'package:imperio/utils/capitalize_first_of_each.dart';
-import 'package:imperio/utils/service_locator.dart';
+import 'package:imperio/config/service_locator.dart';
 import 'package:imperio/views/widgets/shared/gradient_background.dart';
 import 'package:imperio/views/widgets/shared/rounded_image.dart';
 

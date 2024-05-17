@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:imperio/utils/app_routes.dart';
+import 'package:imperio/config/app_navigation.dart';
 import 'package:imperio/views/widgets/custom_large_button/custom_large_button.dart';
 
 class LoginPage extends HookWidget {
@@ -77,7 +77,7 @@ class LoginHeader extends HookWidget {
   Widget build(BuildContext context) {
     // Use useEffect para configurar a barra de status quando o widget é montado
     useEffect(() {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
       ));
@@ -174,7 +174,7 @@ class LoginOptions extends StatelessWidget {
             color: Colors.white,
             borderColor: Colors.black54,
             onTap: () {
-              Navigator.of(context).pushNamed(AppRoutes.EMAIL);
+              Navigator.of(context).pushNamed(AppNavigation.EMAIL);
             },
           ),
         ),
@@ -183,7 +183,7 @@ class LoginOptions extends StatelessWidget {
           child: CustomLargeButton(
             text: 'Telefone',
             onTap: () {
-              Navigator.of(context).pushNamed(AppRoutes.TELL);
+              Navigator.of(context).pushNamed(AppNavigation.TELL);
             },
           ),
         ),

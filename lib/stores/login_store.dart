@@ -129,4 +129,27 @@ abstract class _LoginStore with Store {
     _authToken = await _retrieveToken();
     return _authToken != null;
   }
+
+  @action
+  Future<void> refreshToken() async {
+    _isLoading = true;
+    try {
+      final storedToken = await _retrieveToken();
+      if (storedToken?.refreshToken != null) {
+        final newToken = await _loginService.refreshToken(storedToken!.refreshToken);
+        if (newToken != null) {
+          _authToken = newToken;
+          await _storeToken(newToken);
+        } else {
+          throw Exception('Falha ao obter novo token');
+        }
+      } else {
+        throw Exception('Refresh token não encontrado');
+      }
+    } catch (e) {
+      throw Exception('Falha ao atualizar token: ${e.toString()}');
+    } finally {
+      _isLoading = false;
+    }
+  }
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:imperio/config/app_navigation.dart';
 import 'package:imperio/models/nav_item.dart';
 import 'package:imperio/stores/login_store.dart';
 import 'package:imperio/stores/navigation_store.dart';
-import 'package:imperio/utils/app_routes.dart';
-import 'package:imperio/utils/service_locator.dart';
-import 'package:imperio/views/pages/login/login_page.dart';
+import 'package:imperio/config/service_locator.dart';
 
 class MenuPage extends StatelessWidget {
   final NavigationStore navigationStore = getIt<NavigationStore>();
@@ -80,7 +79,7 @@ class MenuPage extends StatelessWidget {
       onPressed: () {
         loginStore.logout();
         Navigator.of(context).pushNamedAndRemoveUntil(
-          AppRoutes.LOGIN,
+          AppNavigation.LOGIN,
           (Route<dynamic> route) => false,
         );
       },
