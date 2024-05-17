@@ -3,15 +3,16 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:imperio/stores/matches_store.dart';
-import 'package:imperio/stores/odds_matches_store.dart';
 import 'package:imperio/stores/tab_selector_store.dart';
 import 'package:imperio/views/widgets/odd_draggable_sheet/highest_odds.dart';
-import 'package:imperio/views/widgets/shared/rounded_image.dart';
+import 'package:imperio/views/widgets/odd_draggable_sheet/other_odds.dart';
 import 'package:imperio/views/widgets/tab_selector/tab_selector.dart';
 
 class OddDraggableSheet extends HookWidget {
   final TabSelectorStore tabSelectorStore = GetIt.I<TabSelectorStore>();
   final MatchesStore matchesStore = GetIt.I<MatchesStore>();
+
+  OddDraggableSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +22,23 @@ class OddDraggableSheet extends HookWidget {
     final colorAnimation = useMemoized(() {
       return ColorTween(
         begin: Theme.of(context).colorScheme.secondary,
-        end: Color(0xFFDEE0DF),
+        end: const Color(0xFFDEE0DF),
+      ).animate(animationController);
+    }, [animationController]);
+
+    final colorAnimationContainer = useMemoized(() {
+      return ColorTween(
+        begin: Colors.transparent,
+        end: const Color(0xFFC0C4C2),
       ).animate(animationController);
     }, [animationController]);
 
     List<Widget> tabViews = [
-      HighestOdds(),
-      const Text('Amanhã'),
+      HighestOdds(colorAnimation: colorAnimationContainer),
+      OtherOdds(
+        colorAnimation: colorAnimationContainer,
+        teamAName: matchesStore.currentMatch!.teamA,
+      ),
     ];
 
     return NotificationListener<DraggableScrollableNotification>(
@@ -54,7 +65,7 @@ class OddDraggableSheet extends HookWidget {
                   child: Column(
                     children: [
                       Container(
-                        margin: const EdgeInsets.symmetric(vertical: 8.0),
+                        margin: const EdgeInsets.symmetric(vertical: 15.0),
                         height: 6.0,
                         width: 53.0,
                         decoration: BoxDecoration(
@@ -63,10 +74,14 @@ class OddDraggableSheet extends HookWidget {
                         ),
                       ),
                       Observer(builder: (context) {
-                        return TabSelector(
-                          store: tabSelectorStore,
-                          tabs: const ['Odds mais altas', 'Outras odds'],
-                          borderColor: const Color(0xFF646E69),
+                        return Container(
+                          padding: EdgeInsets.only(left: 15),
+                          height: 65,
+                          child: TabSelector(
+                            store: tabSelectorStore,
+                            tabs: const ['Odds mais altas', 'Outras odds'],
+                            borderColor: const Color(0xFF646E69),
+                          ),
                         );
                       }),
                       Observer(

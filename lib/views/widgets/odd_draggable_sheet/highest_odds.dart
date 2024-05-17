@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:imperio/stores/matches_store.dart';
 import 'package:imperio/stores/odds_matches_store.dart';
 import 'package:imperio/views/widgets/shared/match_card/betting_houses_display.dart';
 import 'package:imperio/views/widgets/shared/rounded_image.dart';
+import 'package:intl/intl.dart';
 
 class HighestOdds extends StatelessWidget {
   final OddsMatchesStore oddsMatchesStore = GetIt.I<OddsMatchesStore>();
   final MatchesStore matchesStore = GetIt.I<MatchesStore>();
+  final Animation<Color?> colorAnimation;
 
-  HighestOdds({super.key});
+  HighestOdds({super.key, required this.colorAnimation});
 
   @override
   Widget build(BuildContext context) {
@@ -27,79 +30,90 @@ class HighestOdds extends StatelessWidget {
   }
 
   Widget _buildBettingHousesDisplay() {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(36),
-        color: const Color(0xFFC0C4C2),
-      ),
-      child: const BettingHousesDisplay(
-        onexbetOdd: 3.4,
-        betsafeOdd: 2.4,
-        betssonOdd: 3.5,
-        colorDivisor: Colors.black38,
-      ),
+    return AnimatedBuilder(
+      animation: colorAnimation,
+      builder: (context, child) {
+        return Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(36),
+            color: colorAnimation.value,
+          ),
+          child: const BettingHousesDisplay(
+            onexbetOdd: 3.4,
+            betsafeOdd: 2.4,
+            betssonOdd: 3.5,
+            colorDivisor: Colors.black38,
+          ),
+        );
+      },
     );
   }
 
   Widget _buildOddsTable() {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(36),
-        color: const Color(0xFFC0C4C2),
-      ),
-      child: Column(
-        children: [
-          const Text(
-            'Casa apostadora',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 20),
-          Table(
-            columnWidths: const {
-              0: FixedColumnWidth(100),
-              1: FixedColumnWidth(50),
-              2: FlexColumnWidth(),
-              3: FlexColumnWidth(),
-              4: FlexColumnWidth(),
-            },
-            children: [
-              _buildHeaderRow(),
-              _buildOddsRow(
-                'assets/images/betting_houses/1xbet.png',
-                '3.2',
-                '2.6',
-                '2.6',
-                true,
-                false,
-                false,
+    return Observer(
+      builder: (_) {
+        if (oddsMatchesStore.oddsMatches.isEmpty) {
+          return const CircularProgressIndicator();
+        }
+
+        final oddsMatch = oddsMatchesStore.oddsMatches.first;
+        final odds = [
+          [
+            oddsMatch.teamA1xbetOdd,
+            oddsMatch.teamABetsafeOdd,
+            oddsMatch.teamABetssonOdd
+          ],
+          [
+            oddsMatch.teamB1xbetOdd,
+            oddsMatch.teamBBetsafeOdd,
+            oddsMatch.teamBBetssonOdd
+          ],
+          [
+            oddsMatch.draw1xbetOdd,
+            oddsMatch.drawBetsafeOdd,
+            oddsMatch.drawBetssonOdd
+          ],
+        ];
+
+        return AnimatedBuilder(
+          animation: colorAnimation,
+          builder: (context, child) {
+            return Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(36),
+                color: colorAnimation.value,
               ),
-              _buildOddsRow(
-                'assets/images/betting_houses/betsafe.png',
-                '2.2',
-                '2.6',
-                '2.1',
-                false,
-                true,
-                false,
+              child: Column(
+                children: [
+                  const Text(
+                    'Casa apostadora',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Table(
+                    columnWidths: const {
+                      0: FixedColumnWidth(100),
+                      1: FixedColumnWidth(50),
+                      2: FlexColumnWidth(),
+                      3: FlexColumnWidth(),
+                      4: FlexColumnWidth(),
+                    },
+                    children: [
+                      _buildHeaderRow(),
+                      ..._buildOddsRows(odds),
+                    ],
+                  ),
+                ],
               ),
-              _buildOddsRow(
-                'assets/images/betting_houses/betsson.png',
-                '2.6',
-                '2.6',
-                '3.4',
-                false,
-                false,
-                true,
-              ),
-            ],
-          ),
-        ],
-      ),
+            );
+          },
+        );
+      },
     );
   }
 
@@ -110,7 +124,7 @@ class HighestOdds extends StatelessWidget {
         const SizedBox.shrink(),
         Center(
           child: CustomNetworkImage(
-            imgUrl: matchesStore.currentMatch!.teamAImage,
+            imgUrl: matchesStore.currentMatch?.teamAImage ?? '',
           ),
         ),
         Center(
@@ -129,34 +143,38 @@ class HighestOdds extends StatelessWidget {
         ),
         Center(
           child: CustomNetworkImage(
-            imgUrl: matchesStore.currentMatch!.teamBImage,
+            imgUrl: matchesStore.currentMatch?.teamBImage ?? '',
           ),
         ),
       ],
     );
   }
 
-  TableRow _buildOddsRow(
-    String assetPath,
-    String odd1,
-    String odd2,
-    String odd3,
-    bool isOdd1Highest,
-    bool isOdd2Highest,
-    bool isOdd3Highest,
-  ) {
-    return TableRow(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 16.0),
-          child: _buildHouse(assetPath),
+  List<TableRow> _buildOddsRows(List<List<double>> odds) {
+    final bettingHouseLogos = [
+      'assets/images/betting_houses/1xbet.png',
+      'assets/images/betting_houses/betsafe.png',
+      'assets/images/betting_houses/betsson.png',
+    ];
+
+    final List<TableRow> rows = [];
+    for (var i = 0; i < odds.length; i++) {
+      final maxOdd = odds[i].reduce((a, b) => a > b ? a : b);
+      rows.add(
+        TableRow(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: _buildHouse(bettingHouseLogos[i]),
+            ),
+            const SizedBox.shrink(),
+            for (var odd in odds[i])
+              _buildOddContainer(odd.toString(), odd == maxOdd),
+          ],
         ),
-        const SizedBox.shrink(),
-        _buildOddContainer(odd1, isOdd1Highest),
-        _buildOddContainer(odd2, isOdd2Highest),
-        _buildOddContainer(odd3, isOdd3Highest),
-      ],
-    );
+      );
+    }
+    return rows;
   }
 
   Widget _buildHouse(String assetPath) {
@@ -185,7 +203,7 @@ class HighestOdds extends StatelessWidget {
         borderRadius: BorderRadius.circular(150),
       ),
       child: Text(
-        odd,
+        NumberFormat.compact().format(double.parse(odd)),
         style: TextStyle(
           color: isHighlighted ? Colors.white : Colors.black,
           fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,

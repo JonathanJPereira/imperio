@@ -4,12 +4,15 @@ class InfoRow extends StatelessWidget {
   final Widget start;
   final Widget end;
   final EdgeInsets padding;
+  final Color? dividerColor;
 
-  const InfoRow(
-      {super.key,
-      required this.start,
-      required this.end,
-      this.padding = const EdgeInsets.all(20)});
+  const InfoRow({
+    super.key,
+    required this.start,
+    required this.end,
+    this.padding = const EdgeInsets.all(20),
+    this.dividerColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class InfoRow extends StatelessWidget {
             children: [start, end],
           ),
         ),
-        const Divider()
+        Divider(color: dividerColor)
       ],
     );
   }
