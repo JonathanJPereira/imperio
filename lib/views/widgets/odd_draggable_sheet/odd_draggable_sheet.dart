@@ -14,7 +14,11 @@ class OddDraggableSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> tabViews = [
       const BettingHousesDisplay(
-          onexbetOdd: 3.4, betsafeOdd: 2.4, betssonOdd: 3.5),
+        onexbetOdd: 3.4,
+        betsafeOdd: 2.4,
+        betssonOdd: 3.5,
+        colorDivisor: Color(0xFF646E69),
+      ),
       const Text('Amanhã'),
     ];
 
