@@ -20,6 +20,7 @@ class LoginPage extends HookWidget {
     ));
 
     return const Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.all(8),
         child: Column(
