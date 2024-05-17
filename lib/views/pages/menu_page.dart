@@ -78,6 +78,7 @@ class MenuPage extends StatelessWidget {
           color: Theme.of(context).colorScheme.tertiary.withOpacity(0.7)),
       onPressed: () {
         loginStore.logout();
+        navigationStore.setSelectedItem('home');
         Navigator.of(context).pushNamedAndRemoveUntil(
           AppNavigation.LOGIN,
           (Route<dynamic> route) => false,

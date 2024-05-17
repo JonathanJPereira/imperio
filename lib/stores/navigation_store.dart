@@ -95,7 +95,10 @@ abstract class _NavigationStore with Store {
   }
 
   @observable
-  String selectedItemId = 'home';
+  String _selectedItemId = 'home';
+
+  @computed
+  String get selectedItemId => _selectedItemId;
 
   @observable
   bool menuIsOpen = false;
@@ -106,11 +109,11 @@ abstract class _NavigationStore with Store {
   @computed
   Widget get currentPage => menuIsOpen
       ? MenuPage()
-      : navItems.firstWhere((item) => item.id == selectedItemId).page;
+      : navItems.firstWhere((item) => item.id == _selectedItemId).page;
 
   @action
   void setSelectedItem(String id) {
-    selectedItemId = id;
+    _selectedItemId = id;
     menuIsOpen = false;
     isSearchOpen = false;
     clearSearch();
