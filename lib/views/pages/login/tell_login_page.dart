@@ -16,6 +16,7 @@ class TellLoginPage extends StatelessWidget {
       title: 'Qual o seu telefone?',
       hintText: '(00) 00000-0000',
       inputType: InputType.phone,
+      initialValue: loginStore.tell,
       onChanged: (value) {
         loginStore.setTell(value);
       },

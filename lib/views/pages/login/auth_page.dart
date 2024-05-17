@@ -12,6 +12,7 @@ class AuthPage extends HookWidget {
   final void Function(String value)? onChanged;
   final void Function()? onContinue;
   final String? mask;
+  final String initialValue;
 
   const AuthPage({
     super.key,
@@ -21,20 +22,26 @@ class AuthPage extends HookWidget {
     this.onChanged,
     this.onContinue,
     this.mask,
+    required this.initialValue,
   });
 
   @override
   Widget build(BuildContext context) {
+    final textValue = useState(initialValue);
     final controller = useMemoized(
         () => mask != null
-            ? MaskedTextController(mask: mask)
-            : TextEditingController(),
+            ? MaskedTextController(mask: mask, text: textValue.value)
+            : TextEditingController(text: textValue.value),
         [mask]);
+
     final focusNode = useFocusNode();
 
     useEffect(() {
-      // Solicita foco quando o widget é montado
-      focusNode.requestFocus();
+      Future.delayed(const Duration(milliseconds: 100), () {
+        if (focusNode.canRequestFocus) {
+          focusNode.requestFocus();
+        }
+      });
       return;
     }, [focusNode]);
 
@@ -44,6 +51,19 @@ class AuthPage extends HookWidget {
         onContinue!();
       }
     }
+
+    void handleChange(String value) {
+      textValue.value = value;
+      if (onChanged != null) {
+        onChanged!(value);
+      }
+    }
+
+    useEffect(() {
+      controller.text = textValue.value;
+      controller.selection =
+          TextSelection.collapsed(offset: textValue.value.length);
+    }, [textValue.value]);
 
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +85,7 @@ class AuthPage extends HookWidget {
             AuthInputField(
               hintText: hintText,
               inputType: inputType,
-              onChanged: onChanged,
+              onChanged: handleChange,
               controller: controller,
               focusNode: focusNode,
               onContinue: onContinue,

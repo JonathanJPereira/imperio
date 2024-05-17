@@ -34,12 +34,12 @@ class PasswordLoginPage extends StatelessWidget {
     return Observer(
       builder: (_) {
         return Stack(
-
           children: [
             AuthPage(
               title: 'Qual sua senha?',
               hintText: 'Senha',
               inputType: InputType.password,
+              initialValue: loginStore.password,
               onChanged: (value) => loginStore.setPassword(value),
               onContinue: () => _handleLogin(navigateToHome),
             ),

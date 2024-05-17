@@ -16,6 +16,13 @@ mixin _$LoginStore on _LoginStore, Store {
       (_$isEmailValidComputed ??= Computed<bool>(() => super.isEmailValid,
               name: '_LoginStore.isEmailValid'))
           .value;
+  Computed<bool>? _$isTellValidComputed;
+
+  @override
+  bool get isTellValid =>
+      (_$isTellValidComputed ??= Computed<bool>(() => super.isTellValid,
+              name: '_LoginStore.isTellValid'))
+          .value;
   Computed<bool>? _$isPasswordValidComputed;
 
   @override
@@ -30,34 +37,49 @@ mixin _$LoginStore on _LoginStore, Store {
           Computed<bool>(() => super.isLoading, name: '_LoginStore.isLoading'))
       .value;
 
-  late final _$_emailAtom = Atom(name: '_LoginStore._email', context: context);
+  late final _$emailAtom = Atom(name: '_LoginStore.email', context: context);
 
   @override
-  String get _email {
-    _$_emailAtom.reportRead();
-    return super._email;
+  String get email {
+    _$emailAtom.reportRead();
+    return super.email;
   }
 
   @override
-  set _email(String value) {
-    _$_emailAtom.reportWrite(value, super._email, () {
-      super._email = value;
+  set email(String value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
     });
   }
 
-  late final _$_passwordAtom =
-      Atom(name: '_LoginStore._password', context: context);
+  late final _$tellAtom = Atom(name: '_LoginStore.tell', context: context);
 
   @override
-  String get _password {
-    _$_passwordAtom.reportRead();
-    return super._password;
+  String get tell {
+    _$tellAtom.reportRead();
+    return super.tell;
   }
 
   @override
-  set _password(String value) {
-    _$_passwordAtom.reportWrite(value, super._password, () {
-      super._password = value;
+  set tell(String value) {
+    _$tellAtom.reportWrite(value, super.tell, () {
+      super.tell = value;
+    });
+  }
+
+  late final _$passwordAtom =
+      Atom(name: '_LoginStore.password', context: context);
+
+  @override
+  String get password {
+    _$passwordAtom.reportRead();
+    return super.password;
+  }
+
+  @override
+  set password(String value) {
+    _$passwordAtom.reportWrite(value, super.password, () {
+      super.password = value;
     });
   }
 
@@ -101,6 +123,22 @@ mixin _$LoginStore on _LoginStore, Store {
     return _$loginAsyncAction.run(() => super.login());
   }
 
+  late final _$checkTokenAsyncAction =
+      AsyncAction('_LoginStore.checkToken', context: context);
+
+  @override
+  Future<bool> checkToken() {
+    return _$checkTokenAsyncAction.run(() => super.checkToken());
+  }
+
+  late final _$refreshTokenAsyncAction =
+      AsyncAction('_LoginStore.refreshToken', context: context);
+
+  @override
+  Future<void> refreshToken() {
+    return _$refreshTokenAsyncAction.run(() => super.refreshToken());
+  }
+
   late final _$_LoginStoreActionController =
       ActionController(name: '_LoginStore', context: context);
 
@@ -110,6 +148,17 @@ mixin _$LoginStore on _LoginStore, Store {
         _$_LoginStoreActionController.startAction(name: '_LoginStore.setEmail');
     try {
       return super.setEmail(value);
+    } finally {
+      _$_LoginStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setTell(String value) {
+    final _$actionInfo =
+        _$_LoginStoreActionController.startAction(name: '_LoginStore.setTell');
+    try {
+      return super.setTell(value);
     } finally {
       _$_LoginStoreActionController.endAction(_$actionInfo);
     }
@@ -129,7 +178,11 @@ mixin _$LoginStore on _LoginStore, Store {
   @override
   String toString() {
     return '''
+email: ${email},
+tell: ${tell},
+password: ${password},
 isEmailValid: ${isEmailValid},
+isTellValid: ${isTellValid},
 isPasswordValid: ${isPasswordValid},
 isLoading: ${isLoading}
     ''';

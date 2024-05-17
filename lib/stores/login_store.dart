@@ -14,13 +14,13 @@ abstract class _LoginStore with Store {
   _LoginStore(this._loginService);
 
   @observable
-  String _email = '';
+  String email = '';
 
   @observable
-  String _tell = '';
+  String tell = '';
 
   @observable
-  String _password = '';
+  String password = '';
 
   @observable
   bool _isLoading = false;
@@ -30,27 +30,27 @@ abstract class _LoginStore with Store {
 
   @action
   void setEmail(String value) {
-    _email = value;
+    email = value;
   }
 
   @action
   void setTell(String value) {
-    _tell = value;
+    tell = value;
   }
 
   @action
   void setPassword(String value) {
-    _password = value;
+    password = value;
   }
 
   @computed
-  bool get isEmailValid => _isValidEmail(_email);
+  bool get isEmailValid => _isValidEmail(email);
 
   @computed
-  bool get isTellValid => _isValidTell(_tell);
+  bool get isTellValid => _isValidTell(tell);
 
   @computed
-  bool get isPasswordValid => _isValidPassword(_password);
+  bool get isPasswordValid => _isValidPassword(password);
 
   @computed
   bool get isLoading => _isLoading;
@@ -84,9 +84,9 @@ abstract class _LoginStore with Store {
     final loginStartTime = DateTime.now();
     try {
       if (isEmailValid) {
-        _authToken = await _loginService.loginWithEmail(_email, _password);
+        _authToken = await _loginService.loginWithEmail(email, password);
       } else if (isTellValid) {
-        _authToken = await _loginService.loginWithPhone(_tell, _password);
+        _authToken = await _loginService.loginWithPhone(tell, password);
       }
 
       if (_authToken != null) {
@@ -136,7 +136,8 @@ abstract class _LoginStore with Store {
     try {
       final storedToken = await _retrieveToken();
       if (storedToken?.refreshToken != null) {
-        final newToken = await _loginService.refreshToken(storedToken!.refreshToken);
+        final newToken =
+            await _loginService.refreshToken(storedToken!.refreshToken);
         if (newToken != null) {
           _authToken = newToken;
           await _storeToken(newToken);
