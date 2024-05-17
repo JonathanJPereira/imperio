@@ -1,32 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:imperio/utils/app_routes.dart';
-import 'package:imperio/utils/service_locator.dart';
-import 'package:imperio/views/pages/main_tab_page.dart';
-import 'package:imperio/views/pages/match_details_page.dart';
-import 'package:imperio/views/pages/sports_page.dart';
-import 'themes/app_theme.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'package:imperio/config/app_navigation.dart';
+import 'package:imperio/config/setup_app.dart';
+import 'package:imperio/themes/app_theme.dart';
+import 'package:imperio/stores/login_store.dart';
+import 'package:get_it/get_it.dart';
 
-void main() {
-  setupLocator();
-  timeago.setLocaleMessages('pt_BR', timeago.PtBrMessages());
-  runApp(const MyApp());
+void main() async {
+  await setupApp();
+
+  final loginStore = GetIt.instance<LoginStore>();
+
+  final bool hasToken = await loginStore.checkToken();
+
+  if (hasToken) {
+    await loginStore.refreshToken();
+  }
+
+  runApp(MyApp(hasToken: hasToken));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool hasToken;
+
+  const MyApp({super.key, required this.hasToken});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: AppTheme.lightTheme,
-      initialRoute: '/',
+      initialRoute: hasToken ? AppNavigation.HOME : AppNavigation.LOGIN,
       debugShowCheckedModeBanner: false,
-      routes: {
-        AppRoutes.HOME: (context) => MainTabPage(),
-        AppRoutes.SPORTS: (context) => SportsPage(),
-        AppRoutes.MATCH_DETAILS: (context) => MatchDetails()
-      },
+      onGenerateRoute: generateRoute,
+      routes: appRoutes,
     );
   }
 }

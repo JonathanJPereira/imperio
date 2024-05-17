@@ -16,6 +16,13 @@ mixin _$NavigationStore on _NavigationStore, Store {
           Computed<List<NavItem>>(() => super.filteredItems,
               name: '_NavigationStore.filteredItems'))
       .value;
+  Computed<String>? _$selectedItemIdComputed;
+
+  @override
+  String get selectedItemId =>
+      (_$selectedItemIdComputed ??= Computed<String>(() => super.selectedItemId,
+              name: '_NavigationStore.selectedItemId'))
+          .value;
   Computed<Widget>? _$currentPageComputed;
 
   @override
@@ -56,19 +63,19 @@ mixin _$NavigationStore on _NavigationStore, Store {
     });
   }
 
-  late final _$selectedItemIdAtom =
-      Atom(name: '_NavigationStore.selectedItemId', context: context);
+  late final _$_selectedItemIdAtom =
+      Atom(name: '_NavigationStore._selectedItemId', context: context);
 
   @override
-  String get selectedItemId {
-    _$selectedItemIdAtom.reportRead();
-    return super.selectedItemId;
+  String get _selectedItemId {
+    _$_selectedItemIdAtom.reportRead();
+    return super._selectedItemId;
   }
 
   @override
-  set selectedItemId(String value) {
-    _$selectedItemIdAtom.reportWrite(value, super.selectedItemId, () {
-      super.selectedItemId = value;
+  set _selectedItemId(String value) {
+    _$_selectedItemIdAtom.reportWrite(value, super._selectedItemId, () {
+      super._selectedItemId = value;
     });
   }
 
@@ -166,10 +173,10 @@ mixin _$NavigationStore on _NavigationStore, Store {
   String toString() {
     return '''
 navItems: ${navItems},
-selectedItemId: ${selectedItemId},
 menuIsOpen: ${menuIsOpen},
 isSearchOpen: ${isSearchOpen},
 filteredItems: ${filteredItems},
+selectedItemId: ${selectedItemId},
 currentPage: ${currentPage}
     ''';
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:imperio/stores/navigation_store.dart';
-import 'package:imperio/utils/service_locator.dart';
+import 'package:imperio/config/service_locator.dart';
 import 'package:imperio/views/widgets/nav_bar/rounded_destination.dart';
 import 'package:imperio/views/widgets/nav_bar/rounded_nav_bar.dart';
 
@@ -71,8 +71,7 @@ class MainTabPage extends StatelessWidget {
   Widget buildNavBar() {
     return RoundedNavBar(
       destinations: List.generate(
-          store.navItems.where((item) => item.tabBarItem).length,
-          (index) {
+          store.navItems.where((item) => item.tabBarItem).length, (index) {
         final item = store.navItems[index];
         return RoundedDestination(
             id: item.id,

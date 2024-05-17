@@ -15,8 +15,8 @@ import 'package:imperio/views/widgets/shared/match_card/match_card.dart';
 import 'package:imperio/views/widgets/tab_selector/tab_selector.dart';
 import 'package:imperio/views/widgets/team_facts/team_facts.dart';
 
-class MatchDetails extends StatelessWidget {
-  MatchDetails({super.key});
+class MatchDetailsPage extends StatelessWidget {
+  MatchDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

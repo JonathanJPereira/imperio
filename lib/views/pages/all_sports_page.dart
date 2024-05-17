@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imperio/views/widgets/footer/footer.dart';
-import 'package:imperio/views/widgets/last_bets_won/last_bets_won.dart';
-import 'package:imperio/views/widgets/match_list/match_list.dart';
+import 'package:imperio/views/widgets/last_bets_won/last_bets_won.dart';  
 import 'package:imperio/views/widgets/popular_championships/popular_championships.dart';
 import 'package:imperio/views/widgets/principal_bonus/principal_bonus.dart';
 import 'package:imperio/views/widgets/shared/gradient_background.dart';
@@ -27,7 +26,7 @@ class AllSportsPage extends StatelessWidget {
                 children: [
                   SportsBanner(),
                   const PopularChampionships(),
-                  MatchList(),
+                  // MatchList(),
                   const SizedBox(height: itemDistance),
                   const TipsList(),
                   const SizedBox(height: itemDistance),
