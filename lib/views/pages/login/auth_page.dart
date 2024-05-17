@@ -28,6 +28,7 @@ class AuthPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final textValue = useState(initialValue);
+    final isPasswordVisible = useState(false);
     final controller = useMemoized(
         () => mask != null
             ? MaskedTextController(mask: mask, text: textValue.value)
@@ -88,6 +89,10 @@ class AuthPage extends HookWidget {
               onChanged: handleChange,
               controller: controller,
               focusNode: focusNode,
+              isPasswordVisible: isPasswordVisible.value, // Adicionei aqui
+              togglePasswordVisibility: () {
+                isPasswordVisible.value = !isPasswordVisible.value;
+              }, // Adicionei aqui
               onContinue: onContinue,
             ),
             const SizedBox(height: 32),
@@ -129,6 +134,8 @@ class AuthInputField extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final void Function()? onContinue;
+  final bool isPasswordVisible;
+  final VoidCallback togglePasswordVisibility;
 
   const AuthInputField({
     super.key,
@@ -138,6 +145,8 @@ class AuthInputField extends StatelessWidget {
     required this.controller,
     required this.focusNode,
     this.onContinue,
+    required this.isPasswordVisible,
+    required this.togglePasswordVisibility,
   });
 
   OutlineInputBorder _buildBorder(Color color) {
@@ -167,13 +176,18 @@ class AuthInputField extends StatelessWidget {
       controller: controller,
       focusNode: focusNode,
       keyboardType: getKeyboardType(),
-      obscureText: inputType == InputType.password,
+      obscureText: inputType == InputType.password && !isPasswordVisible,
       decoration: InputDecoration(
         hintText: hintText,
         enabledBorder: _buildBorder(Colors.grey),
         focusedBorder: _buildBorder(Theme.of(context).colorScheme.secondary),
         suffixIcon: inputType == InputType.password
-            ? const Icon(Icons.visibility)
+            ? IconButton(
+                icon: Icon(
+                  isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                ),
+                onPressed: togglePasswordVisibility,
+              )
             : null,
       ),
       onChanged: onChanged,
