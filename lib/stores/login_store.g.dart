@@ -16,12 +16,12 @@ mixin _$LoginStore on _LoginStore, Store {
       (_$isEmailValidComputed ??= Computed<bool>(() => super.isEmailValid,
               name: '_LoginStore.isEmailValid'))
           .value;
-  Computed<bool>? _$isTellValidComputed;
+  Computed<bool>? _$isPhoneValidComputed;
 
   @override
-  bool get isTellValid =>
-      (_$isTellValidComputed ??= Computed<bool>(() => super.isTellValid,
-              name: '_LoginStore.isTellValid'))
+  bool get isPhoneValid =>
+      (_$isPhoneValidComputed ??= Computed<bool>(() => super.isPhoneValid,
+              name: '_LoginStore.isPhoneValid'))
           .value;
   Computed<bool>? _$isPasswordValidComputed;
 
@@ -52,18 +52,18 @@ mixin _$LoginStore on _LoginStore, Store {
     });
   }
 
-  late final _$tellAtom = Atom(name: '_LoginStore.tell', context: context);
+  late final _$phoneAtom = Atom(name: '_LoginStore.phone', context: context);
 
   @override
-  String get tell {
-    _$tellAtom.reportRead();
-    return super.tell;
+  String get phone {
+    _$phoneAtom.reportRead();
+    return super.phone;
   }
 
   @override
-  set tell(String value) {
-    _$tellAtom.reportWrite(value, super.tell, () {
-      super.tell = value;
+  set phone(String value) {
+    _$phoneAtom.reportWrite(value, super.phone, () {
+      super.phone = value;
     });
   }
 
@@ -80,6 +80,22 @@ mixin _$LoginStore on _LoginStore, Store {
   set password(String value) {
     _$passwordAtom.reportWrite(value, super.password, () {
       super.password = value;
+    });
+  }
+
+  late final _$passwordIsVisibleAtom =
+      Atom(name: '_LoginStore.passwordIsVisible', context: context);
+
+  @override
+  bool get passwordIsVisible {
+    _$passwordIsVisibleAtom.reportRead();
+    return super.passwordIsVisible;
+  }
+
+  @override
+  set passwordIsVisible(bool value) {
+    _$passwordIsVisibleAtom.reportWrite(value, super.passwordIsVisible, () {
+      super.passwordIsVisible = value;
     });
   }
 
@@ -154,11 +170,11 @@ mixin _$LoginStore on _LoginStore, Store {
   }
 
   @override
-  void setTell(String value) {
+  void setPhone(String value) {
     final _$actionInfo =
-        _$_LoginStoreActionController.startAction(name: '_LoginStore.setTell');
+        _$_LoginStoreActionController.startAction(name: '_LoginStore.setPhone');
     try {
-      return super.setTell(value);
+      return super.setPhone(value);
     } finally {
       _$_LoginStoreActionController.endAction(_$actionInfo);
     }
@@ -179,10 +195,11 @@ mixin _$LoginStore on _LoginStore, Store {
   String toString() {
     return '''
 email: ${email},
-tell: ${tell},
+phone: ${phone},
 password: ${password},
+passwordIsVisible: ${passwordIsVisible},
 isEmailValid: ${isEmailValid},
-isTellValid: ${isTellValid},
+isPhoneValid: ${isPhoneValid},
 isPasswordValid: ${isPasswordValid},
 isLoading: ${isLoading}
     ''';

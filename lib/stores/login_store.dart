@@ -17,10 +17,13 @@ abstract class _LoginStore with Store {
   String email = '';
 
   @observable
-  String tell = '';
+  String phone = '';
 
   @observable
   String password = '';
+
+  @observable
+  bool passwordIsVisible = false;
 
   @observable
   bool _isLoading = false;
@@ -34,8 +37,8 @@ abstract class _LoginStore with Store {
   }
 
   @action
-  void setTell(String value) {
-    tell = value;
+  void setPhone(String value) {
+    phone = value;
   }
 
   @action
@@ -47,7 +50,7 @@ abstract class _LoginStore with Store {
   bool get isEmailValid => _isValidEmail(email);
 
   @computed
-  bool get isTellValid => _isValidTell(tell);
+  bool get isPhoneValid => _isValidPhone(phone);
 
   @computed
   bool get isPasswordValid => _isValidPassword(password);
@@ -60,7 +63,7 @@ abstract class _LoginStore with Store {
     return emailRegex.hasMatch(email);
   }
 
-  bool _isValidTell(String phoneNumber) {
+  bool _isValidPhone(String phoneNumber) {
     final phoneRegex = RegExp(r'^\(\d{2}\) \d{4,5}-\d{4}$');
     return phoneRegex.hasMatch(phoneNumber);
   }
@@ -69,13 +72,17 @@ abstract class _LoginStore with Store {
     return password.isNotEmpty;
   }
 
+  void togglePasswordVisibility() {
+    passwordIsVisible = !passwordIsVisible;
+  }
+
   @action
   Future<void> login() async {
     if (!isPasswordValid) {
       throw Exception('Senha inválida.');
     }
 
-    if (!isEmailValid && !isTellValid) {
+    if (!isEmailValid && !isPhoneValid) {
       throw Exception('Email ou telefone inválidos.');
     }
 
@@ -85,8 +92,8 @@ abstract class _LoginStore with Store {
     try {
       if (isEmailValid) {
         _authToken = await _loginService.loginWithEmail(email, password);
-      } else if (isTellValid) {
-        _authToken = await _loginService.loginWithPhone(tell, password);
+      } else if (isPhoneValid) {
+        _authToken = await _loginService.loginWithPhone(phone, password);
       }
 
       if (_authToken != null) {

@@ -6,40 +6,45 @@ import 'package:imperio/stores/login_store.dart';
 import 'package:imperio/utils/toast_notifier.dart';
 import 'package:imperio/views/widgets/auth_input_field/auth_input_field.dart';
 import 'auth_page.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
-class EmailLoginPage extends HookWidget {
+class PhoneLoginPage extends HookWidget {
   final LoginStore loginStore = getIt<LoginStore>();
 
-  EmailLoginPage({super.key});
+  PhoneLoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller =
-        useMemoized(() => TextEditingController(text: loginStore.email), []);
+    final controller = useMemoized(
+        () => MaskedTextController(
+            mask: '(00) 00000-0000', text: loginStore.phone),
+        []);
 
     useEffect(() {
       controller.addListener(() {
-        loginStore.email = controller.text;
+        loginStore.phone = controller.text;
       });
       return () => controller.dispose();
     }, [controller]);
 
-    void handleContinue() {
-      if (loginStore.isEmailValid) {
-        Navigator.of(context)
-            .pushNamed(AppNavigation.PASSWORD, arguments: loginStore);
+    void handleContinue() async {
+      if (loginStore.isPhoneValid) {
+        await Navigator.of(context).pushNamed(
+          AppNavigation.PASSWORD,
+          arguments: loginStore,
+        );
       } else {
-        ToastNotifier.error('Por favor, insira um e-mail válido.');
+        ToastNotifier.error('Por favor, insira um telefone válido.');
       }
     }
 
     return AuthPage(
-      title: 'Qual o seu e-mail?',
+      title: 'Qual o seu telefone?',
       onContinue: handleContinue,
       child: AuthInputField(
-        hintText: 'seuemail@exemplo.com',
+        hintText: '(00) 00000-0000',
         controller: controller,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.phone,
         onContinue: handleContinue,
       ),
     );

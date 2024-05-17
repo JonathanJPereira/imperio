@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imperio/views/pages/login/email_login_page.dart';
 import 'package:imperio/views/pages/login/login_page.dart';
 import 'package:imperio/views/pages/login/password_login_page.dart';
-import 'package:imperio/views/pages/login/tell_login_page.dart';
+import 'package:imperio/views/pages/login/phone_login_page.dart';
 import 'package:imperio/views/pages/main_tab_page.dart';
 import 'package:imperio/views/pages/match_details_page.dart';
 import 'package:imperio/views/pages/sports_page.dart';
@@ -24,7 +24,7 @@ Map<String, WidgetBuilder> appRoutes = {
   AppNavigation.MATCH_DETAILS: (context) => MatchDetailsPage(),
   AppNavigation.LOGIN: (context) => const LoginPage(),
   AppNavigation.EMAIL: (context) => EmailLoginPage(),
-  AppNavigation.TELL: (context) => TellLoginPage(),
+  AppNavigation.TELL: (context) => PhoneLoginPage(),
 };
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
