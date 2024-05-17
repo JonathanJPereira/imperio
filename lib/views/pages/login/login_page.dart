@@ -9,6 +9,12 @@ class LoginPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Definir a orientação da tela para retrato apenas
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
