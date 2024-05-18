@@ -14,11 +14,18 @@ class OddDraggableSheet extends HookWidget {
 
   OddDraggableSheet({super.key});
 
+  double mapExtentToAnimationValue(double extent) {
+    const double minExtent = 0.24;
+    const double maxExtent = 1.0;
+    return (extent - minExtent) / (maxExtent - minExtent);
+  }
+
   @override
   Widget build(BuildContext context) {
     final animationController = useAnimationController(
       duration: const Duration(milliseconds: 300),
     );
+
     final colorAnimation = useMemoized(() {
       return ColorTween(
         begin: Theme.of(context).colorScheme.secondary,
@@ -33,22 +40,32 @@ class OddDraggableSheet extends HookWidget {
       ).animate(animationController);
     }, [animationController]);
 
+    final paddingAnimation = useMemoized(() {
+      return Tween<double>(
+        begin: 0,
+        end: 32.0,
+      ).animate(animationController);
+    }, [animationController]);
+
     List<Widget> tabViews = [
-      HighestOdds(colorAnimation: colorAnimationContainer),
+      HighestOdds(
+          colorAnimation: colorAnimationContainer,
+          paddingAnimation: paddingAnimation),
       OtherOdds(
         colorAnimation: colorAnimationContainer,
-        teamAName: matchesStore.currentMatch!.teamA,
+        teamAName: matchesStore.currentMatch?.teamA ?? 'Team A',
       ),
     ];
 
     return NotificationListener<DraggableScrollableNotification>(
       onNotification: (notification) {
-        animationController.value = notification.extent;
-        return true;
+        animationController.value =
+            mapExtentToAnimationValue(notification.extent);
+        return false;
       },
       child: DraggableScrollableSheet(
-        initialChildSize: 0.2,
-        minChildSize: 0.1,
+        initialChildSize: 0.24,
+        minChildSize: 0.24,
         maxChildSize: 1,
         builder: (context, scrollController) {
           return AnimatedBuilder(
@@ -56,16 +73,18 @@ class OddDraggableSheet extends HookWidget {
             builder: (context, child) {
               return Container(
                 decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40),
+                  ),
                   color: colorAnimation.value,
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(40)),
                 ),
                 child: SingleChildScrollView(
                   controller: scrollController,
                   child: Column(
                     children: [
                       Container(
-                        margin: const EdgeInsets.symmetric(vertical: 15.0),
+                        margin: const EdgeInsets.symmetric(vertical: 8.0),
                         height: 6.0,
                         width: 53.0,
                         decoration: BoxDecoration(
@@ -74,9 +93,8 @@ class OddDraggableSheet extends HookWidget {
                         ),
                       ),
                       Observer(builder: (context) {
-                        return Container(
-                          padding: EdgeInsets.only(left: 15),
-                          height: 65,
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 15.0, top: 15),
                           child: TabSelector(
                             store: tabSelectorStore,
                             tabs: const ['Odds mais altas', 'Outras odds'],
@@ -84,17 +102,9 @@ class OddDraggableSheet extends HookWidget {
                           ),
                         );
                       }),
-                      Observer(
-                        builder: (_) => IndexedStack(
-                          index: tabSelectorStore.selectedIndex,
-                          children: tabViews
-                              .map((view) => SingleChildScrollView(
-                                    controller: scrollController,
-                                    child: view,
-                                  ))
-                              .toList(),
-                        ),
-                      ),
+                      Observer(builder: (context) {
+                        return tabViews[tabSelectorStore.selectedIndex];
+                      }),
                     ],
                   ),
                 ),

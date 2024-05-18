@@ -11,13 +11,17 @@ class HighestOdds extends StatelessWidget {
   final OddsMatchesStore oddsMatchesStore = GetIt.I<OddsMatchesStore>();
   final MatchesStore matchesStore = GetIt.I<MatchesStore>();
   final Animation<Color?> colorAnimation;
+  final Animation<double> paddingAnimation;
 
-  HighestOdds({super.key, required this.colorAnimation});
+  HighestOdds(
+      {super.key,
+      required this.colorAnimation,
+      required this.paddingAnimation});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(paddingAnimation.value),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -31,10 +35,10 @@ class HighestOdds extends StatelessWidget {
 
   Widget _buildBettingHousesDisplay() {
     return AnimatedBuilder(
-      animation: colorAnimation,
+      animation: Listenable.merge([colorAnimation, paddingAnimation]),
       builder: (context, child) {
         return Container(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(paddingAnimation.value),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(36),
             color: colorAnimation.value,

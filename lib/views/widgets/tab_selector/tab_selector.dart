@@ -29,7 +29,7 @@ class TabSelector extends StatelessWidget {
     TextStyle activeTextStyle = TextStyles.textStyle(color: Colors.white);
     TextStyle inactiveTextStyle = TextStyles.textStyle(color: Colors.black);
     return SizedBox(
-      height: 50,
+      height: 60,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: tabs.length,
@@ -48,7 +48,7 @@ class TabSelector extends StatelessWidget {
                   border: !isSelected
                       ? Border.all(
                           color: borderColor ?? Theme.of(context).dividerColor,
-                          width: 2)
+                          width: 1)
                       : null,
                   borderRadius: BorderRadius.circular(borderRadius),
                 ),

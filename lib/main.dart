@@ -8,7 +8,7 @@ import 'package:get_it/get_it.dart';
 void main() async {
   await setupApp();
 
-  final loginStore = GetIt.instance<LoginStore>();
+  // final loginStore = GetIt.instance<LoginStore>();
 
   // final bool hasToken = await loginStore.checkToken();
 
