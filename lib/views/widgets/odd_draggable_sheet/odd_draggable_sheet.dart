@@ -53,7 +53,7 @@ class OddDraggableSheet extends HookWidget {
           paddingAnimation: paddingAnimation),
       OtherOdds(
         colorAnimation: colorAnimationContainer,
-        teamAName: matchesStore.currentMatch?.teamA ?? 'Team A',
+        teamAName: matchesStore.currentMatch!.teamA,
       ),
     ];
 

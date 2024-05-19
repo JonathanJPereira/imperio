@@ -19,8 +19,8 @@ class OtherOdds extends StatelessWidget {
         return Column(
           children: [
             _otherOddCard('assets/images/betting_houses/1xbet_promo.png'),
-            _otherOddCard('assets/images/betting_houses/1xbet_promo.png'),
-            _otherOddCard('assets/images/betting_houses/1xbet_promo.png')
+            _otherOddCard('assets/images/betting_houses/betsafe.png'),
+            _otherOddCard('assets/images/betting_houses/betsson.png')
           ],
         );
       },
