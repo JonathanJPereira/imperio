@@ -1,7 +1,9 @@
+import 'package:get_it/get_it.dart';
 import 'package:imperio/models/bet.dart';
 import 'package:imperio/models/match.dart';
 import 'package:imperio/models/match_conflict.dart';
 import 'package:imperio/services/matches_service.dart';
+import 'package:imperio/stores/odds_matches_store.dart';
 import 'package:mobx/mobx.dart';
 
 part 'matches_store.g.dart';
@@ -10,6 +12,7 @@ class MatchesStore = _MatchesStore with _$MatchesStore;
 
 abstract class _MatchesStore with Store {
   final MatchesService _matchesService;
+  final OddsMatchesStore oddsMatchesStore = GetIt.I<OddsMatchesStore>();
 
   _MatchesStore(this._matchesService) {
     fetchMatches().then((value) => print(matches));
@@ -81,7 +84,8 @@ abstract class _MatchesStore with Store {
     try {
       List<dynamic> results = await Future.wait([
         _matchesService.fetchBets(matchId),
-        _matchesService.fetchMatchConflicts(matchId)
+        _matchesService.fetchMatchConflicts(matchId),
+        oddsMatchesStore.fetchOddsMatches(matchId)
       ]);
 
       List<Bet> bets = results[0];

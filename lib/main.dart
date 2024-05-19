@@ -8,15 +8,15 @@ import 'package:get_it/get_it.dart';
 void main() async {
   await setupApp();
 
-  final loginStore = GetIt.instance<LoginStore>();
+  // final loginStore = GetIt.instance<LoginStore>();
 
-  final bool hasToken = await loginStore.checkToken();
+  // final bool hasToken = await loginStore.checkToken();
 
-  if (hasToken) {
-    await loginStore.refreshToken();
-  }
+  // if (hasToken) {
+  //   await loginStore.refreshToken();
+  // }
 
-  runApp(MyApp(hasToken: hasToken));
+  runApp(MyApp(hasToken: true));
 }
 
 class MyApp extends StatelessWidget {

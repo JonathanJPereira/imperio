@@ -6,12 +6,15 @@ class BettingHousesDisplay extends StatelessWidget {
   final double onexbetOdd;
   final double betsafeOdd;
   final double betssonOdd;
+  final Color? colorDivisor;
 
-  const BettingHousesDisplay(
-      {super.key,
-      required this.onexbetOdd,
-      required this.betsafeOdd,
-      required this.betssonOdd});
+  const BettingHousesDisplay({
+    super.key,
+    required this.onexbetOdd,
+    required this.betsafeOdd,
+    required this.betssonOdd,
+    this.colorDivisor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,25 +28,19 @@ class BettingHousesDisplay extends StatelessWidget {
               imgAsset: 'assets/images/betting_houses/1xbet.png',
               odd: NumberFormat.compact().format(onexbetOdd),
             ),
-            const VerticalDivisor(),
+            VerticalDivisor(color: colorDivisor),
             BettingHouseInfo(
               title: 'X',
               imgAsset: 'assets/images/betting_houses/betsafe.png',
               odd: NumberFormat.compact().format(betsafeOdd),
             ),
-            const VerticalDivisor(),
+            VerticalDivisor(color: colorDivisor),
             BettingHouseInfo(
               title: 'Fora',
               imgAsset: 'assets/images/betting_houses/betsson.png',
               odd: NumberFormat.compact().format(betssonOdd),
             ),
           ],
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 15),
-          child: const Divider(
-            height: 1,
-          ),
         ),
       ],
     );
