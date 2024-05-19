@@ -20,17 +20,22 @@ class HighestOdds extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(paddingAnimation.value),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _buildBettingHousesDisplay(),
-          const SizedBox(height: 20),
-          _buildOddsTable(),
-        ],
-      ),
-    );
+    return AnimatedBuilder(
+        animation: Listenable.merge([paddingAnimation]),
+        builder: (context, child) {
+          return Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: 15.0, vertical: paddingAnimation.value / 2),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _buildBettingHousesDisplay(),
+                const SizedBox(height: 20),
+                _buildOddsTable(),
+              ],
+            ),
+          );
+        });
   }
 
   Widget _buildBettingHousesDisplay() {
