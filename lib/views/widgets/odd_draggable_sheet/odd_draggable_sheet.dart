@@ -43,7 +43,7 @@ class OddDraggableSheet extends HookWidget {
     final paddingAnimation = useMemoized(() {
       return Tween<double>(
         begin: 0,
-        end: 32.0,
+        end: 15.0,
       ).animate(animationController);
     }, [animationController]);
 
