@@ -49,12 +49,12 @@ class TimelineWidget extends StatelessWidget {
   final String ballPath;
 
   const TimelineWidget({
-    Key? key,
+    super.key,
     required this.lineColor,
     required this.indicatorUpPath,
     required this.indicatorDownPath,
     required this.ballPath,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +83,9 @@ class Indicator extends StatelessWidget {
   final String assetPath;
 
   const Indicator({
-    Key? key,
+    super.key,
     required this.assetPath,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
