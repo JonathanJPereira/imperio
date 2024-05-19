@@ -46,9 +46,12 @@ class MatchCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              TeamLogo(name: match.teamA),
+              TeamLogo(
+                name: match.teamA,
+                imgUrl: match.teamAImage,
+              ),
               const LiveIndicator(),
-              TeamLogo(name: match.teamB),
+              TeamLogo(name: match.teamB, imgUrl: match.teamBImage),
             ],
           ),
           MatchScoreDisplay(
