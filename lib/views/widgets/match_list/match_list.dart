@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:imperio/views/widgets/shared/action_prompt_row.dart';
 import 'package:intl/intl.dart';
 import 'package:imperio/stores/matches_store.dart';
 import 'package:imperio/stores/tab_selector_store.dart';
@@ -93,6 +94,9 @@ class MatchList extends StatelessWidget {
             ),
           );
         }),
+        const ActionPromptRow(
+          title: 'Veja mais bônus disponíveis',
+        ),
       ],
     );
   }

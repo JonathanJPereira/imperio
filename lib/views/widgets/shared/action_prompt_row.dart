@@ -25,7 +25,9 @@ class ActionPromptRow extends StatelessWidget {
           width: 10,
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/placeholder');
+          },
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(80),

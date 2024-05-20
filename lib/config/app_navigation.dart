@@ -5,6 +5,7 @@ import 'package:imperio/views/pages/login/password_login_page.dart';
 import 'package:imperio/views/pages/login/phone_login_page.dart';
 import 'package:imperio/views/pages/main_tab_page.dart';
 import 'package:imperio/views/pages/match_details_page.dart';
+import 'package:imperio/views/pages/placeholder_page.dart';
 import 'package:imperio/views/pages/sports_page.dart';
 import 'package:imperio/stores/login_store.dart';
 
@@ -16,15 +17,17 @@ class AppNavigation {
   static const EMAIL = '/email';
   static const PASSWORD = '/password';
   static const TELL = '/tell';
+  static const PLACEHOLDER = '/placeholder';
 }
 
 Map<String, WidgetBuilder> appRoutes = {
   AppNavigation.HOME: (context) => MainTabPage(),
   AppNavigation.SPORTS: (context) => SportsPage(),
-  AppNavigation.MATCH_DETAILS: (context) => MatchDetailsPage(),
+  AppNavigation.MATCH_DETAILS: (context) => const MatchDetailsPage(),
   AppNavigation.LOGIN: (context) => const LoginPage(),
   AppNavigation.EMAIL: (context) => EmailLoginPage(),
   AppNavigation.TELL: (context) => PhoneLoginPage(),
+  AppNavigation.PLACEHOLDER: (context) => const PlaceholderPage(),
 };
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
