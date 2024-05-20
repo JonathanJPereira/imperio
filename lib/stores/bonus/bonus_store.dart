@@ -1,4 +1,4 @@
-import 'package:imperio/models/bonus.dart';
+import 'package:imperio/models/bonus/bonus.dart';
 import 'package:imperio/services/bonus_service.dart';
 import 'package:mobx/mobx.dart';
 

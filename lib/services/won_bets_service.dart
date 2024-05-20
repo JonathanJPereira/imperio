@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:imperio/models/won_bet.dart';
+import 'package:imperio/models/won_bet/won_bet.dart';
 
 class WonBetsService {
   final Dio _dio;

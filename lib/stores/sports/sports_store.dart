@@ -1,4 +1,4 @@
-import 'package:imperio/models/sport.dart';
+import 'package:imperio/models/sport/sport.dart';
 import 'package:imperio/services/sports_service.dart';
 import 'package:mobx/mobx.dart';
 

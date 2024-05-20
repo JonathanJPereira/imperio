@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:imperio/views/widgets/game_info/info_column.dart';
 import 'package:imperio/views/widgets/game_info/info_row.dart';
 import 'package:imperio/views/widgets/shared/section_header.dart';
-import 'package:imperio/models/match.dart';
+import 'package:imperio/models/match/match.dart';
 import 'package:imperio/views/widgets/shared/share_button.dart';
 import 'package:intl/intl.dart';
 

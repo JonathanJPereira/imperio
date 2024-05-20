@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:imperio/models/championship.dart';
+import 'package:imperio/models/championship/championship.dart';
 
 class ChampionshipsService {
   final Dio _dio;

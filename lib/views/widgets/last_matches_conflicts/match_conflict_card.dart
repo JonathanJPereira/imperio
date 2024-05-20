@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imperio/models/match_conflict.dart';
+import 'package:imperio/models/match_conflict/match_conflict.dart';
 import 'package:imperio/views/widgets/shared/rounded_image.dart';
 import 'package:intl/intl.dart';
 

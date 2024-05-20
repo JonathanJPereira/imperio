@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:imperio/services/login_service.dart';
-import 'package:imperio/models/auth_token.dart';
+import 'package:imperio/models/auth_token/auth_token.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 part 'login_store.g.dart';

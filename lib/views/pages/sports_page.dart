@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:imperio/models/sport.dart';
+import 'package:imperio/models/sport/sport.dart';
 import 'package:imperio/stores/sports/sports_store.dart';
 import 'package:imperio/utils/capitalize_first_of_each.dart';
 import 'package:imperio/config/service_locator.dart';

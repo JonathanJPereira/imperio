@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imperio/models/tip.dart';
+import 'package:imperio/models/tip/tip.dart';
 import 'package:imperio/views/widgets/shared/rounded_image.dart';
 
 class TipCard extends StatelessWidget {

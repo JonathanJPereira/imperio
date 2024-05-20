@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imperio/models/nav_item.dart';
+import 'package:imperio/models/nav_item/nav_item.dart';
 import 'package:imperio/utils/imperio_icons.dart';
 import 'package:imperio/utils/remove_diacritics.dart';
 import 'package:imperio/views/pages/main_upper_tab_page.dart';

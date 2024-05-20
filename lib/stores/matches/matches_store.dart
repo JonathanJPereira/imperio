@@ -1,7 +1,7 @@
-import 'package:imperio/models/bet.dart';
-import 'package:imperio/models/match.dart';
-import 'package:imperio/models/match_conflict.dart';
-import 'package:imperio/models/odd_match.dart';
+import 'package:imperio/models/bet/bet.dart';
+import 'package:imperio/models/match/match.dart';
+import 'package:imperio/models/match_conflict/match_conflict.dart';
+import 'package:imperio/models/odd_match/odd_match.dart';
 import 'package:imperio/services/matches_service.dart';
 import 'package:mobx/mobx.dart';
 

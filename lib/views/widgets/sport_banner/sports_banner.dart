@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imperio/models/featured_banner.dart';
+import 'package:imperio/models/featured_banner/featured_banner.dart';
 import 'package:imperio/views/widgets/shared/horizontal_list.dart';
 import 'package:imperio/views/widgets/sport_banner/sport_banner_card.dart';
 
