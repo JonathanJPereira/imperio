@@ -29,7 +29,7 @@ class RefereeFacts extends StatelessWidget {
               _buildRefereeProfile(context),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 15),
-                height: 139,
+                height: 179,
                 child: OrderedList(items: refereeFacts),
               ),
               const ActionPromptRow(
