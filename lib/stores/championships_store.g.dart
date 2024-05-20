@@ -25,6 +25,22 @@ mixin _$ChampionshipsStore on _ChampionshipsStore, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: '_ChampionshipsStore.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$fetchChampionshipsAsyncAction =
       AsyncAction('_ChampionshipsStore.fetchChampionships', context: context);
 
@@ -37,7 +53,8 @@ mixin _$ChampionshipsStore on _ChampionshipsStore, Store {
   @override
   String toString() {
     return '''
-championships: ${championships}
+championships: ${championships},
+isLoading: ${isLoading}
     ''';
   }
 }

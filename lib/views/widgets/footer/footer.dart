@@ -6,20 +6,27 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Divider(
-            color: Theme.of(context).colorScheme.tertiary.withOpacity(0.09),
-            thickness: 1,
+    return Column(
+      children: [
+        SizedBox(
+          height: 100,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Divider(
+                color: Theme.of(context).colorScheme.tertiary.withOpacity(0.09),
+                thickness: 1,
+              ),
+              Expanded(
+                child: SvgPicture.asset('assets/images/logo.svg'),
+              ),
+            ],
           ),
-          Expanded(
-            child: SvgPicture.asset('assets/images/logo.svg'),
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(
+          height: 150,
+        )
+      ],
     );
   }
 }

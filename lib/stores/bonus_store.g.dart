@@ -25,6 +25,38 @@ mixin _$BonusStore on _BonusStore, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: '_BonusStore.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  late final _$errorMessageAtom =
+      Atom(name: '_BonusStore.errorMessage', context: context);
+
+  @override
+  String? get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String? value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
   late final _$fetchBonusesAsyncAction =
       AsyncAction('_BonusStore.fetchBonuses', context: context);
 
@@ -36,7 +68,9 @@ mixin _$BonusStore on _BonusStore, Store {
   @override
   String toString() {
     return '''
-bonuses: ${bonuses}
+bonuses: ${bonuses},
+isLoading: ${isLoading},
+errorMessage: ${errorMessage}
     ''';
   }
 }

@@ -6,23 +6,10 @@ import 'package:imperio/views/widgets/shared/section_header.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:imperio/views/widgets/tips_list/tip_card.dart';
 
-class TipsList extends StatefulWidget {
-  const TipsList({super.key});
-
-  @override
-  State<TipsList> createState() => _TipsListState();
-}
-
-class _TipsListState extends State<TipsList> {
+class TipsList extends StatelessWidget {
   final TipsStore tipsStore = GetIt.I<TipsStore>();
 
-  @override
-  void initState() {
-    super.initState();
-    if (tipsStore.tips.isEmpty) {
-      tipsStore.fetchTips();
-    }
-  }
+  TipsList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +18,26 @@ class _TipsListState extends State<TipsList> {
         const SectionHeader(title: 'Dicas'),
         Observer(
           builder: (_) {
-            if (tipsStore.tips.isEmpty) {
-              return CircularProgressIndicator();
+            if (tipsStore.isLoading) {
+              return const CircularProgressIndicator();
+            } else if (tipsStore.errorMessage != null) {
+              return Text(
+                tipsStore.errorMessage!,
+                style: const TextStyle(color: Colors.red),
+              );
+            } else if (tipsStore.tips.isEmpty) {
+              return const Text('Nenhuma dica disponível.');
+            } else {
+              return HorizontalList(
+                height: 300,
+                itemDistance: 8,
+                itemCount: tipsStore.tips.length,
+                itemBuilder: (context, index) {
+                  final tip = tipsStore.tips[index];
+                  return TipCard(tip: tip);
+                },
+              );
             }
-            return HorizontalList(
-              height: 300,
-              itemDistance: 8,
-              itemCount: tipsStore.tips.length,
-              itemBuilder: (context, index) {
-                final tip = tipsStore.tips[index];
-                return TipCard(tip: tip);
-              },
-            );
           },
         ),
       ],

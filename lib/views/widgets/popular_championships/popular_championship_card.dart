@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:imperio/models/championship.dart';
 import 'package:imperio/views/widgets/shared/rounded_image.dart';
 
 class PopularChampionshipCard extends StatelessWidget {
-  const PopularChampionshipCard({super.key});
+  final Championship championship;
+
+  const PopularChampionshipCard({super.key, required this.championship});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +16,8 @@ class PopularChampionshipCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         color: Theme.of(context).colorScheme.secondaryContainer,
       ),
-      child: const Center(
-        child: CustomNetworkImage(imgUrl: 'https://loremflickr.com/640/480/sports'),
+      child: Center(
+        child: CustomNetworkImage(imgUrl: championship.image),
       ),
     );
   }
