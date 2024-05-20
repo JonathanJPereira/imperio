@@ -103,18 +103,26 @@ class HighestOdds extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Table(
-                    columnWidths: const {
-                      0: FixedColumnWidth(100),
-                      1: FixedColumnWidth(10),
-                      2: FlexColumnWidth(),
-                      3: FlexColumnWidth(),
-                      4: FlexColumnWidth(),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Table(
+                        columnWidths: {
+                          0: const FixedColumnWidth(100),
+                          1: FixedColumnWidth(
+                            constraints.maxWidth < 360
+                                ? constraints.maxWidth * 0
+                                : constraints.maxWidth * 0.07,
+                          ),
+                          2: const FlexColumnWidth(),
+                          3: const FlexColumnWidth(),
+                          4: const FlexColumnWidth(),
+                        },
+                        children: [
+                          _buildHeaderRow(),
+                          ..._buildOddsRows(odds),
+                        ],
+                      );
                     },
-                    children: [
-                      _buildHeaderRow(),
-                      ..._buildOddsRows(odds),
-                    ],
                   ),
                 ],
               ),
@@ -200,24 +208,24 @@ class HighestOdds extends StatelessWidget {
 
   Widget _buildOddContainer(String odd, bool isHighlighted) {
     return Container(
-      margin: const EdgeInsets.all(10),
-      height: 32.64,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black26,
+        margin: const EdgeInsets.all(10),
+        height: 32.64,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black26,
+          ),
+          color: isHighlighted ? Colors.black : Colors.transparent,
+          borderRadius: BorderRadius.circular(150),
         ),
-        color: isHighlighted ? Colors.black : Colors.transparent,
-        borderRadius: BorderRadius.circular(150),
-      ),
-      child: Text(
-        NumberFormat.compact().format(double.parse(odd)),
-        style: TextStyle(
-          color: isHighlighted ? Colors.white : Colors.black,
-          fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
-          fontSize: 13.3,
-        ),
-      ),
-    );
+        child: Text(
+          NumberFormat.compact().format(double.parse(odd)),
+          style: TextStyle(
+            color: isHighlighted ? Colors.white : Colors.black,
+            fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
+            fontSize: 13.3,
+          ),
+          overflow: TextOverflow.ellipsis,
+        ));
   }
 }
