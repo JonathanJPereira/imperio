@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:imperio/models/match/match.dart';
-import 'package:imperio/stores/matches/matches_store.dart';
 import 'package:imperio/views/widgets/shared/match_card/live_indicator.dart';
 import 'package:imperio/views/widgets/shared/match_card/match_score_display.dart';
 import 'package:imperio/views/widgets/shared/match_card/team_logo.dart';
 import 'package:imperio/views/widgets/shared/match_card/time_line.dart';
-import 'package:imperio/views/widgets/shared/match_card/view_more.dart';
 
 class MatchCard extends StatelessWidget {
   final Match match;
