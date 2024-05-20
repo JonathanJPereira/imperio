@@ -57,5 +57,6 @@ O projeto usa várias bibliotecas que são necessárias para a sua execução e 
 
 ### Prints do APP:
 
-![Login](imperio_prints/1.jpg)
+<img src="imperio_prints/1.jpg" alt="Descrição da Imagem" width="300"/>
+
 
