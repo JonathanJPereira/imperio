@@ -15,7 +15,7 @@ class OddDraggableSheet extends HookWidget {
   OddDraggableSheet({super.key});
 
   double mapExtentToAnimationValue(double extent) {
-    const double minExtent = 0.24;
+    const double minExtent = 0.23;
     const double maxExtent = 1.0;
     return (extent - minExtent) / (maxExtent - minExtent);
   }
@@ -64,8 +64,8 @@ class OddDraggableSheet extends HookWidget {
         return false;
       },
       child: DraggableScrollableSheet(
-        initialChildSize: 0.24,
-        minChildSize: 0.24,
+        initialChildSize: 0.23,
+        minChildSize: 0.23,
         maxChildSize: 1,
         builder: (context, scrollController) {
           return AnimatedBuilder(
@@ -94,7 +94,7 @@ class OddDraggableSheet extends HookWidget {
                       ),
                       Observer(builder: (context) {
                         return Padding(
-                          padding: const EdgeInsets.only(left: 15.0, top: 15),
+                          padding: const EdgeInsets.only(left: 15.0),
                           child: TabSelector(
                             store: tabSelectorStore,
                             tabs: const ['Odds mais altas', 'Outras odds'],

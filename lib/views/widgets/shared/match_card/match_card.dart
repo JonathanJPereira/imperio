@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:imperio/models/match.dart';
 import 'package:imperio/stores/matches_store.dart';
-
-import 'package:imperio/views/widgets/shared/match_card/betting_houses_display.dart';
 import 'package:imperio/views/widgets/shared/match_card/live_indicator.dart';
 import 'package:imperio/views/widgets/shared/match_card/match_score_display.dart';
 import 'package:imperio/views/widgets/shared/match_card/team_logo.dart';
@@ -12,18 +10,15 @@ import 'package:imperio/views/widgets/shared/match_card/view_more.dart';
 
 class MatchCard extends StatelessWidget {
   final Match match;
+  final Widget child;
+  final bool showDividers;
 
-  const MatchCard({super.key, required this.match});
-
-  void _navigateToMatchDetails(BuildContext context) {
-    final MatchesStore matchesStore = GetIt.I<MatchesStore>();
-    matchesStore.setCurrentMatchId(match.id);
-
-    Navigator.pushNamed(
-      context,
-      '/match_details',
-    );
-  }
+  const MatchCard({
+    super.key,
+    required this.match,
+    required this.child,
+    this.showDividers = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +28,7 @@ class MatchCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(36),
-        border: Border.all(color: const Color(0xFFDEE0DF)),
+        border: Border.all(color: Theme.of(context).dividerColor),
         boxShadow: const [
           BoxShadow(
             color: Colors.black12,
@@ -46,24 +41,22 @@ class MatchCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              TeamLogo(name: match.teamA),
+              TeamLogo(
+                name: match.teamA,
+                imgUrl: match.teamAImage,
+              ),
               const LiveIndicator(),
-              TeamLogo(name: match.teamB),
+              TeamLogo(name: match.teamB, imgUrl: match.teamBImage),
             ],
           ),
           MatchScoreDisplay(
             scoreTeamOne: match.teamAScore,
             scoreTeamTwo: match.teamBScore,
           ),
+          if (showDividers) const Divider(),
           const TimeLine(),
-          BettingHousesDisplay(
-            onexbetOdd: match.onexbetOddsAvg,
-            betsafeOdd: match.betsafeOddsAvg,
-            betssonOdd: match.betssonOddsAvg,
-          ),
-          ViewMore(
-            onPress: () => _navigateToMatchDetails(context),
-          )
+          if (showDividers) const Divider(),
+          child,
         ],
       ),
     );

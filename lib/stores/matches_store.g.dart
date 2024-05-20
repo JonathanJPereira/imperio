@@ -74,13 +74,13 @@ mixin _$MatchesStore on _MatchesStore, Store {
       Atom(name: '_MatchesStore.matchBets', context: context);
 
   @override
-  ObservableMap<String, List<Bet>> get matchBets {
+  ObservableList<Bet> get matchBets {
     _$matchBetsAtom.reportRead();
     return super.matchBets;
   }
 
   @override
-  set matchBets(ObservableMap<String, List<Bet>> value) {
+  set matchBets(ObservableList<Bet> value) {
     _$matchBetsAtom.reportWrite(value, super.matchBets, () {
       super.matchBets = value;
     });
@@ -90,15 +90,31 @@ mixin _$MatchesStore on _MatchesStore, Store {
       Atom(name: '_MatchesStore.matchConflicts', context: context);
 
   @override
-  ObservableMap<String, List<MatchConflict>> get matchConflicts {
+  ObservableList<MatchConflict> get matchConflicts {
     _$matchConflictsAtom.reportRead();
     return super.matchConflicts;
   }
 
   @override
-  set matchConflicts(ObservableMap<String, List<MatchConflict>> value) {
+  set matchConflicts(ObservableList<MatchConflict> value) {
     _$matchConflictsAtom.reportWrite(value, super.matchConflicts, () {
       super.matchConflicts = value;
+    });
+  }
+
+  late final _$matchOddsAtom =
+      Atom(name: '_MatchesStore.matchOdds', context: context);
+
+  @override
+  ObservableList<OddMatch> get matchOdds {
+    _$matchOddsAtom.reportRead();
+    return super.matchOdds;
+  }
+
+  @override
+  set matchOdds(ObservableList<OddMatch> value) {
+    _$matchOddsAtom.reportWrite(value, super.matchOdds, () {
+      super.matchOdds = value;
     });
   }
 
@@ -170,6 +186,7 @@ mixin _$MatchesStore on _MatchesStore, Store {
 matches: ${matches},
 matchBets: ${matchBets},
 matchConflicts: ${matchConflicts},
+matchOdds: ${matchOdds},
 isLoading: ${isLoading},
 errorMessage: ${errorMessage},
 teamAFacts: ${teamAFacts},

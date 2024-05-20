@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:imperio/views/widgets/shared/rounded_image.dart';
 
 class TeamLogo extends StatelessWidget {
   final String name;
-  const TeamLogo({super.key, required this.name});
+  final String imgUrl;
+
+  const TeamLogo({super.key, required this.name, required this.imgUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +19,9 @@ class TeamLogo extends StatelessWidget {
             width: 61.5,
             child: Center(
               child: SizedBox(
-                height: 37.5,
-                width: 37.5,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.network(
-                    'https://loremflickr.com/640/480/sports',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
+                  height: 37.5,
+                  width: 37.5,
+                  child: CustomNetworkImage(imgUrl: imgUrl)),
             ),
           ),
           Text(

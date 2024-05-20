@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:imperio/services/login_service.dart';
 import 'package:imperio/services/matches_service.dart';
-import 'package:imperio/services/odds_matches_service.dart';
+
 import 'package:imperio/services/sports_service.dart';
 import 'package:imperio/services/championships_service.dart';
 import 'package:imperio/services/tips_service.dart';
@@ -10,7 +10,6 @@ import 'package:imperio/services/bonus_service.dart';
 import 'package:imperio/services/won_bets_service.dart';
 import 'package:imperio/stores/login_store.dart';
 import 'package:imperio/stores/matches_store.dart';
-import 'package:imperio/stores/odds_matches_store.dart';
 import 'package:imperio/stores/sports_store.dart';
 import 'package:imperio/stores/championships_store.dart';
 import 'package:imperio/stores/tab_selector_store.dart';
@@ -36,8 +35,6 @@ void setupLocator() {
   getIt.registerLazySingleton<WonBetsService>(() => WonBetsService(getIt()));
   getIt.registerLazySingleton<MatchesService>(() => MatchesService(getIt()));
   getIt.registerLazySingleton<LoginService>(() => LoginService(getIt()));
-  getIt.registerLazySingleton<OddsMatchesService>(
-      () => OddsMatchesService(getIt()));
 
   // Stores são registradas como LazySingletons para garantir que sejam criadas apenas quando acessadas pela primeira vez,
   // melhorando a eficiência da inicialização e reduzindo o consumo de recursos no startup.
@@ -52,8 +49,6 @@ void setupLocator() {
   // NavigationStore é registrado como Singleton para manter o estado de navegação compartilhado globalmente por toda a aplicação.
   // Isso permite que o estado de navegação seja acessado de forma consistente em diferentes partes do app.
   getIt.registerSingleton<NavigationStore>(NavigationStore());
-  getIt
-      .registerLazySingleton<OddsMatchesStore>(() => OddsMatchesStore(getIt()));
 
   // TabSelectorStore é registrado como Factory para fornecer uma nova instância cada vez que for solicitado.
   // Isso é ideal para componentes que necessitam de um estado independente, evitando interferências entre diferentes usos.

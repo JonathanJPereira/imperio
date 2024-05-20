@@ -12,6 +12,7 @@ import 'package:imperio/views/widgets/shared/custom_app_bar.dart';
 import 'package:imperio/models/match.dart';
 import 'package:imperio/views/widgets/shared/match_card/betting_houses_display.dart';
 import 'package:imperio/views/widgets/shared/match_card/match_card.dart';
+import 'package:imperio/views/widgets/shared/match_card/match_social_stats.dart';
 import 'package:imperio/views/widgets/tab_selector/tab_selector.dart';
 import 'package:imperio/views/widgets/team_facts/team_facts.dart';
 
@@ -64,7 +65,15 @@ class MatchDetailsPage extends StatelessWidget {
             child: Column(
               children: [
                 const Divider(),
-                MatchCard(match: match),
+                MatchCard(
+                  match: match,
+                  child: MatchSocialStats(
+                    likeCount: match.likesCount,
+                    starCount: match.starsCount,
+                    shareCount: match.sharesCount,
+                    viewCount: match.viewsCount,
+                  ),
+                ),
                 FootballPitch(
                   teamAImg: match.teamAImage,
                   teamBImg: match.teamBImage,
@@ -83,11 +92,11 @@ class MatchDetailsPage extends StatelessWidget {
                   refereeImg: match.refereeAvatar,
                   refereeFacts: matchesStore.refereeFacts,
                 ),
-                LastBets(betlist: matchesStore.matchBets[match.id]!),
+                LastBets(betlist: matchesStore.matchBets),
                 LastMatchesConflicts(
                   teamAName: match.teamA,
                   teamBName: match.teamB,
-                  matchConflicts: matchesStore.matchConflicts[match.id]!,
+                  matchConflicts: matchesStore.matchConflicts,
                   teamAImg: match.teamAImage,
                   teamBImg: match.teamBImage,
                 ),

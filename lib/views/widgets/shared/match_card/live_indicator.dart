@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperio/views/widgets/shared/dot_indicator.dart';
 
 class LiveIndicator extends StatelessWidget {
   const LiveIndicator({super.key});
@@ -20,17 +21,10 @@ class LiveIndicator extends StatelessWidget {
                     color: theme.colorScheme.tertiary.withOpacity(0.6)),
               ),
             ),
-            Positioned(
+            const Positioned(
               right: 0,
               top: 0,
-              child: Container(
-                height: 6,
-                width: 6,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-              ),
+              child: DotIndicator(size: 6),
             ),
           ],
         ),
