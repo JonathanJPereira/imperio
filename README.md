@@ -2,7 +2,7 @@
 # Império
 
 ## Descrição
-Este documento descreve a configuração e os passos necessários para executar e desenvolver o aplicativo Flutter "Império". Este é um projeto de desafio para a Loomi.
+Este documento descreve a configuração e os passos necessários para executar e desenvolver o aplicativo Flutter "Império". Criado como parte de um desafio proposto pela Loomi.
 
 ## Configuração do Ambiente
 
