@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:imperio/stores/championships_store.dart';
+import 'package:imperio/stores/championship/championships_store.dart';
 import 'package:imperio/views/widgets/popular_championships/popular_championship_card.dart';
 import 'package:imperio/views/widgets/shared/horizontal_list.dart';
 import 'package:imperio/views/widgets/shared/section_header.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:imperio/stores/matches_store.dart';
+import 'package:imperio/stores/matches/matches_store.dart';
 
 import 'package:imperio/views/widgets/shared/match_card/betting_houses_display.dart';
 import 'package:imperio/views/widgets/shared/rounded_image.dart';

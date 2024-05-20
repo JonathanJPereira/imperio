@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:imperio/config/app_navigation.dart';
-import 'package:imperio/models/nav_item.dart';
-import 'package:imperio/stores/login_store.dart';
-import 'package:imperio/stores/navigation_store.dart';
+import 'package:imperio/models/nav_item/nav_item.dart';
+import 'package:imperio/stores/login/login_store.dart';
+import 'package:imperio/stores/navigation/navigation_store.dart';
 import 'package:imperio/config/service_locator.dart';
 
 class MenuPage extends StatelessWidget {

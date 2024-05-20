@@ -7,7 +7,7 @@ import 'package:imperio/views/pages/main_tab_page.dart';
 import 'package:imperio/views/pages/match_details_page.dart';
 import 'package:imperio/views/pages/placeholder_page.dart';
 import 'package:imperio/views/pages/sports_page.dart';
-import 'package:imperio/stores/login_store.dart';
+import 'package:imperio/stores/login/login_store.dart';
 
 class AppNavigation {
   static const HOME = '/';

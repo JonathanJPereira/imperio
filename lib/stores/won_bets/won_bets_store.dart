@@ -1,4 +1,4 @@
-import 'package:imperio/models/won_bet.dart';
+import 'package:imperio/models/won_bet/won_bet.dart';
 import 'package:imperio/services/won_bets_service.dart';
 import 'package:mobx/mobx.dart';
 

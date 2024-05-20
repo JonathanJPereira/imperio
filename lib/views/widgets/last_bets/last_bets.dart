@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imperio/models/bet.dart';
+import 'package:imperio/models/bet/bet.dart';
 import 'package:imperio/views/widgets/last_bets_won/bet_cart.dart';
 import 'package:imperio/views/widgets/shared/horizontal_list.dart';
 import 'package:imperio/views/widgets/shared/section_header.dart';

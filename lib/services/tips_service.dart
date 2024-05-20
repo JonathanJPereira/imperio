@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:imperio/models/tip.dart';
+import 'package:imperio/models/tip/tip.dart';
 
 class TipsService {
   final Dio _dio;

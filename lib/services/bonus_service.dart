@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:imperio/models/bonus.dart';
+import 'package:imperio/models/bonus/bonus.dart';
 
 class BonusService {
   final Dio _dio;

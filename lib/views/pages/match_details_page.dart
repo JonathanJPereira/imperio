@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:imperio/stores/matches_store.dart';
+import 'package:imperio/stores/matches/matches_store.dart';
 import 'package:imperio/views/widgets/football_pitch/football_pitch.dart';
 import 'package:imperio/views/widgets/game_info/game_info.dart';
 import 'package:imperio/views/widgets/last_bets/last_bets.dart';
@@ -9,7 +9,7 @@ import 'package:imperio/views/widgets/last_matches_conflicts/last_matches_confli
 import 'package:imperio/views/widgets/odd_draggable_sheet/odd_draggable_sheet.dart';
 import 'package:imperio/views/widgets/referee_facts/referee_facts.dart';
 import 'package:imperio/views/widgets/shared/custom_app_bar.dart';
-import 'package:imperio/models/match.dart';
+import 'package:imperio/models/match/match.dart';
 import 'package:imperio/views/widgets/shared/match_card/betting_houses_display.dart';
 import 'package:imperio/views/widgets/shared/match_card/match_card.dart';
 import 'package:imperio/views/widgets/shared/match_card/match_social_stats.dart';

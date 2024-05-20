@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:imperio/stores/tips_store.dart';
+import 'package:imperio/stores/tips/tips_store.dart';
 import 'package:imperio/views/widgets/shared/horizontal_list.dart';
 import 'package:imperio/views/widgets/shared/section_header.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

@@ -1,4 +1,4 @@
-import 'package:imperio/models/championship.dart';
+import 'package:imperio/models/championship/championship.dart';
 import 'package:imperio/services/championships_service.dart';
 import 'package:mobx/mobx.dart';
 

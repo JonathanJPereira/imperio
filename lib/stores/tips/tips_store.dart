@@ -1,4 +1,4 @@
-import 'package:imperio/models/tip.dart';
+import 'package:imperio/models/tip/tip.dart';
 import 'package:imperio/services/tips_service.dart';
 import 'package:mobx/mobx.dart';
 

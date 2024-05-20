@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imperio/views/widgets/shared/rounded_image.dart';
-import 'package:imperio/models/match.dart';
+import 'package:imperio/models/match/match.dart';
 
 class FootballPitch extends StatelessWidget {
   final String teamAImg;

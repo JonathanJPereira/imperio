@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:imperio/models/auth_token.dart';
+import 'package:imperio/models/auth_token/auth_token.dart';
 
 class LoginService {
   final Dio _dio;
