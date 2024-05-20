@@ -152,7 +152,7 @@ class TeamStats extends StatelessWidget {
           children: [
             Text(NumberFormat.compact().format(winCount),
                 style: const TextStyle(
-                    fontSize: 40,
+                    fontSize: 35,
                     color: Colors.white,
                     fontWeight: FontWeight.w500)),
             const CustomWhiteLabelText(text: 'Vitórias')
