@@ -10,7 +10,6 @@ abstract class _TabSelectorStore with Store {
 
   @action
   void setSelectedIndex(int index) {
-    print('Passando aqi');
     selectedIndex = index;
   }
 }
