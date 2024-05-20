@@ -21,7 +21,7 @@ class GameInfo extends StatelessWidget {
           textPosition: TextPosition.middle,
         ),
         InfoRow(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           start: _title('Premiere'),
           end: Row(
             children: [
@@ -33,8 +33,11 @@ class GameInfo extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 5),
-              _boldText(
-                match.channels,
+              SizedBox(
+                width: 150,
+                child: _boldText(
+                  match.channels,
+                ),
               ),
               const SizedBox(width: 5),
               const ShareButton(),
@@ -100,6 +103,7 @@ class GameInfo extends StatelessWidget {
     return Text(
       text,
       style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+      overflow: TextOverflow.ellipsis,
     );
   }
 
