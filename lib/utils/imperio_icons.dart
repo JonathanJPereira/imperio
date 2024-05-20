@@ -17,6 +17,7 @@ class ImperioIcons {
 
   static const IconData iconStarOutline =
       IconData(0x0804, fontFamily: 'ImperioIcons');
+  static const IconData iconStar = IconData(0xE804, fontFamily: 'ImperioIcons');
   static const IconData iconPeoplesOutline =
       IconData(0x0805, fontFamily: 'ImperioIcons');
   static const IconData iconPieOutline =
@@ -27,4 +28,8 @@ class ImperioIcons {
       IconData(0x0808, fontFamily: 'ImperioIcons');
   static const IconData iconShareOutline =
       IconData(0x0809, fontFamily: 'ImperioIcons');
+  static const IconData iconThumbsUp =
+      IconData(0x0810, fontFamily: 'ImperioIcons');
+      static const IconData iconEye =
+      IconData(0x0811, fontFamily: 'ImperioIcons');
 }
