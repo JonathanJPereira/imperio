@@ -92,11 +92,11 @@ class MatchDetailsPage extends StatelessWidget {
                   refereeImg: match.refereeAvatar,
                   refereeFacts: matchesStore.refereeFacts,
                 ),
-                LastBets(betlist: matchesStore.matchBets[match.id]!),
+                LastBets(betlist: matchesStore.matchBets),
                 LastMatchesConflicts(
                   teamAName: match.teamA,
                   teamBName: match.teamB,
-                  matchConflicts: matchesStore.matchConflicts[match.id]!,
+                  matchConflicts: matchesStore.matchConflicts,
                   teamAImg: match.teamAImage,
                   teamBImg: match.teamBImage,
                 ),

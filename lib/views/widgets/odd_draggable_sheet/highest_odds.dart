@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:imperio/stores/matches_store.dart';
-import 'package:imperio/stores/odds_matches_store.dart';
+
 import 'package:imperio/views/widgets/shared/match_card/betting_houses_display.dart';
 import 'package:imperio/views/widgets/shared/rounded_image.dart';
 import 'package:intl/intl.dart';
 
 class HighestOdds extends StatelessWidget {
-  final OddsMatchesStore oddsMatchesStore = GetIt.I<OddsMatchesStore>();
   final MatchesStore matchesStore = GetIt.I<MatchesStore>();
   final Animation<Color?> colorAnimation;
   final Animation<double> paddingAnimation;
@@ -62,11 +61,11 @@ class HighestOdds extends StatelessWidget {
   Widget _buildOddsTable() {
     return Observer(
       builder: (_) {
-        if (oddsMatchesStore.oddsMatches.isEmpty) {
+        if (matchesStore.matchOdds.isEmpty) {
           return const CircularProgressIndicator();
         }
 
-        final oddsMatch = oddsMatchesStore.oddsMatches.first;
+        final oddsMatch = matchesStore.matchOdds.first;
         final odds = [
           [
             oddsMatch.teamA1xbetOdd,

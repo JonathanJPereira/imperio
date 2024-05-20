@@ -2,8 +2,8 @@ import 'package:get_it/get_it.dart';
 import 'package:imperio/models/bet.dart';
 import 'package:imperio/models/match.dart';
 import 'package:imperio/models/match_conflict.dart';
+import 'package:imperio/models/odd_match.dart';
 import 'package:imperio/services/matches_service.dart';
-import 'package:imperio/stores/odds_matches_store.dart';
 import 'package:mobx/mobx.dart';
 
 part 'matches_store.g.dart';
@@ -12,7 +12,6 @@ class MatchesStore = _MatchesStore with _$MatchesStore;
 
 abstract class _MatchesStore with Store {
   final MatchesService _matchesService;
-  final OddsMatchesStore oddsMatchesStore = GetIt.I<OddsMatchesStore>();
 
   _MatchesStore(this._matchesService) {
     fetchMatches().then((value) => print(matches));
@@ -25,12 +24,14 @@ abstract class _MatchesStore with Store {
   String _currentMatchId = "";
 
   @observable
-  ObservableMap<String, List<Bet>> matchBets =
-      ObservableMap<String, List<Bet>>();
+  ObservableList<Bet> matchBets = ObservableList<Bet>();
 
   @observable
-  ObservableMap<String, List<MatchConflict>> matchConflicts =
-      ObservableMap<String, List<MatchConflict>>();
+  ObservableList<MatchConflict> matchConflicts =
+      ObservableList<MatchConflict>();
+
+  @observable
+  ObservableList<OddMatch> matchOdds = ObservableList<OddMatch>();
 
   @computed
   List<String> get teamAFacts {
@@ -85,14 +86,21 @@ abstract class _MatchesStore with Store {
       List<dynamic> results = await Future.wait([
         _matchesService.fetchBets(matchId),
         _matchesService.fetchMatchConflicts(matchId),
-        oddsMatchesStore.fetchOddsMatches(matchId)
+        _matchesService.fetchOddsMatches(matchId)
       ]);
 
       List<Bet> bets = results[0];
       List<MatchConflict> conflicts = results[1];
+      List<OddMatch> odds = results[2];
 
-      matchBets[matchId] = bets;
-      matchConflicts[matchId] = conflicts;
+      matchBets.clear();
+      matchBets.addAll(bets);
+
+      matchConflicts.clear();
+      matchConflicts.addAll(conflicts);
+
+      matchOdds.clear();
+      matchOdds.addAll(odds);
     } catch (e) {
       errorMessage = "Failed to enrich match: ${e.toString()}";
     } finally {
