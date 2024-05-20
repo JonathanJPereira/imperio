@@ -66,7 +66,7 @@ class OddDraggableSheet extends HookWidget {
       },
       child: DraggableScrollableSheet(
         initialChildSize: 0.23,
-        minChildSize: 0.1,
+        minChildSize: 0.23,
         maxChildSize: 1,
         builder: (context, scrollController) {
           return AnimatedBuilder(

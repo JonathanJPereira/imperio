@@ -106,7 +106,7 @@ class HighestOdds extends StatelessWidget {
                   Table(
                     columnWidths: const {
                       0: FixedColumnWidth(100),
-                      1: FixedColumnWidth(50),
+                      1: FixedColumnWidth(10),
                       2: FlexColumnWidth(),
                       3: FlexColumnWidth(),
                       4: FlexColumnWidth(),
