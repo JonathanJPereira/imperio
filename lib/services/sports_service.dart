@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:imperio/models/sport.dart';
 
 class SportsService {
@@ -8,8 +9,8 @@ class SportsService {
 
   Future<List<Sport>> fetchSports() async {
     try {
-      final response =
-          await _dio.get('https://6569cc7dde53105b0dd7af5c.mockapi.io/sports');
+      final apiUrl = dotenv.env['API_URL'] ?? '';
+      final response = await _dio.get('$apiUrl/sports');
       List<Sport> sports = (response.data as List)
           .map((dynamic item) => Sport.fromJson(item as Map<String, dynamic>))
           .toList();
