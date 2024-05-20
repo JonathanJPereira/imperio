@@ -47,10 +47,11 @@ class OddDraggableSheet extends HookWidget {
       ).animate(animationController);
     }, [animationController]);
 
-    List<Widget> tabViews = [
+    final tabViews = [
       HighestOdds(
-          colorAnimation: colorAnimationContainer,
-          paddingAnimation: paddingAnimation),
+        colorAnimation: colorAnimationContainer,
+        paddingAnimation: paddingAnimation,
+      ),
       OtherOdds(
         colorAnimation: colorAnimationContainer,
         teamAName: matchesStore.currentMatch!.teamA,
@@ -65,7 +66,7 @@ class OddDraggableSheet extends HookWidget {
       },
       child: DraggableScrollableSheet(
         initialChildSize: 0.23,
-        minChildSize: 0.23,
+        minChildSize: 0.1,
         maxChildSize: 1,
         builder: (context, scrollController) {
           return AnimatedBuilder(
@@ -83,28 +84,9 @@ class OddDraggableSheet extends HookWidget {
                   controller: scrollController,
                   child: Column(
                     children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 8.0),
-                        height: 6.0,
-                        width: 53.0,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          borderRadius: BorderRadius.circular(3.0),
-                        ),
-                      ),
-                      Observer(builder: (context) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 15.0),
-                          child: TabSelector(
-                            store: tabSelectorStore,
-                            tabs: const ['Odds mais altas', 'Outras odds'],
-                            borderColor: const Color(0xFF646E69),
-                          ),
-                        );
-                      }),
-                      Observer(builder: (context) {
-                        return tabViews[tabSelectorStore.selectedIndex];
-                      }),
+                      _buildDragIndicator(context),
+                      _buildTabSelector(),
+                      _buildTabView(tabViews),
                     ],
                   ),
                 ),
@@ -113,6 +95,41 @@ class OddDraggableSheet extends HookWidget {
           );
         },
       ),
+    );
+  }
+
+  Widget _buildDragIndicator(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
+      height: 6.0,
+      width: 53.0,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: BorderRadius.circular(3.0),
+      ),
+    );
+  }
+
+  Widget _buildTabSelector() {
+    return Observer(
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.only(left: 15.0),
+          child: TabSelector(
+            store: tabSelectorStore,
+            tabs: const ['Odds mais altas', 'Outras odds'],
+            borderColor: const Color(0xFF646E69),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildTabView(List<Widget> tabViews) {
+    return Observer(
+      builder: (context) {
+        return tabViews[tabSelectorStore.selectedIndex];
+      },
     );
   }
 }

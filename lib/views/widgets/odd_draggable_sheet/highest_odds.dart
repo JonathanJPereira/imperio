@@ -24,7 +24,7 @@ class HighestOdds extends StatelessWidget {
         builder: (context, child) {
           return Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: 15.0, vertical: paddingAnimation.value / 2),
+                horizontal: 15.0, vertical: paddingAnimation.value),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
