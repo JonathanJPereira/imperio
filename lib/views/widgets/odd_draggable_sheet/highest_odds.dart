@@ -47,10 +47,10 @@ class HighestOdds extends StatelessWidget {
             borderRadius: BorderRadius.circular(36),
             color: colorAnimation.value,
           ),
-          child: const BettingHousesDisplay(
-            onexbetOdd: 3.4,
-            betsafeOdd: 2.4,
-            betssonOdd: 3.5,
+          child: BettingHousesDisplay(
+            onexbetOdd: matchesStore.currentMatch!.onexbetOddsAvg,
+            betsafeOdd: matchesStore.currentMatch!.betsafeOddsAvg,
+            betssonOdd: matchesStore.currentMatch!.betssonOddsAvg,
             colorDivisor: Colors.black38,
           ),
         );
