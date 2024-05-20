@@ -7,12 +7,12 @@ import 'package:imperio/views/widgets/shared/section_header.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class PopularChampionships extends StatelessWidget {
-  const PopularChampionships({super.key});
+  final ChampionshipsStore championshipsStore = GetIt.I<ChampionshipsStore>();
+
+  PopularChampionships({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ChampionshipsStore championshipsStore = GetIt.I<ChampionshipsStore>();
-
     return Column(
       children: [
         const SectionHeader(title: 'Campeonatos populares'),

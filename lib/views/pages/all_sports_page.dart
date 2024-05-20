@@ -26,11 +26,11 @@ class AllSportsPage extends StatelessWidget {
               Column(
                 children: [
                   SportsBanner(),
-                  const PopularChampionships(),
+                  PopularChampionships(),
                   const SizedBox(height: itemDistance),
                   MatchList(),
                   const SizedBox(height: itemDistance),
-                  const TipsList(),
+                  TipsList(),
                   const SizedBox(height: itemDistance),
                   const PrincipalBonus(),
                   const SizedBox(height: itemDistance),

@@ -9,18 +9,30 @@ class TipsStore = _TipsStore with _$TipsStore;
 abstract class _TipsStore with Store {
   final TipsService _tipsService;
 
-  _TipsStore(this._tipsService);
+  _TipsStore(this._tipsService) {
+    fetchTips();
+  }
 
   @observable
   ObservableList<Tip> tips = ObservableList<Tip>();
 
+  @observable
+  bool isLoading = false;
+
+  @observable
+  String? errorMessage;
+
   @action
   Future<void> fetchTips() async {
+    isLoading = true;
+    errorMessage = null;
     try {
       final tipsList = await _tipsService.fetchTips();
       tips = ObservableList<Tip>.of(tipsList);
     } catch (error) {
-      throw Exception('Failed to load tips: $error');
+      errorMessage = 'Failed to load tips: $error';
+    } finally {
+      isLoading = false;
     }
   }
 }
