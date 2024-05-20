@@ -62,10 +62,16 @@ O projeto usa várias bibliotecas que são necessárias para a sua execução e 
     <img src="imperio_prints/2.jpg" alt="Telefone" width="300"/>
     <img src="imperio_prints/3.jpg" alt="Senha" width="300"/>
     <img src="imperio_prints/4.jpg" alt="Home" width="300"/>
-    <img src="imperio_prints/5.jpg" alt="Esportes" width="300"/>
-    <img src="imperio_prints/6.jpg" alt="Partida" width="300"/>
-    <img src="imperio_prints/7.jpg" alt="Odds mais altas" width="300"/>
-    <img src="imperio_prints/8.jpg" alt="Outras odds" width="300"/>
+    <img src="imperio_prints/5.jpg" alt="Home2" width="300"/>
+    <img src="imperio_prints/6.jpg" alt="Home3" width="300"/>
+    <img src="imperio_prints/7.jpg" alt="Home4" width="300"/>
+    <img src="imperio_prints/8.jpg" alt="Partida" width="300"/>
+    <img src="imperio_prints/9.jpg" alt="Partida2" width="300"/>
+    <img src="imperio_prints/10.jpg" alt="Partida3" width="300"/>
+    <img src="imperio_prints/11.jpg" alt="Partida4" width="300"/>
+    <img src="imperio_prints/12.jpg" alt="Odds mais altas" width="300"/>
+    <img src="imperio_prints/13.jpg" alt="Outras odds" width="300"/>
+    <img src="imperio_prints/14.jpg" alt="Esportes" width="300"/>
 </div>
 
 
