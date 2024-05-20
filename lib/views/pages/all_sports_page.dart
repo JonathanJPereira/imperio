@@ -32,7 +32,7 @@ class AllSportsPage extends StatelessWidget {
                   const SizedBox(height: itemDistance),
                   TipsList(),
                   const SizedBox(height: itemDistance),
-                  const PrincipalBonus(),
+                  PrincipalBonus(),
                   const SizedBox(height: itemDistance),
                   LastBetsWon(),
                   const SizedBox(height: itemDistance),

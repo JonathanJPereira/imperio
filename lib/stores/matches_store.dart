@@ -1,4 +1,3 @@
-import 'package:get_it/get_it.dart';
 import 'package:imperio/models/bet.dart';
 import 'package:imperio/models/match.dart';
 import 'package:imperio/models/match_conflict.dart';
@@ -14,7 +13,7 @@ abstract class _MatchesStore with Store {
   final MatchesService _matchesService;
 
   _MatchesStore(this._matchesService) {
-    fetchMatches().then((value) => print(matches));
+    fetchMatches();
   }
 
   @observable

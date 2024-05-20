@@ -9,18 +9,30 @@ class BonusStore = _BonusStore with _$BonusStore;
 abstract class _BonusStore with Store {
   final BonusService _bonusService;
 
-  _BonusStore(this._bonusService);
+  _BonusStore(this._bonusService) {
+    fetchBonuses();
+  }
 
   @observable
   ObservableList<Bonus> bonuses = ObservableList<Bonus>();
 
+  @observable
+  bool isLoading = false;
+
+  @observable
+  String? errorMessage;
+
   @action
   Future<void> fetchBonuses() async {
+    isLoading = true;
+    errorMessage = null;
     try {
       final bonusList = await _bonusService.fetchBonuses();
       bonuses = ObservableList<Bonus>.of(bonusList);
     } catch (e) {
-      print('Failed to load bonuses: ${e.toString()}');
+      errorMessage = 'Failed to load bonuses: ${e.toString()}';
+    } finally {
+      isLoading = false;
     }
   }
 }

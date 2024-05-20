@@ -5,23 +5,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:imperio/views/widgets/shared/action_prompt_row.dart';
 import 'package:imperio/views/widgets/shared/section_header.dart';
 
-class PrincipalBonus extends StatefulWidget {
-  const PrincipalBonus({super.key});
-
-  @override
-  State<PrincipalBonus> createState() => _PrincipalBonusState();
-}
-
-class _PrincipalBonusState extends State<PrincipalBonus> {
+class PrincipalBonus extends StatelessWidget {
   final BonusStore bonusStore = GetIt.I<BonusStore>();
 
-  @override
-  void initState() {
-    super.initState();
-    if (bonusStore.bonuses.isEmpty) {
-      bonusStore.fetchBonuses();
-    }
-  }
+  PrincipalBonus({super.key});
 
   @override
   Widget build(BuildContext context) {
