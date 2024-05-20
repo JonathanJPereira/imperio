@@ -1,5 +1,5 @@
 
-# Documentação do Projeto Império
+# Império
 
 ## Descrição
 Este documento descreve a configuração e os passos necessários para executar e desenvolver o aplicativo Flutter "Império". Este é um projeto de desafio para a Loomi.
@@ -57,6 +57,13 @@ O projeto usa várias bibliotecas que são necessárias para a sua execução e 
 
 ### Prints do APP:
 
-<img src="imperio_prints/1.jpg" alt="Descrição da Imagem" width="300"/>
+<img src="imperio_prints/1.jpg" alt="Login" width="300"/>
+<img src="imperio_prints/2.jpg" alt="Telefone" width="300"/>
+<img src="imperio_prints/3.jpg" alt="Senha" width="300"/>
+<img src="imperio_prints/4.jpg" alt="Home" width="300"/>
+<img src="imperio_prints/5.jpg" alt="Esportes" width="300"/>
+<img src="imperio_prints/6.jpg" alt="Partida" width="300"/>
+<img src="imperio_prints/7.jpg" alt="Odds mais altas" width="300"/>
+<img src="imperio_prints/8.jpg" alt="Outras odds" width="300"/>
 
 
