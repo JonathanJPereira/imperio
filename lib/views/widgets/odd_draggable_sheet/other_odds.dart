@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:imperio/views/widgets/game_info/info_row.dart';
 import 'package:imperio/views/widgets/shared/share_button.dart';
 

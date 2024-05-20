@@ -34,7 +34,7 @@ class LoginService {
       } else {
         throw Exception('Invalid response data');
       }
-    } on DioException catch (e) {
+    } on DioException {
       throw Exception('Failed to login');
     } catch (e) {
       throw Exception('Failed to load data');
