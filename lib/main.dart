@@ -14,9 +14,11 @@ void main() async {
 
   final bool hasToken = await loginStore.checkToken();
 
-  if (hasToken) {
-    // await loginStore.refreshToken();
-  }
+ if (hasToken) {
+  // A linha abaixo está comentada porque a API atual possui tokens que não expiram.
+  // Descomente a linha se a lógica de renovação de token for necessária no futuro.
+  // await loginStore.refreshToken();
+}
 
   runApp(MyApp(hasToken: hasToken));
 }
