@@ -40,6 +40,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/betting_houses/
+    - .env
 
   fonts:
     - family: Montserrat
