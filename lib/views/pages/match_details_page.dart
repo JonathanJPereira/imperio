@@ -17,7 +17,9 @@ import 'package:imperio/views/widgets/tab_selector/tab_selector.dart';
 import 'package:imperio/views/widgets/team_facts/team_facts.dart';
 
 class MatchDetailsPage extends StatelessWidget {
-  MatchDetailsPage({super.key});
+  const MatchDetailsPage({super.key});
+
+  static const double verticalSpacing = 20.0;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +80,9 @@ class MatchDetailsPage extends StatelessWidget {
                   teamAImg: match.teamAImage,
                   teamBImg: match.teamBImage,
                 ),
+                const SizedBox(height: verticalSpacing),
                 GameInfo(match: match),
+                const SizedBox(height: verticalSpacing),
                 TeamFacts(
                   teamAImg: match.teamAImage,
                   teamBImg: match.teamBImage,
@@ -87,12 +91,15 @@ class MatchDetailsPage extends StatelessWidget {
                   teamAFacts: matchesStore.teamAFacts,
                   teamBFacts: matchesStore.teamBFacts,
                 ),
+                const SizedBox(height: verticalSpacing),
                 RefereeFacts(
                   refereeName: match.referee,
                   refereeImg: match.refereeAvatar,
                   refereeFacts: matchesStore.refereeFacts,
                 ),
+                const SizedBox(height: verticalSpacing),
                 LastBets(betlist: matchesStore.matchBets),
+                const SizedBox(height: verticalSpacing),
                 LastMatchesConflicts(
                   teamAName: match.teamA,
                   teamBName: match.teamB,

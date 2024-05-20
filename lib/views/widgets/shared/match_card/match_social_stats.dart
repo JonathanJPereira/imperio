@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperio/utils/imperio_icons.dart';
 import 'package:intl/intl.dart';
 
 class MatchSocialStats extends StatelessWidget {
@@ -22,10 +23,10 @@ class MatchSocialStats extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildStatItem(Icons.thumb_up, likeCount),
-          _buildStatItem(Icons.star, starCount),
-          _buildStatItem(Icons.refresh, shareCount),
-          _buildStatItem(Icons.visibility, viewCount),
+          _buildStatItem(ImperioIcons.iconThumbsUp, likeCount),
+          _buildStatItem(ImperioIcons.iconStar, starCount),
+          _buildStatItem(ImperioIcons.iconShareOutline, shareCount),
+          _buildStatItem(ImperioIcons.iconEye, viewCount),
         ],
       ),
     );
@@ -34,7 +35,10 @@ class MatchSocialStats extends StatelessWidget {
   Widget _buildStatItem(IconData icon, int count) {
     return Row(
       children: [
-        Icon(icon),
+        Icon(
+          icon,
+          size: 16,
+        ),
         const SizedBox(width: 4),
         Text(NumberFormat.compact().format(count)),
       ],
