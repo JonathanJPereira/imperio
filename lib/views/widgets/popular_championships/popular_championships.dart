@@ -4,34 +4,33 @@ import 'package:imperio/stores/championships_store.dart';
 import 'package:imperio/views/widgets/popular_championships/popular_championship_card.dart';
 import 'package:imperio/views/widgets/shared/horizontal_list.dart';
 import 'package:imperio/views/widgets/shared/section_header.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
-class PopularChampionships extends StatefulWidget {
+class PopularChampionships extends StatelessWidget {
   const PopularChampionships({super.key});
 
   @override
-  State<PopularChampionships> createState() => _PopularChampionshipsState();
-}
-
-class _PopularChampionshipsState extends State<PopularChampionships> {
-  final ChampionshipsStore championshipsStore = GetIt.I<ChampionshipsStore>();
-
-  @override
-  void initState() {
-    super.initState();
-    championshipsStore.fetchChampionships();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final ChampionshipsStore championshipsStore = GetIt.I<ChampionshipsStore>();
+
     return Column(
       children: [
         const SectionHeader(title: 'Campeonatos populares'),
-        HorizontalList(
-          height: 80,
-          itemDistance: 8,
-          itemCount: 69,
-          itemBuilder: (context, item) {
-            return PopularChampionshipCard();
+        Observer(
+          builder: (_) {
+            if (championshipsStore.isLoading) {
+              return const CircularProgressIndicator();
+            } else {
+              return HorizontalList(
+                height: 80,
+                itemDistance: 8,
+                itemCount: championshipsStore.championships.length,
+                itemBuilder: (context, index) {
+                  final championship = championshipsStore.championships[index];
+                  return PopularChampionshipCard(championship: championship);
+                },
+              );
+            }
           },
         ),
       ],

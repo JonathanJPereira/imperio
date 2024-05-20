@@ -9,14 +9,25 @@ class ChampionshipsStore = _ChampionshipsStore with _$ChampionshipsStore;
 abstract class _ChampionshipsStore with Store {
   final ChampionshipsService _championshipsService;
 
-  _ChampionshipsStore(this._championshipsService);
+  _ChampionshipsStore(this._championshipsService) {
+    fetchChampionships();
+  }
 
   @observable
   ObservableList<Championship> championships = ObservableList<Championship>();
 
+  @observable
+  bool isLoading = false;
+
   @action
   Future<void> fetchChampionships() async {
-    final championshipsList = await _championshipsService.fetchChampionships();
-    championships = ObservableList<Championship>.of(championshipsList);
+    isLoading = true;
+    try {
+      final championshipsList =
+          await _championshipsService.fetchChampionships();
+      championships = ObservableList<Championship>.of(championshipsList);
+    } finally {
+      isLoading = false;
+    }
   }
 }
