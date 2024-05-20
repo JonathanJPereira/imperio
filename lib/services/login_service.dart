@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:imperio/models/auth_token.dart';
 
 class LoginService {
@@ -20,8 +21,9 @@ class LoginService {
 
   Future<AuthToken> _login(Map<String, dynamic> data) async {
     try {
+      final apiUrl = dotenv.env['API_URL'] ?? '';
       final response = await _dio.post(
-        'https://6569cc7dde53105b0dd7af5c.mockapi.io/login',
+        '$apiUrl/login',
         data: data,
       );
 

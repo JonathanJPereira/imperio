@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:imperio/models/bonus.dart';
 
 class BonusService {
@@ -8,8 +9,8 @@ class BonusService {
 
   Future<List<Bonus>> fetchBonuses() async {
     try {
-      final response =
-          await _dio.get('https://6569cc7dde53105b0dd7af5c.mockapi.io/bonus');
+      final apiUrl = dotenv.env['API_URL'] ?? '';
+      final response = await _dio.get('$apiUrl/bonus');
       List<Bonus> bonuses = (response.data as List)
           .map((dynamic item) => Bonus.fromJson(item as Map<String, dynamic>))
           .toList();
