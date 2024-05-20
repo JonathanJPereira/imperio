@@ -36,7 +36,6 @@ O projeto usa várias bibliotecas que são necessárias para a sua execução e 
 ### Principais Dependências
 - `mobx`: ^2.3.3
 - `flutter_mobx`: ^2.2.1
-- `provider`: ^6.1.2
 - `flutter_svg`: ^2.0.10
 - `json_annotation`: ^4.9.0
 - `dio`: ^5.4.3
