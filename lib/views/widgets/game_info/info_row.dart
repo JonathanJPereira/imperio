@@ -10,7 +10,7 @@ class InfoRow extends StatelessWidget {
     super.key,
     required this.start,
     required this.end,
-    this.padding = const EdgeInsets.all(20),
+    this.padding = const EdgeInsets.all(10),
     this.dividerColor,
   });
 

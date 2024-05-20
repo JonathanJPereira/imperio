@@ -26,7 +26,7 @@ class MainTabPage extends StatelessWidget {
   Widget buildBottomNavigationBar(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 8.0),
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -47,6 +47,7 @@ class MainTabPage extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         backgroundColor: Theme.of(context).colorScheme.tertiary,
         foregroundColor: Colors.white.withOpacity(0.9),
+        minimumSize: Size.zero,
       ),
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300),

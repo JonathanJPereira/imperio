@@ -21,13 +21,14 @@ class LoginPage extends HookWidget {
 
     return const Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          children: [
-            LoginHeader(),
-            Expanded(
-              child: Column(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: Column(
+            children: [
+              LoginHeader(),
+              SizedBox(height: 16),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
@@ -57,8 +58,8 @@ class LoginPage extends HookWidget {
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
