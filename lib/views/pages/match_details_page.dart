@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:imperio/stores/matches_store.dart';
+import 'package:imperio/stores/matches/matches_store.dart';
 import 'package:imperio/views/widgets/football_pitch/football_pitch.dart';
 import 'package:imperio/views/widgets/game_info/game_info.dart';
 import 'package:imperio/views/widgets/last_bets/last_bets.dart';

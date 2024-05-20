@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:imperio/stores/won_bets_store.dart';
+import 'package:imperio/stores/won_bets/won_bets_store.dart';
 import 'package:imperio/views/widgets/last_bets_won/bet_cart.dart';
 import 'package:imperio/views/widgets/shared/horizontal_list.dart';
 import 'package:imperio/views/widgets/shared/section_header.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:imperio/stores/sports_store.dart';
+import 'package:imperio/stores/sports/sports_store.dart';
 import 'package:imperio/utils/imperio_icons.dart';
 import 'package:imperio/config/service_locator.dart';
 import 'package:imperio/views/pages/all_sports_page.dart';

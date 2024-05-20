@@ -8,15 +8,15 @@ import 'package:imperio/services/championships_service.dart';
 import 'package:imperio/services/tips_service.dart';
 import 'package:imperio/services/bonus_service.dart';
 import 'package:imperio/services/won_bets_service.dart';
-import 'package:imperio/stores/login_store.dart';
-import 'package:imperio/stores/matches_store.dart';
-import 'package:imperio/stores/sports_store.dart';
-import 'package:imperio/stores/championships_store.dart';
-import 'package:imperio/stores/tab_selector_store.dart';
-import 'package:imperio/stores/tips_store.dart';
-import 'package:imperio/stores/bonus_store.dart';
-import 'package:imperio/stores/won_bets_store.dart';
-import 'package:imperio/stores/navigation_store.dart';
+import 'package:imperio/stores/login/login_store.dart';
+import 'package:imperio/stores/matches/matches_store.dart';
+import 'package:imperio/stores/sports/sports_store.dart';
+import 'package:imperio/stores/championship/championships_store.dart';
+import 'package:imperio/stores/tab_selector/tab_selector_store.dart';
+import 'package:imperio/stores/tips/tips_store.dart';
+import 'package:imperio/stores/bonus/bonus_store.dart';
+import 'package:imperio/stores/won_bets/won_bets_store.dart';
+import 'package:imperio/stores/navigation/navigation_store.dart';
 
 GetIt getIt = GetIt.instance;
 
